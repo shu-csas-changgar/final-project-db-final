@@ -1,0 +1,9 @@
+.login {
+  padding: 8px;
+  background-color: lightblue;
+  border-radius: 10px;
+}
+
+#loginInput {
+  width: 250px;
+}
