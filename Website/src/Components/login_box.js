@@ -22,31 +22,36 @@ class Login extends Component {
   }
   render() {
     return(
-        <div className="login">
+        <div className="login bg-secondary">
           <form onSubmit={this.handleSubmit}>
             <h5 className="d-flex justify-content-center">Log In</h5>
             <hr />
+
             <div className="form-group">
               <div className="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">{this.userIcon}</span>
-                  <input type="email" id="loginInput" className="form-control" placeholder="jsmith@example.com"/>
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">{this.userIcon}</span>
                 </div>
+                <input type="text" className="form-control" placeholder="jsmith@example.com" aria-label="Username" aria-describedby="basic-addon1"/>
               </div>
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              <div className="d-flex justify-content-center mb-3">
+                <small id="emailHelp" className="form-text text-light">We'll never share your email with anyone else.</small>
+              </div>
             </div>
+
             <div className="form-group">
-              <div className="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">{this.lockIcon}</span>
-                  <input type="password" id="loginInput" className="form-control" placeholder="Password"/>
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">{this.lockIcon}</span>
                 </div>
+                <input type="password" className="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1"/>
               </div>
             </div>
+
             <div className='d-flex justify-content-center mt-4'>
-              <button type="Log In" className="btn btn-dark ">Submit</button>
+              <button type="Log In" style={{marginBottom:"10px"}} className="btn btn-light ">Submit</button>
             </div>
-            </form>
+          </form>
         </div>
     )
   }

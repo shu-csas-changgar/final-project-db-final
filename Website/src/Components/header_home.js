@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "../CSS/header_homepage.css"
 import logo from "../Images/abcLogo_resize.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -22,11 +21,13 @@ class Header extends Component {
     })
   }
 
+  //<img src={logo} className="navbar-brand img-fluid" alt="Responsive image"/>
+
 render(){
   const show = (this.state.menu) ? "show" : "";
   return(
       <nav className="navbar navbar-dark bg-dark navbar-expand-sm">
-        <img src={logo} className="navbar-brand img-fluid" alt="Responsive image"/>
+        <a className="navbar-brand" style={{color: "white"}}>ABC Corp</a>
         <button className="navbar-toggler" type="button" onClick={ this.toggleMenu }>
           <span className="navbar-toggler-icon"></span>
         </button>

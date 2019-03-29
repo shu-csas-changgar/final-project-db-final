@@ -1,9 +1,22 @@
+hr {
+  background-color: white;
+}
+
 .login {
+  width:325px;
   padding: 8px;
-  background-color: lightblue;
+  /*
+  background-color: lightBlue;
+   */
+  color:white;
   border-radius: 10px;
 }
 
-#loginInput {
-  width: 250px;
+#loginSubmit {
+  margin-bottom: 10px;
+}
+
+#inputGroup {
+  widows: 200px;
+  width: 95%;
 }
