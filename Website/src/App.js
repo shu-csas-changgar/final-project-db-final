@@ -21,7 +21,7 @@ class App extends Component {
                 <Login/>
               </div>
               <div className="d-flex mt-1 justify-content-center">
-                <p style={{fontSize:"12px"}}>Don't have an account? Please contact the IT department to see if you are elegable for one</p>
+                <p style={{fontSize:"12px"}}>Don't have an account? Please contact the IT department to see if you are elegable for one.</p>
               </div>
             </div>
           </div>
