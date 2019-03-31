@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
-import './CSS/homepage.css'
-import Footer from "./Components/footer_home"
-import Header from "./Components/header_home"
-import Login from "./Components/login_box"
-import WelcomeMsg from "./Components/welcomeMessage"
+import './CSS/Homepage/homepage.css'
+import Footer from "./Components/AllPages/footer_home"
+import Navbar from "./Components/Homepage/navbar"
+import Login from "./Components/Homepage/login_box"
+import Database from "./Components/Homepage/database"
+import Servers from "./Components/Homepage/Server"
+import Website from "./Components/Homepage/Website"
+//import WelcomeMsg from "./Components/welcomeMessage"
 
 class App extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      list: [Login, Database, Servers, Website],
+      index: 0
+    }
+
+    this.handler = this.handler.bind(this)
+  }
+
+  handler(id) {
+    console.log("in handler")
+    this.setState({
+      index: parseInt(id)
+    })
+
+  }
+
   render() {
+    const TagName = this.state.list[this.state.index]
     return (
         <div>
           <div className="header">
-            <Header />
+            <Navbar action={this.handler} page={this.state.index}/>
           </div>
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center" id="cMargin">
             <div className="container App">
-              <div className="flex-row justify-content-center">
-                <WelcomeMsg />
-              </div>
-              <div className="row justify-content-center" id="logIn">
-                <Login/>
-              </div>
-              <div className="d-flex mt-1 justify-content-center">
-                <p style={{fontSize:"12px"}}>Don't have an account? Please contact the IT department to see if you are elegable for one.</p>
+              <div >
+                <TagName/>
               </div>
             </div>
           </div>
@@ -30,5 +47,4 @@ class App extends Component {
         );
   }
 }
-
 export default App;
