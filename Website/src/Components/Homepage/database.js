@@ -19,10 +19,10 @@ function databaseInfo() {
     <div>
       <div className="container">
         <div className="row justify-content-center mb-4">
-          <h1 class="display-1">The Database</h1>
+          <h1 className="display-1">The Database</h1>
         </div>
         <div className="row justify-content-center">
-          <img className="d-block" src={DBImage} />
+          <img className="d-block" src={DBImage} alt="Responsive img" />
           <p style={{fontSize: "12px"}}>Model last updated 3/31/19</p>
         </div>
       </div>
@@ -33,7 +33,7 @@ function databaseInfo() {
           <h4 className="m-2">Inventory</h4>
           <div className="row justify-content-center">
             <div className="table-responsive m-1">
-              <table class="table table-bordered">
+              <table className="table table-bordered">
                 <thead>
                   <tr>
                     <th scope="col">Column Name</th>
@@ -104,7 +104,7 @@ function databaseInfo() {
           <h4 className="m-2">Employee</h4>
           <div className="row justify-content-center">
             <div className="table-responsive m-1">
-              <table class="table table-bordered">
+              <table className="table table-bordered">
                 <thead>
                   <tr>
                     <th scope="col">Column Name</th>

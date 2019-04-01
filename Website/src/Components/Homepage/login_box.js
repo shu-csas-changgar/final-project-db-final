@@ -58,7 +58,7 @@ class Login extends Component {
           <WelcomeMsg />
         </div>
         <div className="row justify-content-center" id="logIn">
-          <div className="login bg-secondary">
+          <div className="login bg-secondary" style={{backgroundColor: "#A52A2A"}}>
             <form className="needs-validation" onSubmit={this.handleSubmit} noValidate>
               <h5 className="d-flex justify-content-center">Log In</h5>
               <hr />
@@ -68,7 +68,7 @@ class Login extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon1">{this.userIcon}</span>
                   </div>
-                  <input type="text" name="email" onChange={this.handleChange} className="form-control" placeholder="jsmith@example.com" aria-label="Username" aria-describedby="basic-addon1" required/>
+                  <input type="text" name="email" onChange={this.handleChange} className="form-control" autoComplete="on" placeholder="jsmith@example.com" aria-label="Username" aria-describedby="basic-addon1" required/>
 
                 </div>
                 <div className="d-flex justify-content-center mb-3">
@@ -81,7 +81,7 @@ class Login extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon1">{this.lockIcon}</span>
                   </div>
-                  <input type="password" onChange={this.handleChange} name="password" className="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" required/>
+                  <input type="password" onChange={this.handleChange} name="password" className="form-control" autoComplete="off" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" required/>
                 </div>
               </div>
 

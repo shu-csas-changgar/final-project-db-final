@@ -20,8 +20,14 @@ class App extends Component {
     this.handler = this.handler.bind(this)
   }
 
+  /**
+   * Used to recive data from the child component navbar.js
+   * @param  {[type]} id The id is a string that is a number that will be
+   * passed to the state value index. The index is used to determin which child
+   * components the page should laod
+   * @return none
+   */
   handler(id) {
-    console.log("in handler")
     this.setState({
       index: parseInt(id)
     })
@@ -29,6 +35,8 @@ class App extends Component {
   }
 
   render() {
+    // The child component that sould be loaded. The componet is initally set to the login
+    // screen. But will change if the handler updates the state value for index
     const TagName = this.state.list[this.state.index]
     return (
         <div>

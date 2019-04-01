@@ -70,27 +70,28 @@ class Navbar extends Component {
 render(){
   const show = (this.state.menu) ? "show" : ""
   const showDrop = (this.state.dropdown) ? "show" : ""
+  const link = "#"
   return(
       <nav className="navbar navbar-dark bg-dark navbar-expand-sm">
-        <a className="navbar-brand" style={{color: "white"}}>ABC Corp</a>
+        <a className="navbar-brand" href={link} style={{color: "white"}}>ABC Corp</a>
         <button className="navbar-toggler" type="button" name="menu" onClick={ this.toggleMenu }>
           <span className="navbar-toggler-icon" onClick={this.toggleMenu} name="menu"></span>
         </button>
         <div className={"collapse navbar-collapse " + show}>
           <div className="navbar-nav">
-            <a className={ this.props.page == 0 ? "nav-item nav-link active disabled": "nav-item nav-link"} href="#" onClick={ this.handleChange} id="0">Home <span className="sr-only">(current)</span></a>
+            <a className={ this.props.page === 0 ? "nav-item nav-link active disabled": "nav-item nav-link"} href={link} onClick={ this.handleChange} id="0">Home <span className="sr-only">(current)</span></a>
             <a className="nav-item nav-link" href="/">Features</a>
 
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" value={this.state.selectValue} onClick={ this.toggleMenu }  onBlur ={this.checkDropDown} tabIndex="-1" name="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" value={this.state.selectValue} onClick={ this.toggleMenu }  onBlur ={this.checkDropDown} tabIndex="-1" name="dropdown" href={link} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 About
               </a>
               <div className={"dropdown-menu " + showDrop} value={this.state.selectValue} onMouseDown={ this.handleChange} aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" name="hi" id="1" href="#">Database</a>
-                <a className="dropdown-item" id="2" href="#">Server</a>
-                <a className="dropdown-item" id="3" href="#">Website</a>
+                <a className="dropdown-item" name="hi" id="1" href={link}>Database</a>
+                <a className="dropdown-item" id="2" href={link}>Server</a>
+                <a className="dropdown-item" id="3" href={link}>Website</a>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" value="#" href="#">The Project</a>
+                <a className="dropdown-item" value="#" href={link}>The Project</a>
               </div>
             </li>
             <a className="nav-item nav-link" href="https://github.com/shu-csas-changgar/final-project-db-final">Github {this.gitHubIcon} <span className="sr-only">(current)</span></a>
