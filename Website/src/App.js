@@ -14,7 +14,7 @@ class App extends Component {
     super()
     this.state = {
       list: [Login, Database, Servers, Website],
-      index: 0
+      index: 1
     }
 
     this.handler = this.handler.bind(this)
