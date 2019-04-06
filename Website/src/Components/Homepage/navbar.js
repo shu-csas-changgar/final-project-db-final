@@ -79,7 +79,7 @@ render(){
         </button>
         <div className={"collapse navbar-collapse " + show}>
           <div className="navbar-nav">
-            <a className={ this.props.page === 0 ? "nav-item nav-link active disabled": "nav-item nav-link"} href={link} onClick={ this.handleChange} id="0">Home <span className="sr-only">(current)</span></a>
+            <a className={ this.props.page === 0 ? "nav-item nav-link active disabled": "nav-item nav-link"} href={link} onClick={ this.handleChange} id="0">Login <span className="sr-only">(current)</span></a>
             <a className="nav-item nav-link" href="/">Features</a>
 
             <li className="nav-item dropdown">
@@ -87,11 +87,11 @@ render(){
                 About
               </a>
               <div className={"dropdown-menu " + showDrop} value={this.state.selectValue} onMouseDown={ this.handleChange} aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" name="hi" id="1" href={link}>Database</a>
+                <a className="dropdown-item" id="1" href={link}>Database</a>
                 <a className="dropdown-item" id="2" href={link}>Server</a>
                 <a className="dropdown-item" id="3" href={link}>Website</a>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" value="#" href={link}>The Project</a>
+                <a className="dropdown-item" id="3" href={link}>The Project</a>
               </div>
             </li>
             <a className="nav-item nav-link" href="https://github.com/shu-csas-changgar/final-project-db-final">Github {this.gitHubIcon} <span className="sr-only">(current)</span></a>

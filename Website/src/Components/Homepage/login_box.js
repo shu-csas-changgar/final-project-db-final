@@ -48,7 +48,39 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
     event.target.className += " was-validated"
-    this.state.email.length > 0 && this.state.password.length > 0 ? console.log("Ready to continue") : console.log("Fields not complete")
+    this.state.email.length > 0 && this.state.password.length > 0 ? this.send() : console.log("Fields not complete")
+  }
+
+  /**
+   * TODO: Add documention for this function when it is complete
+   */
+  connectAndCheck() {
+    this.sendData()
+  }
+
+  /**
+   * This function sends a post request to the server to decide if the email and passoword
+   * are associated with an account
+   */
+  sendData = () => {
+    fetch('log', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+    .then( res => res.json())
+    .then( data => console.log(data))
+  }
+
+  /**
+   * This function sends a request to the server for information. curently this function has no use
+   */
+  getPass = () =>{
+    fetch('login')
+    .then(res => res.json())
+    .then(response => console.log(response.res))
   }
 
   render() {
@@ -92,7 +124,7 @@ class Login extends Component {
           </div>
         </div>
         <div className="d-flex mt-1 justify-content-center">
-          <p style={{fontSize:"12px"}}>Don't have an account? Please contact the IT department to see if you are elegable for one.</p>
+          <p style={{fontSize:"12px"}}>Don't have an account? Please contact the IT department to see if you are eligible for one.</p>
         </div>
       </div>
     )
