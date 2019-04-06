@@ -79,7 +79,7 @@ render(){
         </button>
         <div className={"collapse navbar-collapse " + show}>
           <div className="navbar-nav">
-            <a className={ this.props.page === 0 ? "nav-item nav-link active disabled": "nav-item nav-link"} href={link} onClick={ this.handleChange} id="0">Home <span className="sr-only">(current)</span></a>
+            <a className={ this.props.page === 0 ? "nav-item nav-link active disabled": "nav-item nav-link"} href={link} onClick={ this.handleChange} id="0">Login <span className="sr-only">(current)</span></a>
             <a className="nav-item nav-link" href="/">Features</a>
 
             <li className="nav-item dropdown">
