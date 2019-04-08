@@ -5,7 +5,8 @@ import Navbar from "./Components/Homepage/navbar"
 import Login from "./Components/Homepage/login_box"
 import Database from "./Components/Homepage/database"
 import Servers from "./Components/Homepage/Server"
-import Website from "./Components/Homepage/Website"
+import Website from "./Components/Homepage/website"
+import Project from "./Components/Homepage/project"
 //import WelcomeMsg from "./Components/welcomeMessage"
 
 class App extends Component {
@@ -13,8 +14,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      list: [Login, Database, Servers, Website],
-      index: 1
+      list: [Login, Database, Servers, Website, Project],
+      index: 4
     }
 
     this.handler = this.handler.bind(this)

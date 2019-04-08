@@ -29,7 +29,7 @@ export default {
                 colName: "owner_id",
                 datatype: "INT",
                 key: "FK",
-                NN: 1,
+                NN: checkmark,
                 UQ: null,
                 AI: null
             },
@@ -37,8 +37,8 @@ export default {
                 colName: "equipment_id",
                 datatype: "INT",
                 key: "FK",
-                NN: 1,
-                UQ: 1,
+                NN: checkmark,
+                UQ: checkmark,
                 AI: null
             },
             {
@@ -53,7 +53,7 @@ export default {
                 colName: "last_update",
                 datatype: "DATETIME",
                 key: null,
-                NN: 1,
+                NN: checkmark,
                 UQ: null,
                 AI: checkmark
             }
@@ -82,7 +82,7 @@ export default {
                 colName: "owner_id",
                 datatype: "INT",
                 key: "FK",
-                NN: 1,
+                NN: checkmark ,
                 UQ: null,
                 AI: null
             },

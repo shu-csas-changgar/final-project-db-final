@@ -9,12 +9,16 @@ class Login extends Component {
   constructor(){
     super()
 
-    // State variables:
-    //  - email: the email for the login credentials. Initally set to empty
-    //  - password: the password for the login credentials. Initally set to empty
+    /** State variables:
+     * - email: the email for the login credentials. Initally set to empty
+     * - password: the password for the login credentials. Initally set to empty
+     * - message: a string that tells the user if their log in cradentials were wrong.
+     *    Message is initally empty and will only change if the server fails to log the user in
+     */     
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      message: ""
     }
 
     //FontAwesome Icons
@@ -48,19 +52,14 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
     event.target.className += " was-validated"
-    this.state.email.length > 0 && this.state.password.length > 0 ? this.send() : console.log("Fields not complete")
+    this.state.email.length > 0 && this.state.password.length > 0 ? this.sendData() : console.log("Fields not complete")
   }
 
-  /**
-   * TODO: Add documention for this function when it is complete
-   */
-  connectAndCheck() {
-    this.sendData()
-  }
 
   /**
    * This function sends a post request to the server to decide if the email and passoword
-   * are associated with an account
+   * are associated with an account. If the promise is false then state.message is set so the user knows
+   * to try to login again. If the promise is true then the user will be sent a new view
    */
   sendData = () => {
     fetch('log', {
@@ -71,7 +70,16 @@ class Login extends Component {
       body: JSON.stringify(this.state)
     })
     .then( res => res.json())
-    .then( data => console.log(data))
+    .then( data => {
+      if (data === "INVALID") {
+        // Sent the state's message
+        this.setState({message: "Username or password is incorrect"})
+      }
+      else{
+        console.log("Ready to continue")
+        // TODO: ADD code here
+      } 
+    })
   }
 
   /**
@@ -109,11 +117,14 @@ class Login extends Component {
               </div>
 
               <div className="form-group">
-                <div className="input-group mb-3">
+                <div className="input-group mb">
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon1">{this.lockIcon}</span>
                   </div>
                   <input type="password" onChange={this.handleChange} name="password" className="form-control" autoComplete="off" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" required/>
+                </div>
+                <div className="d-flex justify-content-center mb-3">
+                  <small id="loginErr" className="form-text">{this.state.message}</small>
                 </div>
               </div>
 

@@ -1,23 +1,28 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 5000
+const mysql = require('mysql')
+const db = require('./database')
 
-const email = "Josh"
-const password = "password"
+// Set the server port 
+const port = process.env.PORT || 5000
 
 // Add JSON parser to the app
 app.use(express.json())
 
-app.get('/login', (req, res) =>{
-  res.json({response: "The message was recieved"})
-  //res.send("You are connected")
-  console.log("data was sent")
-
-})
 
 app.post('/log', (req, res) => {
-  console.log(req.body.email)
-  req.body.email === email && req.body.password === password ? res.json({res: "OK"}) : res.json({res: "NO"})
+  const username = req.body.email
+  const password = req.body.password
+  const sql = 'SELECT username, password FROM account WHERE username = ? AND password = ?'
+
+  db.query(sql, [username, password], (err, rows, fields) => {
+    if(err) console.log(err)
+    else if(rows.length === 0) res.json("INVALID")
+    else{
+      rows.map( x => console.log(x.username))
+      res.json(rows)
+    }
+  })
 })
 
 app.listen(port, () => console.log(`Listening on port: ${port}!`))

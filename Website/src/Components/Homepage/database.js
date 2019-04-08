@@ -6,7 +6,6 @@ import Tables from "../../table_data"
 import Table from "./table"
 
 function databaseInfo() {
-
   // The array of table objects that will be dynamically rendered
   const arr = Tables.tables
 
@@ -21,8 +20,6 @@ function databaseInfo() {
           <p style={{fontSize: "12px"}}>Model last updated 3/31/19</p>
         </div>
       </div>
-
-
 
       <div>
       {
@@ -40,7 +37,6 @@ function databaseInfo() {
         })
       }
       </div>
-      
     </div>
   )
 }

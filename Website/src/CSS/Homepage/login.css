@@ -12,6 +12,10 @@ hr {
   border-radius: 10px;
 }
 
+#loginErr {
+  color: rgb(177, 2, 2);
+}
+
 #loginSubmit {
   margin-bottom: 10px;
 }

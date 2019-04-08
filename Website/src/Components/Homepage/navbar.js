@@ -12,16 +12,18 @@ class Navbar extends Component {
 
   constructor(){
     super()
-    // State variables:
-    //  - menu controls the navbar when the screen size is below
-    //    bootstrap-sm attribute.
-    //  - dropdown controls the About dropdown bar
-    //  - selectValue is the id associated with one of the dropdown bars elements
+
+    /** State variables: 
+     * - menu controls the navbar when the screen size is below  bootstrap-sm attribute.
+     * - dropdown controls the About dropdown bar
+     * - selectValue is the id associated with one of the dropdown bars elements
+     */
     this.state = {
       menu: false,
       dropdown: false,
       selectValue: ""
     }
+
     // font awsome logo
     this.gitHubIcon = <FontAwesomeIcon icon={faGithub} />
 
@@ -90,8 +92,7 @@ render(){
                 <a className="dropdown-item" id="1" href={link}>Database</a>
                 <a className="dropdown-item" id="2" href={link}>Server</a>
                 <a className="dropdown-item" id="3" href={link}>Website</a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" id="3" href={link}>The Project</a>
+                <a className="dropdown-item" id="4" href={link}>The Project</a>
               </div>
             </li>
             <a className="nav-item nav-link" href="https://github.com/shu-csas-changgar/final-project-db-final">Github {this.gitHubIcon} <span className="sr-only">(current)</span></a>
