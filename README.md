@@ -12,3 +12,4 @@ TODO: ADD README
 - * cd to location of website (most likely yourname\documents\github\final-project-db-final\website) *
 - * npm start (if you get an error, try npm install, then npm start)*
 - *ctrl+c to stop *
+![alt text](https://raw.githubusercontent.com/sachinmahashabde/final-project-db-final/master/THE GOAT.png)
