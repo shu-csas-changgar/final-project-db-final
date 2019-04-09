@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const mysql = require('mysql')
 const db = require('./database')
 
 // Set the server port 
@@ -17,9 +16,12 @@ app.post('/log', (req, res) => {
 
   db.query(sql, [username, password], (err, rows, fields) => {
     if(err) console.log(err)
-    else if(rows.length === 0) res.json("INVALID")
+    else if(rows.length === 0){
+      console.log("The username or password was incorrect")
+      res.json("INVALID")
+    } 
     else{
-      rows.map( x => console.log(x.username))
+      rows.map( x => console.log(`Sucess`))
       res.json(rows)
     }
   })

@@ -73,8 +73,9 @@ render(){
   const show = (this.state.menu) ? "show" : ""
   const showDrop = (this.state.dropdown) ? "show" : ""
   const link = "#"
+  // navbar-dark bg-dark
   return(
-      <nav className="navbar navbar-dark bg-dark navbar-expand-sm">
+      <nav className="navbar navbar-dark bg-dark navbar-expand-sm" style={{backgroundColor: "#A52A2A"}}>
         <a className="navbar-brand" href={link} style={{color: "white"}}>ABC Corp</a>
         <button className="navbar-toggler" type="button" name="menu" onClick={ this.toggleMenu }>
           <span className="navbar-toggler-icon" onClick={this.toggleMenu} name="menu"></span>
