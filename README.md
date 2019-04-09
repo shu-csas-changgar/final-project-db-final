@@ -14,4 +14,3 @@ TODO: ADD README
 - *ctrl+c to stop *
 
 
-![alt text](https://raw.githubusercontent.com/sachinmahashabde/final-project-db-final/master/THE-GOAT.png)
