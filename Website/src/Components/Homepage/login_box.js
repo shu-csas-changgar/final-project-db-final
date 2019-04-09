@@ -76,6 +76,7 @@ class Login extends Component {
         this.setState({message: "Username or password is incorrect"})
       }
       else{
+        console.log(data)
         console.log("Ready to continue")
         // TODO: ADD code here
       } 
