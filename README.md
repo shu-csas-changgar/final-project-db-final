@@ -14,3 +14,4 @@ TODO: ADD README
 - *ctrl+c to stop *
 
 
+![](https://github.com/shu-csas-changgar/final-project-db-final/blob/master/THE-GOAT.png)
