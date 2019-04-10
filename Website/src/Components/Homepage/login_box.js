@@ -130,7 +130,7 @@ class Login extends Component {
               </div>
 
               <div className='d-flex justify-content-center mt-4'>
-                <button type="Log In" style={{marginBottom:"10px"}} className="btn btn-light ">Submit</button>
+                <button type="Log In" style={{marginBottom:"10px"}} className="btn btn-custom-red">Submit</button>
               </div>
             </form>
           </div>
