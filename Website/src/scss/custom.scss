@@ -1,8 +1,22 @@
+/* import the necessary Bootstrap files */
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
 
 //add new color
 $theme-colors: (
-  "custom-red": #900
+  "custom-red": #900,
+  "custom": #fcfcfcea,
+  "login-red": #cc2626
 );
 
-// Import Bootstrap and its default variables
+
+$gray: #000000;
+
+$navbar-dark-color:                 rgba($white, .75);
+$navbar-dark-hover-color:           rgba($white, .95);
+$navbar-dark-active-color:          $gray;
+
+
+
+
 @import '~bootstrap/scss/bootstrap.scss';

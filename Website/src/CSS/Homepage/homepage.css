@@ -1,8 +1,10 @@
 body {
   min-height: 100vh;
   position: relative;
+  /*
   background-color: #f5f5dc;
-  /* background-image: url("./Images/ITBackground.jpg");*/
+  */
+  background-image: url("../../Images/red2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

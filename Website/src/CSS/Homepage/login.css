@@ -5,15 +5,44 @@ hr {
 .login {
   width:325px;
   padding: 8px;
-  /*
-  background-color: lightBlue;
-   */
+  background-color: rgb(204, 38, 38, .9);
+
   color:white;
+  border-radius: 10px;
+
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color:rgba(0, 0, 0, 0.81)
+}
+
+#login_container {
+  /*
+  background-color: rgb(223, 137, 137, .9);
+  */
+  padding: 8px;
   border-radius: 10px;
 }
 
 #loginErr {
   color: rgb(177, 2, 2);
+}
+
+#helper {
+  color: whitesmoke;
+  padding: 6px;
+  border-radius: 2px;
+  background-color: rgb(204, 38, 38, .9);
+
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color:rgba(0, 0, 0, 0.81)
+}
+
+#helper-row {
+  margin: 1px;
+
 }
 
 #loginSubmit {
