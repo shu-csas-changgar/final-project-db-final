@@ -1,7 +1,7 @@
 body {
   min-height: 100vh;
   position: relative;
-  background-color: #f5f5dc;
+  background-color: #5CDB95;
   /* background-image: url("./Images/ITBackground.jpg");*/
   background-size: cover;
   background-repeat: no-repeat;
@@ -17,15 +17,15 @@ img {
   border-style: solid;
   border-radius: 10px;
   border-width: 1px;
-  border-color:rgba(99, 42, 14, 0.81)
+  border-color: #05386B
 }
 
 #custom-container-1 {
-  background-color: whitesmoke;
+  background-color: #8EE4AF;
   border-radius: 10px;
   border-style: solid;
   border-width: 1px;
-  border-color:rgba(99, 42, 14, 0.81)
+  border-color: #379683
 }
 
 #cMargin {
