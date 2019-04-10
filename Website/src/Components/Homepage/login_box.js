@@ -101,7 +101,7 @@ class Login extends Component {
         <div className="row justify-content-center" >
         <div className="flex-container" id="login_container">
         <div className="row justify-content-center">
-          <div className="login m-3" >
+          <div className="login m-3">
             <form className="needs-validation" onSubmit={this.handleSubmit} noValidate>
               <h5 className="d-flex justify-content-center">Log In</h5>
               <hr />
@@ -132,7 +132,7 @@ class Login extends Component {
               </div>
 
               <div className='d-flex justify-content-center mt-4'>
-                <button type="Log In" style={{marginBottom:"10px"}} className="btn btn-custom-red">Submit</button>
+                <button type="Log In" style={{marginBottom:"10px"}} className="btn btn-light">Submit</button>
               </div>
             </form>
           </div>
