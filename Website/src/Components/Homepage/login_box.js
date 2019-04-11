@@ -81,7 +81,6 @@ class Login extends Component {
         console.log(data)
         console.log("Ready to continue")
         this.setState({toNextView: true})
-        
       } 
     })
   }
