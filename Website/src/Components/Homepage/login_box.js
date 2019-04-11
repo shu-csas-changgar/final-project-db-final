@@ -18,7 +18,8 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      message: ""
+      message: "",
+      toNextView: false
     }
 
     //FontAwesome Icons
@@ -51,6 +52,7 @@ class Login extends Component {
    */
   handleSubmit(event) {
     event.preventDefault();
+    this.setState({toNextView: true})
     event.target.className += " was-validated"
     this.state.email.length > 0 && this.state.password.length > 0 ? this.sendData() : console.log("Fields not complete")
   }
@@ -78,7 +80,8 @@ class Login extends Component {
       else{
         console.log(data)
         console.log("Ready to continue")
-        // TODO: ADD code here
+        this.setState({toNextView: true})
+        
       } 
     })
   }
@@ -93,6 +96,7 @@ class Login extends Component {
   }
 
   render() {
+
     return(
       <div>
         <div className="flex-row justify-content-center">

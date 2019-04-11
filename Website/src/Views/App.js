@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import './CSS/Homepage/homepage.css'
-import Footer from "./Components/AllPages/footer_home"
-import Navbar from "./Components/Homepage/navbar"
-import Login from "./Components/Homepage/login_box"
-import Database from "./Components/Homepage/database"
-import Servers from "./Components/Homepage/Server"
-import Website from "./Components/Homepage/website"
-import Project from "./Components/Homepage/project"
+import '../CSS/Homepage/homepage.css'
+import Footer from "../Components/AllPages/footer_home"
+import Navbar from "../Components/Homepage/navbar"
+import Login from "../Components/Homepage/login_box"
+import Database from "../Components/Homepage/database"
+import Servers from "../Components/Homepage/Server"
+import Website from "../Components/Homepage/website"
+import Project from "../Components/Homepage/project"
+import { withRouter } from 'react-router-dom'
+
 //import WelcomeMsg from "./Components/welcomeMessage"
 
 class App extends Component {
@@ -15,10 +17,12 @@ class App extends Component {
     super()
     this.state = {
       list: [Login, Database, Servers, Website, Project],
-      index: 4
+      index: 0,
+      newView: false
     }
 
     this.handler = this.handler.bind(this)
+    this.handClick = this.handClick.bind(this)
   }
 
   /**
@@ -35,7 +39,14 @@ class App extends Component {
 
   }
 
+  handClick(event) {
+    this.props.history.push('/database')
+  }
+
   render() {
+
+    console.log(this.state.newView)
+
     // The child component that sould be loaded. The componet is initally set to the login
     // screen. But will change if the handler updates the state value for index
     const TagName = this.state.list[this.state.index]
@@ -51,6 +62,7 @@ class App extends Component {
               </div>
             </div>
           </div>
+          <button type="Log In" onClick={this.handClick} style={{marginBottom:"10px"}} className="btn btn-custom-red">Submit</button>
           <Footer />
         </div>
         );
