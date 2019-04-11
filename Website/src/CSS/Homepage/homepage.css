@@ -19,7 +19,7 @@ img {
   border-style: solid;
   border-radius: 10px;
   border-width: 1px;
-  border-color:rgba(99, 42, 14, 0.81)
+  border-color:rgba(0, 0, 0, 0.81)
 }
 
 #custom-container-1 {
@@ -27,7 +27,7 @@ img {
   border-radius: 10px;
   border-style: solid;
   border-width: 1px;
-  border-color:rgba(99, 42, 14, 0.81)
+  border-color:rgba(0, 0, 0, 0.81)
 }
 
 #cMargin {

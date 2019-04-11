@@ -90,7 +90,7 @@ render(){
               <a className="nav-link dropdown-toggle" value={this.state.selectValue} onClick={ this.toggleMenu }  onBlur ={this.checkDropDown} tabIndex="-1" name="dropdown" href={link} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 About
               </a>
-              <div className={"dropdown-menu " + showDrop} value={this.state.selectValue} onMouseDown={ this.handleChange} aria-labelledby="navbarDropdown">
+              <div className={"dropdown-menu " + showDrop} value={this.state.selectValue} id={this.props.currentPage} onMouseDown={ this.handleChange} aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" id="1" href={link}>Database</a>
                 <a className="dropdown-item" id="2" href={link}>Server</a>
                 <a className="dropdown-item" id="3" href={link}>Website</a>
