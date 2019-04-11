@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       list: [Login, Database, Servers, Website, Project],
       index: 0,
-      newView: false
+      isloged: false
     }
 
     this.handler = this.handler.bind(this)
@@ -53,7 +53,7 @@ class App extends Component {
     return (
         <div>
           <div className="header">
-            <Navbar action={this.handler} page={this.state.index}/>
+            <Navbar currentPage={this.state.index} action={this.handler} page={this.state.index}/>
           </div>
           <div className="d-flex justify-content-center" id="cMargin">
             <div className="container App">
