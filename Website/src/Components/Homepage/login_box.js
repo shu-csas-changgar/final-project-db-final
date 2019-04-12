@@ -3,6 +3,7 @@ import "../../CSS/Homepage/login.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import WelcomeMsg from "./welcomeMessage"
+import { NavLink } from 'react-router-dom';
 
 class Login extends Component {
 
