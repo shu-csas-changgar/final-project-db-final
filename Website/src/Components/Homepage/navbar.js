@@ -73,8 +73,9 @@ render(){
   const show = (this.state.menu) ? "show" : ""
   const showDrop = (this.state.dropdown) ? "show" : ""
   const link = "#"
+  // navbar-dark bg-dark
   return(
-      <nav className="navbar navbar-dark bg-dark navbar-expand-sm">
+      <nav className="navbar navbar-dark bg-dark navbar-expand-sm" style={{backgroundColor: "#A52A2A"}}>
         <a className="navbar-brand" href={link} style={{color: "white"}}>ABC Corp</a>
         <button className="navbar-toggler" type="button" name="menu" onClick={ this.toggleMenu }>
           <span className="navbar-toggler-icon" onClick={this.toggleMenu} name="menu"></span>
@@ -88,7 +89,7 @@ render(){
               <a className="nav-link dropdown-toggle" value={this.state.selectValue} onClick={ this.toggleMenu }  onBlur ={this.checkDropDown} tabIndex="-1" name="dropdown" href={link} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 About
               </a>
-              <div className={"dropdown-menu " + showDrop} value={this.state.selectValue} onMouseDown={ this.handleChange} aria-labelledby="navbarDropdown">
+              <div className={"dropdown-menu " + showDrop} value={this.state.selectValue} id={this.props.currentPage} onMouseDown={ this.handleChange} aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" id="1" href={link}>Database</a>
                 <a className="dropdown-item" id="2" href={link}>Server</a>
                 <a className="dropdown-item" id="3" href={link}>Website</a>

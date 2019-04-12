@@ -1,3 +1,6 @@
+![](https://github.com/shu-csas-changgar/final-project-db-final/blob/master/THE-GOAT.png)
+
+
 # Database Final Project
 TODO: ADD README
 
@@ -12,3 +15,5 @@ TODO: ADD README
 - * cd to location of website (most likely yourname\documents\github\final-project-db-final\website) *
 - * npm start (if you get an error, try npm install, then npm start)*
 - *ctrl+c to stop *
+
+

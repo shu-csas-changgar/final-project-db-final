@@ -3,6 +3,7 @@ import DBImage from "../../Images/database_modle.PNG"
 import Tables from "../../table_data"
 
 
+
 import Table from "./table"
 
 function databaseInfo() {
