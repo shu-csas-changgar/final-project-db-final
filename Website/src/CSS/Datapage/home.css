@@ -1,12 +1,24 @@
 #view-container {
-    background-color: pink;
+    background-color: whitesmoke;
     border-radius: 10px;
+}
+
+#container-1{
+    margin-top: 8px;
+    margin-bottom: 8px;
+    min-width: 50%;
+    /*
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px 40px #888888;
+    */
 }
 
 #custom-nav{
     border-top-left-radius: 10px;
 }
 
-html,body {
-    height: 100%;
-  }
+#view-container {
+    min-width: 95%;
+}
