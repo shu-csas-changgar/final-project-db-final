@@ -5,7 +5,7 @@ hr {
 .login {
   width:325px;
   padding: 8px;
-  background-color: rgb(204, 38, 38, .9);
+  background-color: rgba(51, 49, 49, 0.9);
 
   color:white;
   border-radius: 10px;
@@ -33,7 +33,7 @@ hr {
   color: whitesmoke;
   padding: 6px;
   border-radius: 2px;
-  background-color: rgb(204, 38, 38, .9);
+  background-color: rgba(51, 49, 49, 0.9);
 
   border-style: solid;
   border-radius: 10px;
