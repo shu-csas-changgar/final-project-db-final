@@ -4,8 +4,7 @@ class navbar extends Component {
 
     render() {
         return(
-            <nav className="navbar navbar-expand-sm navbar-light bg-light">
-                <span class="navbar-brand mb-0 h1">ABC Corp</span>
+            <nav className="navbar navbar-expand-sm  navbar-light bg-light" id="custom-nav">
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -15,10 +14,16 @@ class navbar extends Component {
                             <a className="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Features</a>
+                            <a className="nav-link" href="#">Inventory</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Logout</a>
+                            <a className="nav-link" href="#">Leases</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Reservations</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Reports</a>
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,12 @@
+#view-container {
+    background-color: pink;
+    border-radius: 10px;
+}
+
+#custom-nav{
+    border-top-left-radius: 10px;
+}
+
+html,body {
+    height: 100%;
+  }
