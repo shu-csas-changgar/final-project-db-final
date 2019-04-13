@@ -3,6 +3,7 @@ import Navbar from '../Components/Datapage/navbar'
 import Header from '../Components/Datapage/header'
 import Footer from '../Components/AllPages/footer_home'
 import '../CSS/Datapage/home.css'
+import Navbar2 from '../Components/Datapage/navbar2'
 
 class home extends Component {
 
@@ -13,8 +14,8 @@ class home extends Component {
                     <Header />
                 </div>
                 <div className="container mt-3" id="view-container">
-                    <div className="row bg-light" style={{borderTopLeftRadius:"10px", borderTopRightRadius:"10px",borderBottom:"1px solid black"}}>
-                        <Navbar />
+                    <div className="row bg-light" style={{borderTopLeftRadius:"10px", padding:"8px", borderTopRightRadius:"10px",borderBottom:"1px solid black"}}>
+                        <Navbar2 />
                     </div>
                     <div className="d-flex row justify-content-center mt-5">
                         <h1>Welcome Thanos</h1>
