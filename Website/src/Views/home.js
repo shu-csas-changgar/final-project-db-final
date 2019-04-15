@@ -10,7 +10,7 @@ class home extends Component {
     render() {
         return(
             <div>
-                <div className="container-fluid">
+                <div >
                     <Header />
                 </div>
                 <div className="container mt-3" id="view-container">
