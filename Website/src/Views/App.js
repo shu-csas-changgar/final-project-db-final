@@ -24,7 +24,6 @@ class App extends Component {
 
     this.store = this.props.store;
     this.handler = this.handler.bind(this)
-    this.handClick = this.handClick.bind(this)
 
   }
 
