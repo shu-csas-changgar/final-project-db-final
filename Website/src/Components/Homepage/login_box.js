@@ -3,7 +3,6 @@ import "../../CSS/Homepage/login.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import WelcomeMsg from "./welcomeMessage"
-import { NavLink } from 'react-router-dom'
 import { success } from '../../Redux/actions/index'
 
 class Login extends Component {
@@ -83,6 +82,9 @@ class Login extends Component {
         this.store.dispatch(success())
         this.props.history.push('/database')
       } 
+    })
+    .catch((error) =>{
+      this.setState({message: "Unable to connect to the server at this time"})
     })
   }
 

@@ -625,7 +625,6 @@ export default {
                 }
             ],
         },
-        ,
         {
             tableName: "Country",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
