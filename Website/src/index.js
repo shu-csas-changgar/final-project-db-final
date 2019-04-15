@@ -5,22 +5,31 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter as Router, Switch} from 'react-router-dom'
 import { ProtectedRoute } from "./protectedRoute"
+
 // View imports below
 import App from './Views/App';
 import Home from './Views/home'
 import NotFound from './Views/notfound'
 
+//Redux imports
+import { createStore } from 'redux'
+import myApp from './Redux/reducers/index'
 
-//                <Route path="/database" component={Home} />
+//Create redux store
+let store = createStore(myApp)
 
-
+// Create the routing scheme
 const routing =(
     <Router>
         <div>
             <Switch>
-                <Route exact path="/" component={App} />
+                <Route 
+                    exact path="/" 
+                    render={(props) =><App {...props} store={store}/>}
+                />
                 <ProtectedRoute
                     exact path = "/database"
+                    store = {store}
                     component={Home}
                 />
                 <Route component={NotFound} />
@@ -29,8 +38,18 @@ const routing =(
     </Router>
 )
 
+/**
+ * This function renders the views and their componetns onto the screen
+ */
+function render() {
+    ReactDOM.render(routing, document.getElementById('root'));
+}
 
-ReactDOM.render(routing, document.getElementById('root'));
+
+store.subscribe(render) // make sure that the render function is called whenever the state  of the application changes
+render() // render the view
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
