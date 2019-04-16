@@ -20,7 +20,7 @@ function footer() {
   return(
     <div className="d-flex justify-content-center">
       <div className="footer m-2">
-        <p>Developed with {heartIcon} and {javaIcon} using {bootLink}, {reactLink}, and {fontAwLink}</p>
+        <p id="footerborder">Developed with {heartIcon} and {javaIcon} using {bootLink}, {reactLink}, and {fontAwLink}</p>
       </div>
     </div>
   )

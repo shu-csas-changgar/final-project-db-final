@@ -137,7 +137,7 @@ class Login extends Component {
             </form>
           </div>
           </div>
-          <div className="row justify-content-center" id="helper-row" style={{backgroundColor: "Red"}}>
+          <div className="row justify-content-center" id="helper-row">
             <p style={{fontSize:"12px"}} id="helper">Don't have an account? Please contact the IT department to see if you are eligible for one.</p>
           </div>
         </div>

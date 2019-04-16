@@ -4,3 +4,13 @@
   position: absolute;
   bottom:0;
 }
+
+#footerborder {
+  background-color: rgba(51, 49, 49, 0.9);
+  padding: 4px;
+
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color:rgba(0, 0, 0, 0.81)
+}

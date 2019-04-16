@@ -1,6 +1,7 @@
 import React from "react"
 import DBImage from "../../Images/database_modle.PNG"
 import Tables from "../../table_data"
+import "../../CSS/Homepage/database.css"
 
 
 
@@ -18,7 +19,7 @@ function databaseInfo() {
         </div>
         <div className="row justify-content-center">
           <img className="d-block" src={DBImage} alt="Responsive img" />
-          <p style={{fontSize: "12px"}}>Model last updated 3/31/19</p>
+          <p id="update">Model last updated 3/31/19</p>
         </div>
       </div>
 
