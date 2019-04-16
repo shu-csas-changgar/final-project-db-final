@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import Navbar from '../Components/Datapage/navbar'
+//import Navbar from '../Components/Datapage/navbar'
 import Header from '../Components/Datapage/header'
 import Footer from '../Components/AllPages/footer_home'
 import '../CSS/Datapage/home.css'
@@ -10,7 +10,7 @@ class home extends Component {
     render() {
         return(
             <div>
-                <div classname="container-fluid">
+                <div >
                     <Header />
                 </div>
                 <div className="container mt-3" id="view-container">
@@ -26,7 +26,7 @@ class home extends Component {
                         <h4>Currently Owned Items</h4>
                         </div>
                     <div className="d-flex row justify-content-center">
-                        <table class="table m-2 table-striped">
+                        <table className="table m-2 table-striped">
                             <thead>
                                 <tr>
                                 <th scope="col">Item</th>
@@ -73,12 +73,12 @@ class home extends Component {
                     </div>
 
                     <h2 className="mt-5">Upcomming Corperate Events</h2>
-                    <ul class="d-flex list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                    <ul className="d-flex list-group">
+                        <li className="list-group-item">Cras justo odio</li>
+                        <li className="list-group-item">Dapibus ac facilisis in</li>
+                        <li className="list-group-item">Morbi leo risus</li>
+                        <li className="list-group-item">Porta ac consectetur ac</li>
+                        <li className="list-group-item">Vestibulum at eros</li>
                     </ul>
                     
                 </div>

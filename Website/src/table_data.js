@@ -551,7 +551,6 @@ export default {
                 }
             ],
         },
-        ,
         {
             tableName: "Country",
             description: "This table has the data for specifying a country.",

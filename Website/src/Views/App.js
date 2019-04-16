@@ -7,22 +7,24 @@ import Database from "../Components/Homepage/database"
 import Servers from "../Components/Homepage/Server"
 import Website from "../Components/Homepage/website"
 import Project from "../Components/Homepage/project"
-import { withRouter } from 'react-router-dom'
-
-//import WelcomeMsg from "./Components/welcomeMessage"
 
 class App extends Component {
 
-  constructor() {
-    super()
+  /** State variables:
+   * - list; a list containing all the child components for this view. Bases on the states index one of the
+   *      components from this list will be dynamiaclly rendered on the screen
+   * - index: represents the position in the list. This position will be the item that is rendered on the screen    
+   */
+  constructor(props) {
+    super(props)
     this.state = {
       list: [Login, Database, Servers, Website, Project],
       index: 0,
-      isloged: false
     }
 
+    this.store = this.props.store;
     this.handler = this.handler.bind(this)
-    this.handClick = this.handClick.bind(this)
+
   }
 
   /**
@@ -39,13 +41,7 @@ class App extends Component {
 
   }
 
-  handClick(event) {
-    this.props.history.push('/database')
-  }
-
   render() {
-
-    console.log(this.state.newView)
 
     // The child component that sould be loaded. The componet is initally set to the login
     // screen. But will change if the handler updates the state value for index
@@ -58,11 +54,13 @@ class App extends Component {
           <div className="d-flex justify-content-center" id="cMargin">
             <div className="container App">
               <div >
-                <TagName/>
+                <TagName
+                  store={this.store}
+                  history={this.props.history}
+                />
               </div>
             </div>
           </div>
-          <button type="Log In" onClick={this.handClick} style={{marginBottom:"10px"}} className="btn btn-custom-red">Submit</button>
           <Footer />
         </div>
         );
