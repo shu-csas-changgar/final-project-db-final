@@ -12,7 +12,7 @@ function databaseInfo() {
 
   return(
     <div>
-      <div className="container">
+      <div className="container" style={{color: "#ffffff"}}>
         <div className="row justify-content-center mb-4">
           <h1 className="display-1">The Database</h1>
         </div>

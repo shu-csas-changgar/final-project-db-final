@@ -24,3 +24,9 @@ hr {
   widows: 200px;
   width: 95%;
 }
+
+#helper {
+  color: white;
+  font-weight: 400;
+  font-variant: small-caps;
+}

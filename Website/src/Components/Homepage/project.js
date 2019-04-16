@@ -4,7 +4,7 @@ function projectInfo() {
     return(
         <div>
             <div className="row justify-content-center">
-                <h1 className="display-1">The Project</h1>
+                <h1 className="display-1" style={{color: "white"}}>The Project</h1>
             </div>
             <div className="container mt-3" id="custom-container-1">
                 <h5 className="m-2">Overview:</h5>
