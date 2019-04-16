@@ -4,20 +4,22 @@ class navbar extends Component {
     
     
     render() {
+
+        const link = "#"
         return(
             <div>
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
+                <ul className="nav nav-pills">
+                    <li className="nav-item">
+                        <a className="nav-link active" href={link}>Active</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                    <li className="nav-item">
+                        <a className="nav-link" href={link}>Link</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                    <li className="nav-item">
+                        <a className="nav-link" href={link}>Link</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
+                    <li className="nav-item">
+                        <a className="nav-link disabled" href={link}>Disabled</a>
                     </li>
                 </ul>
             </div>

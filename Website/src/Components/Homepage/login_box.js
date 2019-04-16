@@ -3,12 +3,12 @@ import "../../CSS/Homepage/login.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import WelcomeMsg from "./welcomeMessage"
-import { NavLink } from 'react-router-dom';
+import { success } from '../../Redux/actions/index'
 
 class Login extends Component {
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     /** State variables:
      * - email: the email for the login credentials. Initally set to empty
@@ -19,10 +19,10 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      message: "",
-      toNextView: false
+      message: ""
     }
 
+    this.store = this.props.store
     //FontAwesome Icons
     this.userIcon = <FontAwesomeIcon icon={faUser} />
     this.lockIcon = <FontAwesomeIcon icon={faLock} />
@@ -53,7 +53,6 @@ class Login extends Component {
    */
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({toNextView: true})
     event.target.className += " was-validated"
     this.state.email.length > 0 && this.state.password.length > 0 ? this.sendData() : console.log("Fields not complete")
   }
@@ -79,10 +78,13 @@ class Login extends Component {
         this.setState({message: "Username or password is incorrect"})
       }
       else{
-        console.log(data)
-        console.log("Ready to continue")
-        this.setState({toNextView: true})
+        // Set the global state to true
+        this.store.dispatch(success())
+        this.props.history.push('/database')
       } 
+    })
+    .catch((error) =>{
+      this.setState({message: "Unable to connect to the server at this time"})
     })
   }
 
