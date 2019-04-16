@@ -8,7 +8,7 @@ const checkmark = <FontAwesomeIcon icon={faCheck} />
 export default {
     tables: [{
         tableName: "Inventory",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+        description: "Table outlining the essential information regarding the id and location of inventory. This table also includes information about the owner of the inventory and the employee's responsible.",
         data: [{
                 colName: "inventory_id",
                 datatype: "INT",
@@ -30,59 +30,6 @@ export default {
                 datatype: "INT",
                 key: "FK",
                 NN: checkmark,
-                UQ: null,
-                AI: null
-            },
-            {
-                colName: "equipment_id",
-                datatype: "INT",
-                key: "FK",
-                NN: checkmark,
-                UQ: checkmark,
-                AI: null
-            },
-            {
-                colName: "employee_id",
-                datatype: "INT",
-                key: "FK",
-                NN: null,
-                UQ: null,
-                AI: null
-            },
-            {
-                colName: "last_update",
-                datatype: "DATETIME",
-                key: null,
-                NN: checkmark,
-                UQ: null,
-                AI: checkmark
-            }
-        ],    
-    },
-    {
-        tableName: "Inventory2",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
-        data: [{
-                colName: "inventory_id",
-                datatype: "INT",
-                key: "PK",
-                NN: checkmark,
-                UQ: checkmark,
-                AI: checkmark
-            },
-            {
-                colName: "location_id",
-                datatype: "INT",
-                key: "FK",
-                NN: null,
-                UQ: null,
-                AI: null
-            },
-            {
-                colName: "owner_id",
-                datatype: "INT",
-                key: "FK",
-                NN: checkmark ,
                 UQ: null,
                 AI: null
             },
@@ -115,7 +62,7 @@ export default {
     {
           
             tableName: "Employee",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table is responsible for all of the pertinent information regarding an employee such as name and id.",
             data: [{
                     colName: "employee_id",
                     datatype: "INT",
@@ -185,7 +132,7 @@ export default {
         },
         {
             tableName: "Account",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table provides the necessary information for a unique account for the website.",
             data: [{
                     colName: "account_id",
                     datatype: "INT",
@@ -222,7 +169,7 @@ export default {
         },
         {
             tableName: "Location",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table highlights the location information of buildings and rooms.",
             data: [{
                     colName: "location_id",
                     datatype: "INT",
@@ -259,7 +206,7 @@ export default {
         },
         {
             tableName: "Room",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table highlights the information necessary to identify a specific room in a building.",
             data: [{
                     colName: "floor",
                     datatype: "INT",
@@ -280,7 +227,7 @@ export default {
         },
         {
             tableName: "Building",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table houses the necessary information for each building owned by the company.",
             data: [{
                     colName: "building_name",
                     datatype: "VARCHAR",
@@ -301,7 +248,7 @@ export default {
         },
         {
             tableName: "Equipment",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table provides information regarding the equipment such as its id and serial number, as well the transaction information.",
             data: [{
                     colName: "equipment_id",
                     datatype: "INT",
@@ -346,7 +293,7 @@ export default {
         },
         {
             tableName: "Equipment Type",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table is for all of the information about an equipment's model name and number.",
             data: [{
                     colName: "model_name",
                     datatype: "VARCHAR",
@@ -367,7 +314,7 @@ export default {
         },
         {
             tableName: "Reservations",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table is for all of the relevant information for a reservation such as location and start and end times as well as the employees involved.",
             data: [{
                     colName: "location_id",
                     datatype: "INT",
@@ -412,7 +359,7 @@ export default {
         },
         {
             tableName: "Equipment Has Reservations",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table is responsible for the reservations reservation id.",
             data: [{
                     colName: "reservations_reservation_id",
                     datatype: "INT",
@@ -434,7 +381,7 @@ export default {
         },
         {
             tableName: "Transaction",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table highlights all of the transaction data such as vendor id, cost of the product and date of purchase.",
             data: [{
                     colName: "vendor_id",
                     datatype: "INT",
@@ -487,7 +434,7 @@ export default {
         },
         {
             tableName: "Vendor",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table stores the data for all of the vendors such as their address.",
             data: [{
                     colName: "address_id",
                     datatype: "INT",
@@ -507,29 +454,8 @@ export default {
             ],    
         },
         {
-            tableName: "Vendor",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
-            data: [{
-                    colName: "address_id",
-                    datatype: "INT",
-                    key: null,
-                    NN: checkmark,
-                    UQ: null,
-                    AI: null
-                },
-                {
-                    colName: "last_updated",
-                    datatype: "TIMESTAMP",
-                    key: null,
-                    NN: checkmark,
-                    UQ: null,
-                    AI: null
-                },
-            ],
-        },
-        {
             tableName: "Address",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table stores all of the relevant data used for the address of a location such as city, state, and postal code.",
             data: [{
                     colName: "address2",
                     datatype: "VARCHAR",
@@ -582,7 +508,7 @@ export default {
         },
         {
             tableName: "City",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "Stores the data used to identify a specific city.",
             data: [{
                     colName: "city_id",
                     datatype: "INT",
@@ -628,7 +554,7 @@ export default {
         ,
         {
             tableName: "Country",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget sem quis felis vehicula condimentum eu commodo orci. Ut tincidunt dictum egestas. Mauris et ante sit amet ex fermentum iaculis. Fusce leo justo, luctus vel suscipit eu, gravida sed lacus. Vestibulum sem metus, scelerisque et tincidunt at, accumsan non sapien. Nullam non nibh eget ipsum laoreet convallis sed vitae enim.",
+            description: "This table has the data for specifying a country.",
             data: [{
                     colName: "country_name",
                     datatype: "VARCHAR",
