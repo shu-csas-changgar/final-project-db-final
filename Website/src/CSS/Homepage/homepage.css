@@ -1,8 +1,8 @@
 body {
   min-height: 100vh;
   position: relative;
-  background-color: #f5f5dc;
-  /* background-image: url("./Images/ITBackground.jpg");*/
+  /* background-color: #5CDB95; */
+  background-image: url("../../Images/nyc.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -16,16 +16,17 @@ img {
   height:80%;
   border-style: solid;
   border-radius: 10px;
-  border-width: 1px;
-  border-color:rgba(99, 42, 14, 0.81)
+  border-width: 5px;
+  border-color: black;
+  box-shadow: 10px;
 }
 
 #custom-container-1 {
-  background-color: whitesmoke;
+  background-color: rgb(211, 211, 211, 0.98);
   border-radius: 10px;
   border-style: solid;
   border-width: 1px;
-  border-color:rgba(99, 42, 14, 0.81)
+  border-color: white;
 }
 
 #cMargin {

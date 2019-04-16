@@ -104,8 +104,10 @@ class Login extends Component {
         <div className="flex-row justify-content-center">
           <WelcomeMsg />
         </div>
-        <div className="row justify-content-center" id="logIn">
-          <div className="login bg-secondary" style={{backgroundColor: "#A52A2A"}}>
+        <div className="row justify-content-center" >
+        <div className="flex-container" id="login_container">
+        <div className="row justify-content-center">
+          <div className="login m-3">
             <form className="needs-validation" onSubmit={this.handleSubmit} noValidate>
               <h5 className="d-flex justify-content-center">Log In</h5>
               <hr />
@@ -136,13 +138,15 @@ class Login extends Component {
               </div>
 
               <div className='d-flex justify-content-center mt-4'>
-                <button type="Log In" style={{marginBottom:"10px"}} className="btn btn-custom-red">Submit</button>
+                <button type="Log In" style={{marginBottom:"10px"}} className="btn btn-light">Submit</button>
               </div>
             </form>
           </div>
+          </div>
+          <div className="row justify-content-center" id="helper-row">
+            <p style={{fontSize:"12px"}} id="helper">Don't have an account? Please contact the IT department to see if you are eligible for one.</p>
+          </div>
         </div>
-        <div className="d-flex mt-1 justify-content-center">
-          <p style={{fontSize:"12px"}}>Don't have an account? Please contact the IT department to see if you are eligible for one.</p>
         </div>
       </div>
     )
