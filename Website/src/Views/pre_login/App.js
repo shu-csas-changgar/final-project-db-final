@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import '../CSS/Homepage/homepage.css'
-import Footer from "../Components/AllPages/footer_home"
-import Navbar from "../Components/Homepage/navbar"
-import Login from "../Components/Homepage/login_box"
-import Database from "../Components/Homepage/database"
-import Servers from "../Components/Homepage/Server"
-import Website from "../Components/Homepage/website"
-import Project from "../Components/Homepage/project"
+import '../../CSS/Homepage/homepage.css'
+import Footer from "../../Components/AllPages/footer_home"
+import Navbar from "../../Components/Homepage/navbar"
+import Login from "../../Components/Homepage/login_box"
+import Database from "../../Components/Homepage/database"
+import Servers from "../../Components/Homepage/Server"
+import Website from "../../Components/Homepage/website"
+import Project from "../../Components/Homepage/project"
 
 class App extends Component {
 

@@ -7,8 +7,8 @@ import { Route, BrowserRouter as Router, Switch} from 'react-router-dom'
 import { ProtectedRoute } from "./protectedRoute"
 
 // View imports below
-import App from './Views/App';
-import Home from './Views/home'
+import App from './Views/pre_login/App'
+import Home from './Views/post_login/home'
 import NotFound from './Views/notfound'
 
 //Redux imports
