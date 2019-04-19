@@ -20,7 +20,7 @@ USE `abc` ;
 CREATE TABLE IF NOT EXISTS `abc`.`country` (
   `country_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `country_name` VARCHAR(50) NOT NULL,
-  `last_update` TIMESTAMP NOT NULL,
+  `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`country_id`),
   UNIQUE INDEX `country_id_UNIQUE` (`country_id` ASC) VISIBLE,
   UNIQUE INDEX `country_name_UNIQUE` (`country_name` ASC) VISIBLE)
@@ -33,9 +33,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `abc`.`city` (
   `city_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `city_name` VARCHAR(50) NOT NULL,
-  `last_update` TIMESTAMP NOT NULL,
   `country_id` INT UNSIGNED NOT NULL,
   `state` VARCHAR(45) NULL,
+  `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`city_id`),
   INDEX `fk_city_country1_idx` (`country_id` ASC) VISIBLE,
   CONSTRAINT `fk_city_country1`
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`address` (
   `district` VARCHAR(20) NOT NULL,
   `postal_code` VARCHAR(20) NOT NULL,
   `city_id` INT UNSIGNED NOT NULL,
-  `last_update` TIMESTAMP NOT NULL,
+  `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`address_id`),
   UNIQUE INDEX `address_id_UNIQUE` (`address_id` ASC) VISIBLE,
   INDEX `fk_city_id_idx` (`city_id` ASC) VISIBLE,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`vendor` (
   `vendor_id` INT NOT NULL AUTO_INCREMENT,
   `company_name` VARCHAR(45) NOT NULL,
   `address_id` INT UNSIGNED NOT NULL,
-  `last_updated` TIMESTAMP NOT NULL,
+  `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`vendor_id`),
   UNIQUE INDEX `vender_id_UNIQUE` (`vendor_id` ASC) VISIBLE,
   INDEX `fk_vender_address_id_idx` (`address_id` ASC) VISIBLE,
@@ -96,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `abc`.`transaction` (
   `vendor_id` INT NOT NULL,
   `Cost` DOUBLE NOT NULL,
   `purchase_date` DATETIME NULL,
-  `last_updated` TIMESTAMP NOT NULL,
   `begin_date` DATETIME NULL,
   `end_date` DATETIME NULL,
+  `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`transaction_id`),
   UNIQUE INDEX `transaction_id_UNIQUE` (`transaction_id` ASC) VISIBLE,
   UNIQUE INDEX `vender_id_UNIQUE` (`vendor_id` ASC) VISIBLE,
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`equipment` (
   `serial_number` VARCHAR(20) NOT NULL,
   `transaction_id` INT NOT NULL,
   `type_id` INT UNSIGNED NOT NULL,
-  `last_updated` DATETIME NOT NULL,
+  `last_updated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`equiptment_id`),
   UNIQUE INDEX `equiptment_id_UNIQUE` (`equiptment_id` ASC) VISIBLE,
   UNIQUE INDEX `transaction_id_UNIQUE` (`transaction_id` ASC) VISIBLE,
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`location` (
   `location_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `building_id` INT UNSIGNED NOT NULL,
   `room_id` INT UNSIGNED NULL,
-  `last_updated` TIMESTAMP NOT NULL,
+  `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX `office_id_idx` (`building_id` ASC) VISIBLE,
   INDEX `room_id_idx` (`room_id` ASC) VISIBLE,
   PRIMARY KEY (`location_id`),
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`account` (
   `account_id` INT NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `password` BINARY(16) NOT NULL,
-  `last_updated` TIMESTAMP NOT NULL,
+  `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`account_id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `account_id_UNIQUE` (`account_id` ASC) VISIBLE)
@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`employee` (
   `location_id` INT UNSIGNED NOT NULL,
   `account_id` INT NULL,
   `cell_number` INT NULL,
-  `last_updated` TIMESTAMP NOT NULL,
+  `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`employee_id`),
   INDEX `location_id_idx` (`location_id` ASC) VISIBLE,
   INDEX `account_id_idx` (`account_id` ASC) VISIBLE,
@@ -260,10 +260,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `abc`.`Inventory` (
   `inventory_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `location_id` INT UNSIGNED NULL,
-  `owner_id` INT UNSIGNED NULL,
+  `owner_id` INT UNSIGNED NOT NULL,
   `equpiment_id` INT UNSIGNED NOT NULL,
-  `last_update` TIMESTAMP NOT NULL,
   `employee_id` INT UNSIGNED NULL,
+  `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`inventory_id`),
   UNIQUE INDEX `inventory_id_UNIQUE` (`inventory_id` ASC) VISIBLE,
   UNIQUE INDEX `equpiment_id_UNIQUE` (`equpiment_id` ASC) VISIBLE,
@@ -296,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`reservations` (
   `start_time` DATETIME NOT NULL,
   `end_time` DATETIME NOT NULL,
   `employee_id` INT UNSIGNED NOT NULL,
-  `last_updated` TIMESTAMP NOT NULL,
+  `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`reservation_id`),
   INDEX `employee_id_idx` (`employee_id` ASC) VISIBLE,
   UNIQUE INDEX `reservation_id_UNIQUE` (`reservation_id` ASC) VISIBLE,
@@ -320,7 +320,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `abc`.`equipment_reservations` (
   `equipment_equiptment_id` INT UNSIGNED NOT NULL,
   `reservations_reservation_id` INT UNSIGNED NOT NULL,
-  `last_updated` TIMESTAMP NOT NULL,
+  `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`equipment_equiptment_id`, `reservations_reservation_id`),
   INDEX `fk_equipment_has_reservations_reservations1_idx` (`reservations_reservation_id` ASC) VISIBLE,
   INDEX `fk_equipment_has_reservations_equipment1_idx` (`equipment_equiptment_id` ASC) VISIBLE,
@@ -376,29 +376,6 @@ CREATE TABLE IF NOT EXISTS `abc`.`events` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-USE `abc`;
-
-DELIMITER $$
-USE `abc`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `abc`.`Inventory_BEFORE_INSERT` BEFORE INSERT ON `Inventory` FOR EACH ROW
-BEGIN
-IF (Inventory.owner_id IS NULL AND Inventory.location_id IS NULL) THEN
-    SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = '\'FieldA\' and \'FieldB\' cannot both be null';
-  END IF;
-END$$
-
-USE `abc`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `abc`.`Inventory_BEFORE_UPDATE` BEFORE UPDATE ON `Inventory` FOR EACH ROW
-BEGIN
-IF (Inventory.owner_id IS NULL AND Inventory.location_id IS NULL) THEN
-    SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = '\'FieldA\' and \'FieldB\' cannot both be null';
-  END IF;
-END$$
-
-
-DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
