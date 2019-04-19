@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`city` (
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`city_id`),
   INDEX `fk_city_country1_idx` (`country_id` ASC) VISIBLE,
+  UNIQUE INDEX `city_id_UNIQUE` (`city_id` ASC) VISIBLE,
   CONSTRAINT `fk_city_country1`
     FOREIGN KEY (`country_id`)
     REFERENCES `abc`.`country` (`country_id`)
@@ -53,8 +54,7 @@ CREATE TABLE IF NOT EXISTS `abc`.`address` (
   `address_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `address1` VARCHAR(45) NOT NULL,
   `address2` VARCHAR(50) NULL,
-  `city` VARCHAR(50) NOT NULL,
-  `district` VARCHAR(20) NOT NULL,
+  `county` VARCHAR(20) NOT NULL,
   `postal_code` VARCHAR(20) NOT NULL,
   `city_id` INT UNSIGNED NOT NULL,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
