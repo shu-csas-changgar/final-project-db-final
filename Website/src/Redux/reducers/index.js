@@ -8,7 +8,8 @@
  *      since when client starts the user is not logged in
  */
 const initialState = {
-    logged: false
+    logged: false,
+    account_id: null
 }
 
 /**
@@ -25,6 +26,12 @@ export default(state = initialState, action) => {
             console.log('You were denied login')
             return Object.assign({}, state, {
                 logged: false
+            })
+
+        case 'EMP_UPDATE':
+            console.log('Updated employee id ')
+            return Object.assign({}, state, {
+                account_id: action.id
             })
         default:
             return state

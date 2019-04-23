@@ -7,6 +7,11 @@ import Navbar2 from '../../Components/Datapage/navbar2'
 //import Navbar from '../../Components/Datapage/navbar'
 class home extends Component {
 
+    componentDidMount() {
+        
+    }
+
+
     render() {
         const link = '#'
         return(

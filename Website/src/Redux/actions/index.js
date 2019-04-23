@@ -21,3 +21,10 @@ export const denied = () => {
         type: 'LOG_DENIED'
     }
 }
+
+export const emp_update = (id) => {
+    return{
+        type: 'EMP_UPDATE',
+        id: id
+    }
+}

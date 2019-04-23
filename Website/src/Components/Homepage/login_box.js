@@ -3,7 +3,7 @@ import "../../CSS/Homepage/login.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import WelcomeMsg from "./welcomeMessage"
-import { success } from '../../Redux/actions/index'
+import { success, emp_update } from '../../Redux/actions/index'
 
 class Login extends Component {
 
@@ -79,7 +79,9 @@ class Login extends Component {
       }
       else{
         // Set the global state to true
+        console.log(data)
         this.store.dispatch(success())
+        this.store.dispatch(emp_update(data[0].account_id))
         this.props.history.push('/database')
       } 
     })

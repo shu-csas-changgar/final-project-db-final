@@ -12,7 +12,7 @@ app.use(express.json())
 app.post('/log', (req, res) => {
   const username = req.body.email
   const password = req.body.password
-  const sql = 'SELECT username, password FROM account WHERE username = ? AND password = ?'
+  const sql = 'SELECT account_id FROM account WHERE username = ? AND password= ?'
 
   db.query(sql, [username, password], (err, rows, fields) => {
     if(err) console.log(err)
@@ -21,7 +21,6 @@ app.post('/log', (req, res) => {
       res.json("INVALID")
     } 
     else{
-      rows.map( x => console.log(`Sucess`))
       res.json(rows)
     }
   })
