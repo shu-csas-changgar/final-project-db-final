@@ -4,6 +4,7 @@ import Header from '../../Components/Datapage/header'
 import Footer from '../../Components/AllPages/footer_home'
 import '../../CSS/Datapage/home.css'
 import Navbar2 from '../../Components/Datapage/navbar2'
+import './home.css'
 //import Navbar from '../../Components/Datapage/navbar'
 class home extends Component {
 
