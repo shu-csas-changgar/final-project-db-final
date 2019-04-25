@@ -113,7 +113,7 @@ INSERT INTO equipment_type(model_name, model_number) VALUES("HP Latop 2017", "xz
 INSERT INTO equipment_type(model_name, model_number) VALUES("Smart Room", "kjfhgkdfjhtjkh");
 
 -- -----------------------------------------------------
--- Equiptment
+-- Equiptment No owner or location 
 -- -----------------------------------------------------
 INSERT INTO equipment(serial_number, transaction_id, type_id) VALUES ("7536472", 1, 3);
 INSERT INTO equipment(serial_number, transaction_id, type_id) VALUES ("65385734", 1, 1);
@@ -127,20 +127,19 @@ INSERT INTO equipment(serial_number, transaction_id, type_id) VALUES ("135467864
 INSERT INTO equipment(serial_number, transaction_id, type_id) VALUES ("122546546", 2, 6);
 
 -- -----------------------------------------------------
--- Inventory
+-- Equiptment with location
 -- -----------------------------------------------------
-INSERT INTO inventory(location_id, equipment_id, employee_id) VALUES(2, 1,
-	(SELECT employee_id FROM employee WHERE first_name = "Josh" AND last_name = "Schappel"));
-INSERT INTO inventory(location_id, equipment_id, employee_id) VALUES(2, 8,
-	(SELECT employee_id FROM employee WHERE first_name = "Josh" AND last_name = "Schappel"));
-INSERT INTO inventory(location_id, equipment_id, employee_id) VALUES(2, 5,
-	(SELECT employee_id FROM employee WHERE first_name = "Josh" AND last_name = "Schappel"));
-INSERT INTO inventory(location_id, equipment_id, employee_id) VALUES(2, 3,
-	(SELECT employee_id FROM employee WHERE first_name = "Fred" AND last_name = "Joe"));
-INSERT INTO inventory(location_id, equipment_id, employee_id) VALUES(2, 2,
-	(SELECT employee_id FROM employee WHERE first_name = "Ron" AND last_name = "johnson"));
-INSERT INTO inventory(location_id, equipment_id, employee_id) VALUES(2, 7,
-	(SELECT employee_id FROM employee WHERE first_name = "Ron" AND last_name = "johnson"));
-INSERT INTO inventory(location_id, equipment_id) VALUES(1,10);
 
-SELECT * FROM inventory;
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id) VALUES ("122wer6546", 2, 6,2);
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id) VALUES ("122455546", 2, 6,2);
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id) VALUES ("12234567546", 2, 6,2);
+
+-- -----------------------------------------------------
+-- Equiptment with owner and location
+-- -----------------------------------------------------
+
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("12234123546", 2, 6, 2, 1);
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("1223423425546", 2, 6, 2, 1);
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("122345345456", 2, 6, 2, 1);
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("122345345234", 2, 6, 2, 1);
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("1223345233", 2, 6, 2, 1);
