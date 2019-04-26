@@ -38,8 +38,8 @@ class home extends Component {
                                         <tr>
                                         <th scope="col">Item</th>
                                         <th scope="col">Location</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Time Changed</th>
+                                        <th scope="col">Serial Number</th>
+                                        <th scope="col">Type</th>
                                         </tr>
                                     </thead>
                                     <tbody>

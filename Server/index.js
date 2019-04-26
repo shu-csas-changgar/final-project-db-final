@@ -9,7 +9,10 @@ const port = process.env.PORT || 5000
 app.use(express.json())
 
 
-app.post('/log', (req, res) => {
+app.post('/database/select/:id', (req, res) => {
+  const id = req.params.id
+  console.log(id)
+
   const username = req.body.email
   const password = req.body.password
   const sql = 'SELECT account_id FROM account WHERE username = ? AND password= ?'

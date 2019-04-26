@@ -64,7 +64,7 @@ class Login extends Component {
    * to try to login again. If the promise is true then the user will be sent a new view
    */
   sendData = () => {
-    fetch('log', {
+    fetch('database/select/log', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

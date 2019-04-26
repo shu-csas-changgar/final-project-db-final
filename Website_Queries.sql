@@ -26,3 +26,8 @@ JOIN address a
 WHERE e.employee_id = 1
 ORDER BY c.category ASC,
 		 t.model_name ASC;
+
+-- -----------------------------------------------------
+-- Selects an employees firt and last name when given an employee_id
+-- -----------------------------------------------------
+SELECT first_name, last_name FROM employee WHERE employee_id = 1;
