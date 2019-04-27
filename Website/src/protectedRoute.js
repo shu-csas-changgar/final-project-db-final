@@ -7,7 +7,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
             {...rest}
             render={props => {
                 if(rest.store.getState().logged){
-                    return <Component {...props} />
+                    return <Component {...props} store={rest.store} />
                 }
                 else {
                     return(<Redirect to={{

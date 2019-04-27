@@ -18,18 +18,18 @@ const initialState = {
 export default(state = initialState, action) => {
     switch(action.type){
         case 'LOG_SUCCESS':
-            console.log('You are successfuly logged in')
+            //console.log('You are successfuly logged in')
             return Object.assign({}, state, {
                 logged: true
             })
         case 'LOG_DENIED':
-            console.log('You were denied login')
+            //console.log('You were denied login')
             return Object.assign({}, state, {
                 logged: false
             })
 
         case 'EMP_UPDATE':
-            console.log('Updated employee id ')
+            //console.log('Updated employee id ')
             return Object.assign({}, state, {
                 account_id: action.id
             })

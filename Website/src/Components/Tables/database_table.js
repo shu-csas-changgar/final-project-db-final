@@ -1,9 +1,11 @@
 import React from "react"
 
 /**
- * This fuction creates a table object for the database page
+ * This fuction creates a table object when given the proper arguements
  * @param {*} props the props are:
  *  - tableName of type string
+ *  - description: a string that will be renderd directly under the table
+ *  - headers: a steing array that contains all the column headers
  *  - data: an array of table data that consistes of the values dataType, key, NN, UQ, AI
  *      an example of this data can be found in table_data.js.
  */
@@ -23,12 +25,14 @@ function table(props) {
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th scope="col">Column Name</th>
-                    <th scope="col">Datatype</th>
-                    <th scope="col">PK/FK</th>
-                    <th scope="col">NN</th>
-                    <th scope="col">UQ</th>
-                    <th scope="col">AI/AU</th>
+                    {
+                      // map through the column headers and render them
+                      props.tableHeaders.map((e,i) => {
+                        return(
+                          <th key={i} scope="col">{e}</th>
+                        )
+                      })
+                    }
                   </tr>
                 </thead>
                 <tbody>

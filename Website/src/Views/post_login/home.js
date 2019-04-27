@@ -2,19 +2,79 @@ import React, { Component } from "react"
 //import Navbar from '../Components/Datapage/navbar'
 import Header from '../../Components/Datapage/header'
 import Footer from '../../Components/AllPages/footer_home'
+import Table from '../../Components/Tables/table'
 import '../../CSS/Datapage/home.css'
 import Navbar2 from '../../Components/Datapage/navbar2'
 import './home.css'
 //import Navbar from '../../Components/Datapage/navbar'
 class home extends Component {
+    constructor(props){
+        super(props)
+        this.state ={
+            firstName: null,
+            lastName: null,
+            equipmentTableData: null
+        }
 
-    componentDidMount() {
-        
+        this.store = this.props.store;
     }
 
+    /**
+     * This function fetches data from the database before the page fully renders so that the data fetch can be rendered onto the screen
+     * All data that is fetch from this function is stored in the pages state variable
+     */
+    componentWillMount() {
+        // fetch the employees equipment info
+        fetch('database/employee/equipment', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id: 1})
+        })
+        .then( res => res.status === 200? res.json() : "INVALID")
+        .then( data => {
+        if (data === "INVALID") console.log('Invalid id supplied')
+        else {
+            this.setState({equipmentTableData: data.message})
+        } 
+        })
+        .catch((error) => console.log("error: " + error))
+
+        // Fetch the employees name
+        fetch('database/employee/name', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id: 1})
+            })
+            .then( res => res.status === 200? res.json() : "INVALID")
+            .then( data => {
+            if (data === "INVALID") console.log('Invalid id supplied')
+            else {
+                this.setState({
+                    firstName: data.message[0].first_name,
+                    lastName: data.message[0].last_name
+                })
+            } 
+            })
+            .catch((error) => console.log("error: " + error))
+  }
 
     render() {
         const link = '#'
+        let renderIt = null
+        console.log(this.state.equipmentTableData)
+        if(this.state.equipmentTableData != null){
+            renderIt = <div className="d-flex row justify-content-center">
+                            <Table
+                                                    headers= {['Item', 'Location', 'Serial Number', 'Type']}
+                                                    body = {this.state.equipmentTableData}
+                                            />
+                        </div>
+        }
+
         return(
             <div>
                 <div >
@@ -25,57 +85,16 @@ class home extends Component {
                         <Navbar2 />
                     </div>
                     <div className="d-flex row justify-content-center mt-5">
-                        <h1>Welcome Thanos</h1>
+                        <h1>Welcome {this.state.firstName}</h1>
                     </div>
                     <div className="flex-row mt-5">
                         <div className="container" id="container-1">
                             <div className="d-flex row justify-content-center">
                                 <h4>Currently Owned Items</h4>
                             </div>
-                            <div className="d-flex row justify-content-center">
-                                <table className="table m-2 table-striped">
-                                    <thead>
-                                        <tr>
-                                        <th scope="col">Item</th>
-                                        <th scope="col">Location</th>
-                                        <th scope="col">Serial Number</th>
-                                        <th scope="col">Type</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        <th scope="row"> IPhone 6</th>
-                                        <td>Building 1</td>
-                                        <td>Owned</td>
-                                        <td>2038-01-19 03:14:07</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">Infinity Gauntlet</th>
-                                        <td>Titan</td>
-                                        <td>Leased</td>
-                                        <td>20319-01-19 03:33:32</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            {
+                                renderIt
+                            }
                         </div>
                     </div>
 

@@ -5,7 +5,7 @@ import "../../CSS/Homepage/database.css"
 
 
 
-import Table from "./table"
+import Table from "../Tables/database_table"
 
 function databaseInfo() {
   // The array of table objects that will be dynamically rendered
@@ -31,6 +31,7 @@ function databaseInfo() {
         arr.map( (table,i) => {
           return (
             <Table
+              tableHeaders = {['Column Name','Datatype','PK/FK','NN','UQ','AI/AU']}
               tableName = {table.tableName}
               data = {table.data}
               description = {table.description}

@@ -64,14 +64,14 @@ class Login extends Component {
    * to try to login again. If the promise is true then the user will be sent a new view
    */
   sendData = () => {
-    fetch('database/select/log', {
+    fetch('database/employee/credentials', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state)
     })
-    .then( res => res.json())
+    .then( res => res.status === 200? res.json() : "INVALID")
     .then( data => {
       if (data === "INVALID") {
         // Sent the state's message
@@ -79,13 +79,13 @@ class Login extends Component {
       }
       else{
         // Set the global state to true
-        console.log(data)
         this.store.dispatch(success())
-        this.store.dispatch(emp_update(data[0].account_id))
+        this.store.dispatch(emp_update(data.info[0].account_id))
         this.props.history.push('/database')
       } 
     })
     .catch((error) =>{
+      console.log("error " + error)
       this.setState({message: "Unable to connect to the server at this time"})
     })
   }

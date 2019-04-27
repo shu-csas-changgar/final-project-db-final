@@ -21,7 +21,6 @@ class App extends Component {
       list: [Login, Database, Servers, Website, Project],
       index: 0,
     }
-
     this.store = this.props.store;
     this.handler = this.handler.bind(this)
 
