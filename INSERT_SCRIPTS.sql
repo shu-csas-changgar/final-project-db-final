@@ -85,11 +85,10 @@ INSERT INTO account(username, password) VALUES("r@abc.com", "password");
 -- -----------------------------------------------------
 INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Joshua", "Schappel", "j@abc.com", 2, "9083708410",
 	(SELECT account_id FROM account WHERE username = "j@abc.com"));
-INSERT INTO employee(first_name, last_name, email, location_id, cell_number) VALUES ("Fred", "Joe", "fred@abc.com", 2, "9084567485");
+INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Fred", "Joe", "n@abc.com", 2, "9084567485",
+	(SELECT account_id FROM account WHERE username = "n@abc.com"));
 INSERT INTO employee(first_name, last_name, email, location_id, cell_number) VALUES ("Ron", "johnson", "rj@abc.com", 2, "586432432132");
 INSERT INTO employee(first_name, last_name, email, location_id, cell_number) VALUES ("Sam", "Joe", "s@abc.com", 2, "9083708410");
-
-
 -- -----------------------------------------------------
 -- Vendor
 -- -----------------------------------------------------
@@ -150,3 +149,13 @@ INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, emplo
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("122345345456", 2, 10, 2, 1);
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("122345345234", 2, 4, 2, 1);
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("1223345233", 2, 9, 2, 1);
+
+-- -----------------------------------------------------
+-- Events
+-- -----------------------------------------------------
+INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (1, 'This is a birthday party', 'This is a description for the birthday party', '2019-09-06 16-30-00', '2019-09-06 19-30-00', 1);
+INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (4, 'Annual Picnic', 'This is a description for the picnic', '2019-05-13 10-30-00', '2019-05-13 19-00-00', 2);
+INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (2, 'Staff Meeting', 'This is a description for the staff meeting', '2019-05-06 10-30-00', '2019-05-06 12-45-00', 1);
+INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (1, 'Staff Meeting', 'This is a description for the staff meeting', '2019-07-03 14-30-00', '2019-07-03 15-30-00', 2);
+INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (3, 'Investor Meeting', 'This is a description for the investor meeting', '2019-04-30 8-00-00', '2019-04-30 14-30-00', 1);
+INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (1, 'Pancake Breakfast', 'This is a description for the pancake breakfast', '2019-10-23 14-30-00', '2019-10-23 17-30-00', 1);

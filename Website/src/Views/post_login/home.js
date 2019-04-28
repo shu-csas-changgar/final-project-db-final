@@ -1,21 +1,27 @@
 import React, { Component } from "react"
-//import Navbar from '../Components/Datapage/navbar'
 import Header from '../../Components/Datapage/header'
 import Footer from '../../Components/AllPages/footer_home'
 import Table from '../../Components/Tables/table'
-import '../../CSS/Datapage/home.css'
 import Navbar2 from '../../Components/Datapage/navbar2'
+import '../../CSS/Datapage/home.css'
 import './home.css'
-//import Navbar from '../../Components/Datapage/navbar'
+
 class home extends Component {
     constructor(props){
         super(props)
+
+        /** State variables:
+         * - firstName: the first name of the logged in employee. Initally set to an empty string
+         * - lastname: the last name of the logged in employee. Initally set to an empty string
+         * - equipmentTableData: a javascript object literal that holds all the data for the owned equiptment table.
+         *    Initally set to an empty array
+         */ 
         this.state ={
             firstName: null,
             lastName: null,
-            equipmentTableData: null
+            equipmentTableData: []
         }
-
+        // Add the redux global variables
         this.store = this.props.store;
     }
 
@@ -30,7 +36,7 @@ class home extends Component {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({id: 1})
+        body: JSON.stringify({id: this.store.getState().account_id})
         })
         .then( res => res.status === 200? res.json() : "INVALID")
         .then( data => {
@@ -47,7 +53,7 @@ class home extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({id: 1})
+            body: JSON.stringify({id: this.store.getState().account_id})
             })
             .then( res => res.status === 200? res.json() : "INVALID")
             .then( data => {
@@ -64,14 +70,20 @@ class home extends Component {
 
     render() {
         const link = '#'
+
+        // Render the proper item onto the screen. If there are not any items then we will render a header otherwise
+        //  we will render a table
         let renderIt = null
-        console.log(this.state.equipmentTableData)
-        if(this.state.equipmentTableData != null){
+        if(this.state.equipmentTableData.length > 0){
             renderIt = <div className="d-flex row justify-content-center">
                             <Table
-                                                    headers= {['Item', 'Location', 'Serial Number', 'Type']}
-                                                    body = {this.state.equipmentTableData}
-                                            />
+                                headers= {['Item', 'Location', 'Serial Number', 'Type']}
+                                body = {this.state.equipmentTableData}
+                            />
+                        </div>
+        } else{
+            renderIt = <div className="d-flex row justify-content-center">
+                            <h2 className="text-muted" style={{marginTop:'40px', marginBottom:'40px'}}>You dont own any equipment at this time :(</h2>
                         </div>
         }
 
@@ -89,9 +101,6 @@ class home extends Component {
                     </div>
                     <div className="flex-row mt-5">
                         <div className="container" id="container-1">
-                            <div className="d-flex row justify-content-center">
-                                <h4>Currently Owned Items</h4>
-                            </div>
                             {
                                 renderIt
                             }
