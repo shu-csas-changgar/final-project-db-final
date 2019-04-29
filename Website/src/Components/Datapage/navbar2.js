@@ -16,7 +16,7 @@ class navbar extends Component {
                         <a className="nav-link" href={link}>Inventory</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href={link}>Reservations</a>
+                        <a className="nav-link"  href={link}>Reservations</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href={link}>Leases</a>

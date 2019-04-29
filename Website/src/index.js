@@ -9,7 +9,7 @@ import { ProtectedRoute } from "./protectedRoute"
 // View imports below
 import App from './Views/pre_login/App'
 import Home from './Views/post_login/home'
-import NotFound from './Views/notfound'
+import NotFound from './Views/errors/notFound'
 
 //Redux imports
 import { createStore } from 'redux'

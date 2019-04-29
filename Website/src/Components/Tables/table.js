@@ -2,7 +2,7 @@ import React from "react"
 
 function table(props){
     return(
-        <table className="table m-2">
+        <table className={props.tableType}>
             <thead>
                 <tr className="thead-light">
                     {
@@ -16,7 +16,7 @@ function table(props){
                 {
                     props.body.map( (obj, i) => {
                         return(
-                            <tr key={i}>
+                            <tr key={i} data-key={i} onClick={props.rowClick}>
                                 {
                                     Object.keys(obj).map((key, j) => {
                                         return (<td key={j}>{obj[key]}</td>)

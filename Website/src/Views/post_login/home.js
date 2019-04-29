@@ -3,6 +3,8 @@ import Header from '../../Components/Datapage/header'
 import Footer from '../../Components/AllPages/footer_home'
 import Table from '../../Components/Tables/table'
 import Navbar2 from '../../Components/Datapage/navbar2'
+import DateFormatt from './date'
+import Popup from '../../Components/AllPages/popup'
 import '../../CSS/Datapage/home.css'
 import './home.css'
 
@@ -11,25 +13,37 @@ class home extends Component {
         super(props)
 
         /** State variables:
+         * - show modal: if true then the modal will be shown on screen
          * - firstName: the first name of the logged in employee. Initally set to an empty string
          * - lastname: the last name of the logged in employee. Initally set to an empty string
          * - equipmentTableData: a javascript object literal that holds all the data for the owned equiptment table.
          *    Initally set to an empty array
+         * - eventTableData: a javascript object literal that holds all the data for the upcomming company events.
+         *    Initally set to an empty array
          */ 
         this.state ={
+            showModal: false,
+            modalHeader: null,
+            modalBody: null,
             firstName: null,
             lastName: null,
-            equipmentTableData: []
+            equipmentTableData: [],
+            eventTableData: [],
+            eventTableExtras:[]
         }
         // Add the redux global variables
         this.store = this.props.store;
+
+        // bind necessary functions
+        this.handleClick = this.handleClick.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
     }
 
     /**
      * This function fetches data from the database before the page fully renders so that the data fetch can be rendered onto the screen
      * All data that is fetch from this function is stored in the pages state variable
      */
-    componentWillMount() {
+    componentDidMount() {
         // fetch the employees equipment info
         fetch('database/employee/equipment', {
         method: "POST",
@@ -66,27 +80,94 @@ class home extends Component {
             } 
             })
             .catch((error) => console.log("error: " + error))
-  }
+
+        // Fetch the upcomming events
+        fetch('database/events/5')
+        .then( res => res.json())
+        .then( data => {
+            const newObj = data.message.map( obj => {
+                let b = {
+                    event: obj.event_title,
+                    day: this.getDay(obj.start_time),
+                    time: this.getTime(obj.start_time, obj.end_time),
+                    location: obj.name
+                }
+                return b
+            })
+            this.setState({
+                eventTableData: newObj,
+                eventTableExtras: data.message
+            })
+        })
+    }
+
+    /**
+     * Formatts the start and end time into one line
+     * @param {MySQL DataTime} start_time the time that an event starts
+     * @param {MySQL DateTime} end_time the time that an event ends
+     */
+    getTime(start_time, end_time) {
+        var startDate = new Date(start_time)
+        var endDate = new Date(end_time)
+        return(DateFormatt.startToEnd(startDate,endDate))
+    }
+
+    /**
+     * Returns the day of week , month, and day that an event start
+     * @param {MySQl DateTime} start_time the time that the event start.
+     */
+    getDay(start_time) {
+        var date = new Date(start_time)
+        return(DateFormatt.dayOfWeekAndMonth(date))
+    }
+
+    handleClick(event) {
+        const index = parseInt(event.currentTarget.getAttribute('data-key'))
+        this.setState({
+            showModal:true,
+            modalBody: this.state.eventTableExtras[index].description,
+            modalHeader: this.state.eventTableExtras[index].event_title
+        })
+    }
+
+    toggleModal = () => this.setState({
+        showModal: !this.state.showModal
+      })
 
     render() {
         const link = '#'
 
-        // Render the proper item onto the screen. If there are not any items then we will render a header otherwise
-        //  we will render a table
-        let renderIt = null
+        // Render the proper item onto the screen. If there are not any items then we will render a header otherwise we will render a table
+        let renderInv = null
+        let renderEvents = null
         if(this.state.equipmentTableData.length > 0){
-            renderIt = <div className="d-flex row justify-content-center">
+            renderInv = <div className="d-flex row justify-content-center">
                             <Table
-                                headers= {['Item', 'Location', 'Serial Number', 'Type']}
-                                body = {this.state.equipmentTableData}
+                                tableType="table m-2"
+                                headers={['Item', 'Location', 'Serial Number', 'Type']}
+                                body={this.state.equipmentTableData}
+                                rowClick={null}
                             />
                         </div>
         } else{
-            renderIt = <div className="d-flex row justify-content-center">
+            renderInv = <div className="d-flex row justify-content-center">
                             <h2 className="text-muted" style={{marginTop:'40px', marginBottom:'40px'}}>You dont own any equipment at this time :(</h2>
                         </div>
         }
-
+        if(this.state.eventTableData.length > 0){
+            renderEvents = <div className="table-responsive">
+                                <Table
+                                    tableType='table table-hover'
+                                    headers= {['Event', 'Day', 'Time', 'Location']}
+                                    body={this.state.eventTableData}
+                                    rowClick={this.handleClick}
+                                />
+                           </div>
+        } else {
+            renderEvents = <div className="d-flex row justify-content-center">
+                                <h4 className="text-muted" style={{marginTop:'40px', marginBottom:'40px'}}>There are no upcomming events</h4>
+                            </div>
+        }
         return(
             <div>
                 <div >
@@ -102,7 +183,7 @@ class home extends Component {
                     <div className="flex-row mt-5">
                         <div className="container" id="container-1">
                             {
-                                renderIt
+                                renderInv
                             }
                         </div>
                     </div>
@@ -123,7 +204,7 @@ class home extends Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <tr key='1' value='0' test='6' onClick={this.handleClick}>
                                                 <th scope="row">item 1</th>
                                                 <td>Monday</td>
                                                 <td>9:20am - 2:00pm</td>
@@ -149,42 +230,23 @@ class home extends Component {
                             <div className="card border-secondary">
                                 <h5 className="card-header">Upcoming Events</h5>
                                 <div className="card-body">
-                                    <p className="card-text">Below are the next 5 upcomming corporate events.</p>
+                                    <p className="card-text">Below are the next 5 upcomming corporate events. Please click on an event for more infromation.</p>
                                     <div className="table-responsive">
-                                        <table className="table">
-                                            <thead className="thead-light" >
-                                                <tr>
-                                                <th scope="col">Event</th>
-                                                <th scope="col">Day</th>
-                                                <th scope="col">Time</th>
-                                                <th scope='col'>Location</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                <th scope="row">Bob's Birthday Celebration</th>
-                                                <td>Monday</td>
-                                                <td>9:20am - 2:00pm</td>
-                                                <td>Lounge</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row">BBQ</th>
-                                                <td>Wednesday</td>
-                                                <td>12:30am - 3:45pm</td>
-                                                <td>Boss's house</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row">Quarterly Staff Meeting</th>
-                                                <td>Friday</td>
-                                                <td>10:30am - 12:00pm</td>
-                                                <td>Meeting Room 2</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        {
+                                            renderEvents
+                                        }
                                     </div>
                                     <a href={link}className="btn btn-primary">See more</a>
                                 </div>
                             </div>
+                        </div>
+                        <div className={`container ${this.state.showModal ? 'modal-open' :''}`}>
+                            <Popup 
+                                toggle = {this.toggleModal}
+                                showModal={this.state.showModal}
+                                body={this.state.modalBody}
+                                header={this.state.modalHeader}
+                            />
                         </div>
                     </div>
                 </div>
