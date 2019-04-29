@@ -14,12 +14,16 @@ class home extends Component {
 
         /** State variables:
          * - show modal: if true then the modal will be shown on screen
+         * - modalHeaders: The tile that the modal will display 
+         * - modalBody: The body text that the modal will display
          * - firstName: the first name of the logged in employee. Initally set to an empty string
          * - lastname: the last name of the logged in employee. Initally set to an empty string
          * - equipmentTableData: a javascript object literal that holds all the data for the owned equiptment table.
          *    Initally set to an empty array
-         * - eventTableData: a javascript object literal that holds all the data for the upcomming company events.
-         *    Initally set to an empty array
+         * - eventTableData: a javascript object literal that holds all the table data for upcomming company events.
+         *    Initally set to an empty array. This object is a shortened wersion of eventTableExtras for table rendering purposes
+         * - eventTableExtras: a javascript object literal that holds all the data for the upcomming company events.
+         *    Initally set to an empty array. When data is fetched from the server, this array will hold all the data recieved
          */ 
         this.state ={
             showModal: false,
@@ -35,7 +39,7 @@ class home extends Component {
         this.store = this.props.store;
 
         // bind necessary functions
-        this.handleClick = this.handleClick.bind(this)
+        this.handleTableClick = this.handleTableClick.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
     }
 
@@ -121,7 +125,12 @@ class home extends Component {
         return(DateFormatt.dayOfWeekAndMonth(date))
     }
 
-    handleClick(event) {
+    /**
+     * Handles the onclick functionality of a table row. More specifically this function
+     * is used to show a modal for a specified table row.
+     * @param {Synthetic Event} event 
+     */
+    handleTableClick(event) {
         const index = parseInt(event.currentTarget.getAttribute('data-key'))
         this.setState({
             showModal:true,
@@ -129,10 +138,6 @@ class home extends Component {
             modalHeader: this.state.eventTableExtras[index].event_title
         })
     }
-
-    toggleModal = () => this.setState({
-        showModal: !this.state.showModal
-      })
 
     render() {
         const link = '#'
@@ -160,7 +165,7 @@ class home extends Component {
                                     tableType='table table-hover'
                                     headers= {['Event', 'Day', 'Time', 'Location']}
                                     body={this.state.eventTableData}
-                                    rowClick={this.handleClick}
+                                    rowClick={this.handleTableClick}
                                 />
                            </div>
         } else {
@@ -168,6 +173,7 @@ class home extends Component {
                                 <h4 className="text-muted" style={{marginTop:'40px', marginBottom:'40px'}}>There are no upcomming events</h4>
                             </div>
         }
+        
         return(
             <div>
                 <div >
@@ -204,7 +210,7 @@ class home extends Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr key='1' value='0' test='6' onClick={this.handleClick}>
+                                                <tr>
                                                 <th scope="row">item 1</th>
                                                 <td>Monday</td>
                                                 <td>9:20am - 2:00pm</td>
@@ -242,7 +248,7 @@ class home extends Component {
                         </div>
                         <div className={`container ${this.state.showModal ? 'modal-open' :''}`}>
                             <Popup 
-                                toggle = {this.toggleModal}
+                                toggle = {() => this.setState({showModal: !this.state.showModal})}
                                 showModal={this.state.showModal}
                                 body={this.state.modalBody}
                                 header={this.state.modalHeader}
