@@ -79,7 +79,6 @@ class Login extends Component {
       }
       else{
         // Set the global state to true
-        console.log(data.info[0].account_id)
         this.store.dispatch(success())
         this.store.dispatch(emp_update(data.info[0].account_id))
         this.props.history.push('/database')

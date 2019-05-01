@@ -45,64 +45,61 @@ class home extends Component {
 
     /**
      * This function fetches data from the database before the page fully renders so that the data fetch can be rendered onto the screen
-     * All data that is fetch from this function is stored in the pages state variable
+     * There are 3 fetches that are called:
+     *  - Type: POST => Fetches employee equiptment based on who is logged in
+     *  - Type: POST => Fetches an employee's first and name name when given an id
+     *  - Type: GET => Fetches the upcomming corperate events bases on the amount requested
+     * All data that is fetch from this function is stored in state variables
      */
     componentDidMount() {
-        // fetch the employees equipment info
-        fetch('database/employee/equipment', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({id: this.store.getState().account_id})
-        })
-        .then( res => res.status === 200? res.json() : "INVALID")
-        .then( data => {
-        if (data === "INVALID") console.log('Invalid id supplied')
-        else {
-            this.setState({equipmentTableData: data.message})
-        } 
-        })
-        .catch((error) => console.log("error: " + error))
+        Promise.all([
+            fetch('database/employee/equipment', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: this.store.getState().account_id})
+            }),
+            fetch('database/employee/name', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: this.store.getState().account_id})
+            }),
+            fetch('database/events/5')
+        ])
+        .then( (results) => {return Promise.all(results.map( res => (res.status === 200 ? res.json() : "INVALID")))})
+        .then(([r1, r2, r3]) =>{
+            let equipmentTableData = []
+            let firstName = null
+            let lastName = null
+            let eventTableData = []
 
-        // Fetch the employees name
-        fetch('database/employee/name', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id: this.store.getState().account_id})
-            })
-            .then( res => res.status === 200? res.json() : "INVALID")
-            .then( data => {
-            if (data === "INVALID") console.log('Invalid id supplied')
-            else {
-                this.setState({
-                    firstName: data.message[0].first_name,
-                    lastName: data.message[0].last_name
+            if (r1 !== "INVALID") equipmentTableData = r1.message
+            if (r2 !== "INVALID") {
+                firstName = r2.message[0].first_name
+                lastName = r2.message[0].lastName
+            }
+            if (r3 !== "INVALID") {
+                eventTableData = r3.message.map( obj => {
+                    return{
+                        event: obj.event_title,
+                        day: this.getDay(obj.start_time),
+                        time: this.getTime(obj.start_time, obj.end_time),
+                        location: obj.name
+                    }
                 })
-            } 
-            })
-            .catch((error) => console.log("error: " + error))
-
-        // Fetch the upcomming events
-        fetch('database/events/5')
-        .then( res => res.json())
-        .then( data => {
-            const newObj = data.message.map( obj => {
-                let b = {
-                    event: obj.event_title,
-                    day: this.getDay(obj.start_time),
-                    time: this.getTime(obj.start_time, obj.end_time),
-                    location: obj.name
-                }
-                return b
-            })
+            }
             this.setState({
-                eventTableData: newObj,
-                eventTableExtras: data.message
+                equipmentTableData: equipmentTableData,
+                firstName: firstName,
+                lastName: lastName,
+                eventTableData: eventTableData,
+                eventTableExtras: r3.message
             })
         })
+        .catch( error => {console.log(`Error duing fetches ${error}`)})
     }
 
     /**
@@ -141,7 +138,6 @@ class home extends Component {
 
     render() {
         const link = '#'
-
         // Render the proper item onto the screen. If there are not any items then we will render a header otherwise we will render a table
         let renderInv = null
         let renderEvents = null

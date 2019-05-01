@@ -11,7 +11,7 @@ import Project from "../../Components/Homepage/project"
 class App extends Component {
 
   /** State variables:
-   * - list; a list containing all the child components for this view. Bases on the states index one of the
+   * - list: a list containing all the child components for this view. Bases on the states index one of the
    *      components from this list will be dynamiaclly rendered on the screen
    * - index: represents the position in the list. This position will be the item that is rendered on the screen    
    */
