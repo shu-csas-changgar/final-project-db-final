@@ -181,7 +181,8 @@ class home extends Component {
                 </div>
                 <div className="container mt-3" id="view-container">
                     <div className="row bg-light" style={{borderTopLeftRadius:"10px", padding:"8px", borderTopRightRadius:"10px",borderBottom:"1px solid black"}}>
-                        <Navbar2 />
+                        <Navbar2 
+                        history = {this.props.history}/>
                     </div>
                     <div className="d-flex row justify-content-center mt-5">
                         <h1>Welcome {this.state.firstName}</h1>
