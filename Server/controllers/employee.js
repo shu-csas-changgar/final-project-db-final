@@ -69,4 +69,31 @@ exports.employee_name = (req, res) => {
     }
 
 
+
 }
+
+exports.employee_all = (req, res) =>{
+    //selects all equipment from every employee
+    const sql ='select et.model_name, et.model_number, e.location_id, emp.first_name, emp.last_name, lo.address_id, r.room_number from equipment e  join equipment_type et on e.type_id = et.type_id join employee emp on e.employee_id = emp.employee_id join location lo on lo.location_id = e.location_id join room r on r.location_id = r.location_id'
+    db.query(sql, (err, rows, fields)=> {
+        if(err) console.log('errrorrrr')
+        else if(rows.length === 0 ){
+            console.log(rows)
+            res.status(401).send({
+                success: 'false'
+
+            })
+            }
+
+            else{
+                res.status(200).send({
+                    success: 'true',
+                    info: rows
+                })
+            }
+        }
+
+        
+        
+    )
+    }

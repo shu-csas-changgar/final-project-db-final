@@ -10,5 +10,6 @@ router.post('/employee/credentials', employee.employee_credentials)
 router.post('/employee/equipment', employee.employee_equipment)
 router.post('/employee/name', employee.employee_name)
 router.get('/events/:id', events.upcomming_events)
+router.get('/employee/all', employee.employee_all)
 
 module.exports = router
