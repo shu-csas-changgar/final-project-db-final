@@ -1,8 +1,7 @@
 import React, { Component } from "react"
 import Header from '../../Components/Datapage/header'
-import Footer from '../../Components/AllPages/footer_home'
 import Table from '../../Components/Tables/table'
-import Navbar2 from '../../Components/Datapage/navbar2'
+import Navbar from '../../Components/Datapage/navbar'
 import DateFormatt from './date'
 import Popup from '../../Components/AllPages/popup'
 import '../../CSS/Datapage/home.css'
@@ -175,10 +174,12 @@ class home extends Component {
                 <div >
                     <Header />
                 </div>
-                <div className="container mt-3" id="view-container">
+                <div className="container mt-3" id="view-container" style={{marginBottom: "30px"}}>
                     <div className="row bg-light" style={{borderTopLeftRadius:"10px", padding:"8px", borderTopRightRadius:"10px",borderBottom:"1px solid black"}}>
-                        <Navbar2 
-                        history = {this.props.history}/>
+                        <Navbar 
+                            history = {this.props.history}
+                            home = {true}
+                        />
                     </div>
                     <div className="d-flex row justify-content-center mt-5">
                         <h1>Welcome {this.state.firstName}</h1>
@@ -252,10 +253,6 @@ class home extends Component {
                             />
                         </div>
                     </div>
-                </div>
-                
-                <div style={{marginTop:"90px"}}>
-                <Footer />
                 </div>
             </div>
         )

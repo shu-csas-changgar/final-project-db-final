@@ -1,34 +1,38 @@
-import React, { Component } from "react"
+import React, {Component } from 'react'
+import {BrowserRouter as Router} from 'react-router-dom'
 
 class navbar extends Component {
 
     render() {
-      const link = '#'
+        const link = "#"
         return(
-          <nav className="navbar navbar-expand-sm  navbar-light bg-light" id="custom-nav">
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul className="navbar-nav">
-                  <li className="nav-item active">
-                      <a className="nav-link" href={link}>Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li className="nav-item">
-                      <a className="nav-link" href={link}>Inventory</a>
-                  </li>
-                  <li className="nav-item">
-                      <a className="nav-link" href={link}>Leases</a>
-                  </li>
-                  <li className="nav-item">
-                      <a className="nav-link" href={link}>Reservations</a>
-                  </li>
-                  <li className="nav-item">
-                      <a className="nav-link" href={link}>Reports</a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
+          <Router>
+            <div>
+                <ul className="nav nav-pills" >
+                    <li className="nav-item">
+                        <a className={`nav-link ${this.props.home? "active" : null}`} onClick={()=>{this.props.history.push("/database")}} href={link}>Home</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${this.props.inventory? "active" : null}`} onClick={()=>{this.props.history.push("/database/inventory")}} href={link}>Inventory</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${this.props.reservations? "active" : null}`} onClick={()=>{this.props.history.push("/database/reservations")}}  href={link}>Reservations</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${this.props.employees? "active" : null}`} onClick={()=>{this.props.history.push("database/employees")}} href={link}>Employees</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${this.props.leases? "active" : null}`} onClick={()=>{this.props.history.push("database/leases")}} href={link}>Leases</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${this.props.events? "active" : null}`} onClick={()=>{this.props.history.push("database/events")}} href={link}>Events</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={()=>{this.props.history.push("/database/reports")}} href={link}>Reports</a>
+                    </li>
+                </ul>
+            </div>
+            </Router>  
         )
 
     }
