@@ -137,9 +137,15 @@ class home extends Component {
 
     render() {
         const link = '#'
-        // Render the proper item onto the screen. If there are not any items then we will render a header otherwise we will render a table
+
+        /**
+         * Check if tables to be rendered onto the screen have data. If they do then create the table component
+         * If they dont then create a message to be rendered where the table would have been rendered
+         */
         let renderInv = null
         let renderEvents = null
+
+        // Equiptment Table conditons
         if(this.state.equipmentTableData.length > 0){
             renderInv = <div className="d-flex row justify-content-center">
                             <Table
@@ -154,6 +160,8 @@ class home extends Component {
                             <h2 className="text-muted" style={{marginTop:'40px', marginBottom:'40px'}}>You dont own any equipment at this time :(</h2>
                         </div>
         }
+
+        // Event table conditions
         if(this.state.eventTableData.length > 0){
             renderEvents = <div className="table-responsive">
                                 <Table
