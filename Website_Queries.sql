@@ -6,6 +6,90 @@
 -- -----------------------------------------------------
 use abc;
 
+#returns every country name in the database
+Select cn.country_name
+from country cn;
+
+#Insert a state name and returns every city in that state
+select c.city_name, c.state
+from city c
+where c.state = "New Jersey";
+
+#Insert a city name and returns every address (address 1, postal, address2)
+select c.city_name, c.city_id, a.address1, a.postal_code, a.address2
+from city c
+join address a
+on c.city_id = a.city_id
+where c.city_name = "South Orange"; 
+
+#Return employee name and info
+Select e.employee_id, e.first_name, e.last_name, e.email, e.location_id
+from employee e;
+
+#returns every vendor name and address
+select v.company_name, v.address_id
+from vendor v;
+
+#insert vendor name and returns every transaction
+select v.company_name, v.vendor_id, t.cost, t.purchase_date, t.end_date, t.end_date
+from vendor v, transaction t
+where v.company_name = "Vender 1";
+
+
+#For all equipment, return the item name, serial number, location(if applies) ,
+# employee name(if applies),and lease end date. If there is a location, return the address and room number.
+
+select et.model_name, et.model_number, e.location_id, emp.first_name, emp.last_name, lo.address_id, r.room_number
+from equipment e
+join equipment_type et
+	on e.type_id = et.type_id
+join employee emp
+	on e.employee_id = emp.employee_id
+join location lo
+	on lo.location_id = e.location_id
+join room r
+	on r.location_id = r.location_id;
+##just need to add lease end date
+
+#when given employee id return first and last name
+select e.employee_id, e.first_name, e.last_name
+from employee e
+where e.employee_id = 1;
+
+#When given an employee_id return the first name, last name, address, and email of the employee.
+select e.first_name, e.last_name, e.email, a.address1
+from employee e
+join location lo
+on lo.location_id = e.location_id
+join address a
+on lo.address_id = a.address_id;
+
+#Given a employee_id, return the name, serial number, location (if applies) for each item they own
+select e.first_name, e.last_name, eq.serial_number, eq.location_id, et.model_name
+from employee e
+join equipment eq
+	on eq.employee_id = e.employee_id
+join equipment_type et
+	on et.type_id = eq.type_id
+where e.employee_id = "";
+    
+#Given a employee_id, return the item name, reservation start time,
+#end time, and day for each item they have reserved for the upcoming
+#week (week starts at current day).
+select r.start_time, r.end_time, 
+from emplyee e
+join reservations r
+	on e.employee_id = r.employee_id;
+###this one needs to be worked on more i dont think its right at all rn
+    
+    
+#Return the title, location, start and end time, owner name, and description of the next 5 upcoming company events
+select ev.event_id, ev.location_id, ev.start_time, ev.end_time, ev.host_id, ev.description
+from events ev;
+###just need to add the call for next five events
+
+
+
 -- -----------------------------------------------------
 -- Selects model_name, address, serial number, and cataegory for each of the an employees owned items
 -- 		Orders them by category ASC and then model_name ASC.
