@@ -159,3 +159,11 @@ INSERT INTO events(host_id, event_title, description, start_time, end_time, loca
 INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (1, 'Staff Meeting', 'This is a description for the staff meeting', '2019-07-03 14-30-00', '2019-07-03 15-30-00', 2);
 INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (3, 'Investor Meeting', 'This is a description for the investor meeting', '2019-04-30 8-00-00', '2019-04-30 14-30-00', 1);
 INSERT INTO events(host_id, event_title, description, start_time, end_time, location_id) VALUES (1, 'Pancake Breakfast', 'This is a description for the pancake breakfast', '2019-10-23 14-30-00', '2019-10-23 17-30-00', 1);
+
+-- -----------------------------------------------------
+-- Reservations
+-- -----------------------------------------------------
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (1, 1, '2019-09-06 16-30-00', '2019-09-06 17-30-00', 1);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (2, 1, '2019-09-06 16-30-00', '2019-09-06 17-30-00', 1);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (3, 2, '2019-09-06 16-30-00', '2019-09-06 17-30-00', 2);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (4, 3, '2019-09-06 16-30-00', '2019-09-06 17-30-00', 3);
