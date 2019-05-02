@@ -38,7 +38,6 @@ where v.company_name = "Vender 1";
 
 #For all equipment, return the item name, serial number, location(if applies) ,
 # employee name(if applies),and lease end date. If there is a location, return the address and room number.
-
 select et.model_name, et.model_number, e.location_id, emp.first_name, emp.last_name, lo.address_id, r.room_number
 from equipment e
 join equipment_type et
@@ -49,6 +48,7 @@ join location lo
 	on lo.location_id = e.location_id
 join room r
 	on r.location_id = r.location_id;
+
 ##just need to add lease end date
 
 #when given employee id return first and last name
@@ -76,17 +76,15 @@ where e.employee_id = "";
 #Given a employee_id, return the item name, reservation start time,
 #end time, and day for each item they have reserved for the upcoming
 #week (week starts at current day).
-select r.start_time, r.end_time, 
-from emplyee e
-join reservations r
-	on e.employee_id = r.employee_id;
-###this one needs to be worked on more i dont think its right at all rn
-    
-    
-#Return the title, location, start and end time, owner name, and description of the next 5 upcoming company events
-select ev.event_id, ev.location_id, ev.start_time, ev.end_time, ev.host_id, ev.description
-from events ev;
-###just need to add the call for next five events
+select e.employee_id, r.start_time, r.end_time, et.model_name
+from employee e, equipment eq, equipment_type et, reservations r
+where et.type_id = eq.type_id
+	and r.employee_id = e.employee_id
+    and e.employee_id = 1
+limit 7;
+#not perfect but returns next 7 instances thats sort of a week
+
+#
 
 
 
