@@ -22,13 +22,18 @@ join address a
 on c.city_id = a.city_id
 where c.city_name = "South Orange"; 
 
-#Return employee name and info
-SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address1, cell_number
+
+-- -----------------------------------------------------
+-- Return employee name and info
+-- -----------------------------------------------------
+SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address1, c.city_name, c.state, e.cell_number
 FROM employee e
 JOIN location l
 	ON e.location_id = l.location_id
 JOIN address a
-	ON l.address_id = a.address_id;
+	ON l.address_id = a.address_id
+JOIN city c
+	ON c.city_id = a.city_id;
 
 
 #returns every vendor name and address

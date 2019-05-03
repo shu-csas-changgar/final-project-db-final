@@ -24,7 +24,11 @@ INSERT INTO city (city_name, state, country_id) VALUES ("Westfield", "California
     
 INSERT INTO city (city_name, state, country_id) VALUES ("New York", "New York",
 	(SELECT country_id FROM country WHERE country_name = "America"));
+    
 INSERT INTO city (city_name, state, country_id) VALUES ("Pittsburgh", "Pennsylvania",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Phoenix", "Arazona",
 	(SELECT country_id FROM country WHERE country_name = "America"));
 
 INSERT INTO city (city_name, state, country_id) VALUES ("Westfield", "Illinois",
@@ -39,6 +43,12 @@ INSERT INTO address(address1, county, postal_code, city_id) VALUES ("702 Shadowl
 	(SELECT city_id FROM city WHERE city_name = "Westfield" AND state = "Illinois"));
 INSERT INTO address(address1, county, postal_code, city_id) VALUES ("400 S Orange Ave", "Essex", "1154876",
 	(SELECT city_id FROM city WHERE city_name = "South Orange" AND state = "New Jersey"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("1000 Who Gives a Shit", "Cool", "545682",
+	(SELECT city_id FROM city WHERE city_name = "Pittsburgh" AND state = "Pennsylvania"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("420 Weed Dr", "Stoner", "545682",
+	(SELECT city_id FROM city WHERE city_name = "New York" AND state = "New York"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("32 Thanos is Bae", "Bradford", "545682",
+	(SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arazona"));
 
 -- -----------------------------------------------------
 -- Location
@@ -55,6 +65,9 @@ INSERT INTO location(address_id, name, phone_number) VALUES(
 	(SELECT address_id FROM address WHERE address1 = "702 Shadowlawn Drive" AND city_id = (SELECT city_id FROM city WHERE city_name = "Westfield" AND state = "Illinois")),
     "A Cool Building",
     "8887776655");
+INSERT INTO location(address_id, name, phone_number) VALUES(4, "Umm hello there", "5465479632");
+INSERT INTO location(address_id, name, phone_number) VALUES(6, "Weed Man", "8885420174");
+INSERT INTO location(address_id, name, phone_number) VALUES(7, "Run Forest Run", "0325693475");
 
 -- -----------------------------------------------------
 -- Room
@@ -85,10 +98,12 @@ INSERT INTO account(username, password) VALUES("r@abc.com", "password");
 -- -----------------------------------------------------
 INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Joshua", "Schappel", "j@abc.com", 2, "9083708410",
 	(SELECT account_id FROM account WHERE username = "j@abc.com"));
-INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Fred", "Joe", "n@abc.com", 2, "9084567485",
+INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Nick", "DeGirolamo", "n@abc.com", 2, "9084567485",
 	(SELECT account_id FROM account WHERE username = "n@abc.com"));
-INSERT INTO employee(first_name, last_name, email, location_id, cell_number) VALUES ("Ron", "johnson", "rj@abc.com", 2, "586432432132");
-INSERT INTO employee(first_name, last_name, email, location_id, cell_number) VALUES ("Sam", "Joe", "s@abc.com", 2, "9083708410");
+INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Ryan", "Salem ", "rj@abc.com", 2, "586432432132", 4);
+INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Sash", "Mahashabde", "s@abc.com", 2, "9083708410", 2);
+SELECT * FROM employee;
+Update employee SET location_id = 4 WHERE employee_id = 2;
 -- -----------------------------------------------------
 -- Vendor
 -- -----------------------------------------------------
