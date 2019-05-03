@@ -183,7 +183,7 @@ class home extends Component {
                     <Header />
                 </div>
                 <div className="container mt-3" id="view-container" style={{marginBottom: "30px"}}>
-                    <div className="row bg-light" style={{borderTopLeftRadius:"10px", padding:"8px", borderTopRightRadius:"10px",borderBottom:"1px solid black"}}>
+                    <div className="row bg-light" style={{borderTopLeftRadius:"10px", padding:"8px", borderTopRightRadius:"10px",borderBottom:"1px solid #A0A0A0"}}>
                         <Navbar 
                             history = {this.props.history}
                             home = {true}

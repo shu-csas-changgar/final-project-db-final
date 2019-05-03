@@ -73,8 +73,12 @@ exports.employee_name = (req, res) => {
 }
 
 exports.employee_all = (req, res) =>{
-    //selects all equipment from every employee
-    const sql ='select et.model_name, et.model_number, e.location_id, emp.first_name, emp.last_name, lo.address_id, r.room_number from equipment e  join equipment_type et on e.type_id = et.type_id join employee emp on e.employee_id = emp.employee_id join location lo on lo.location_id = e.location_id join room r on r.location_id = r.location_id'
+
+
+
+    //Select all employee information
+    const sql = 'SELECT e.first_name, e.last_name, e.email, a.address1, c.city_name, c.state, e.cell_number FROM employee e JOIN location l ON e.location_id = l.location_id JOIN address a ON l.address_id = a.address_id JOIN city c ON c.city_id = a.city_id'
+
     db.query(sql, (err, rows, fields)=> {
         if(err) console.log('errrorrrr')
         else if(rows.length === 0 ){

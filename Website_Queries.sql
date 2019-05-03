@@ -23,8 +23,13 @@ on c.city_id = a.city_id
 where c.city_name = "South Orange"; 
 
 #Return employee name and info
-Select e.employee_id, e.first_name, e.last_name, e.email, e.location_id
-from employee e;
+SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address1, cell_number
+FROM employee e
+JOIN location l
+	ON e.location_id = l.location_id
+JOIN address a
+	ON l.address_id = a.address_id;
+
 
 #returns every vendor name and address
 select v.company_name, v.address_id
@@ -38,6 +43,7 @@ where v.company_name = "Vender 1";
 
 #For all equipment, return the item name, serial number, location(if applies) ,
 # employee name(if applies),and lease end date. If there is a location, return the address and room number.
+
 select et.model_name, et.model_number, e.location_id, emp.first_name, emp.last_name, lo.address_id, r.room_number
 from equipment e
 join equipment_type et
