@@ -73,12 +73,8 @@ exports.employee_name = (req, res) => {
 }
 
 exports.employee_all = (req, res) =>{
-
-
-
     //Select all employee information
-    const sql = 'SELECT e.first_name, e.last_name, e.email, a.address1, c.city_name, c.state, e.cell_number FROM employee e JOIN location l ON e.location_id = l.location_id JOIN address a ON l.address_id = a.address_id JOIN city c ON c.city_id = a.city_id'
-
+    const sql = 'SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address1, c.city_name, c.state, e.cell_number FROM employee e JOIN address a ON e.address_id = a.address_id JOIN city c ON c.city_id = a.city_id'
     db.query(sql, (err, rows, fields)=> {
         if(err) console.log('errrorrrr')
         else if(rows.length === 0 ){

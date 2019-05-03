@@ -2,6 +2,8 @@ const express = require('express')
 const db = require('../database')
 const employee = require('../controllers/employee')
 const events = require('../controllers/events')
+const address = require('../controllers/address')
+const cities = require('../controllers/cities')
 
 // Create a route handler
 const router = express.Router();
@@ -11,5 +13,7 @@ router.post('/employee/equipment', employee.employee_equipment)
 router.post('/employee/name', employee.employee_name)
 router.get('/events/:id', events.upcomming_events)
 router.get('/employee/all', employee.employee_all)
+router.get('/address/all', address.address_all)
+router.get('/cities/all', cities.city_all)
 
 module.exports = router

@@ -34,7 +34,7 @@ class Login extends Component {
 
   /**
    * Handels the changing of state variables
-   * @param  {[type]} event the event associated witht the listener
+   * @param  {[type]} event the event associated with the listener
    * @return {[type]} none
    */
   handleChange(event) {
