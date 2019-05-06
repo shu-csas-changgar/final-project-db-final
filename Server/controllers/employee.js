@@ -1,8 +1,8 @@
 const db = require('../database')
-
+const abstractQueries = require('../abstract_scripts')
 
 exports.employee_credentials = (req, res) => {
-    if(req === null) res.status(401).send({
+    if(req === null) res.status(400).send({
         success: 'false',
         message: 'Invald argruments'
     })
@@ -12,7 +12,7 @@ exports.employee_credentials = (req, res) => {
             if(err) console.log('error fetching data: ' + err)
             else if(rows.length === 0){
               console.log("The username or password was incorrect")
-              res.status(401).send({
+              res.status(400).send({
                   success: 'false'
               })
             } 
@@ -20,15 +20,15 @@ exports.employee_credentials = (req, res) => {
               res.status(200).send({
                   success: 'true',
                   info: rows
-              })
+                })
             }
-          })
+        })
     }
 }
 
 
 exports.employee_equipment = (req, res) => {
-    if(req.body.id === null) res.status(401).send({
+    if(req.body.id === null) res.status(400).send({
         success: 'false',
         message: 'Invald argruments'
     })
@@ -48,7 +48,7 @@ exports.employee_equipment = (req, res) => {
 }
 
 exports.employee_name = (req, res) => {
-    if(req.body.id === null) res.status(401).send({
+    if(req.body.id === null) res.status(400).send({
         success: 'false',
         message: 'Invald argruments'
     })
@@ -63,37 +63,72 @@ exports.employee_name = (req, res) => {
                     message: rows
                     })
             }
-
         })
-
     }
-
-
-
 }
 
-exports.employee_all = (req, res) =>{
+exports.employee_all = (req, res) => {
     //Select all employee information
-    const sql = 'SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address1, c.city_name, c.state, e.cell_number FROM employee e JOIN address a ON e.address_id = a.address_id JOIN city c ON c.city_id = a.city_id'
+    const sql = 'SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, c.city_id, c.city_name, c.state, e.cell_number FROM employee e JOIN address a ON e.address_id = a.address_id JOIN city c ON c.city_id = a.city_id'
     db.query(sql, (err, rows, fields)=> {
         if(err) console.log('errrorrrr')
         else if(rows.length === 0 ){
             console.log(rows)
-            res.status(401).send({
+            res.status(400).send({
                 success: 'false'
 
             })
-            }
-
-            else{
-                res.status(200).send({
-                    success: 'true',
-                    info: rows
-                })
-            }
+        } else{
+            res.status(200).send({
+                success: 'true',
+                info: rows
+            })
         }
+    })
+}
 
-        
-        
-    )
-    }
+exports.employee_update = (req, res) => {
+    //console.log(req.body)
+
+    // Create the update query for the data
+/*
+    let table = 'Update '
+    let values = 'SET '
+    let identifier = ` WHERE `
+
+    req.body.map( obj =>{
+        Object.keys(obj).forEach( key => {
+            if(!key.includes('_id')){
+                if(key === 'table'){
+                    table += `${obj[key]} `
+                }else{
+
+                values += `${key} = ${db.escape(obj[key])}, `
+                }
+            }
+            else {
+                identifier += `${key} = ${db.escape(obj[key])}`
+            }
+        })
+    })
+    var newValues = values.substring(0, values.length -2)
+    const sql = table + newValues + identifier
+*/
+
+    const queries = abstractQueries.updateQuery(req.body)
+
+    db.query(queries[0], (err, results, fields) => {
+        if(err) {
+            console.log(`ERROR: ${err}`)
+            res.status(400).send({
+                success: 'false'
+            })
+        } 
+        else{
+            console.log(`Updated ${results.affectedRows} rows`)
+            res.status(200).send({
+                success: 'true'
+            })
+        }
+    })
+}

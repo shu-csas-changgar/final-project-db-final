@@ -8,13 +8,13 @@ class Address extends Component{
         /** State variables:
          * - cityStateMap: a map obj that will hold the information for the city and state inputs. The map is 
          *      structured as: key = state, values = citys that belong to the state. The map is initally set to empty
-         * - address: a stirng that holds the value for the address input field. Initally set to an empty string.
-         * - address2: a stirng that holds the value for the address2 input field. Initally set to an empty string.
-         * - city: a string that holds the value for the city input field. Initally set to an empty string.
-         * - county: a string that holds the value for the county input field. Initally set to an empty string.
-         * - state: a string that holds the value for the state input field. Initally set to an empty string.
-         * - country: a string that holds the value for the country input fields. Initally set to 'United States'.
-         * - postal: a string that holds the value for the postal input field. Initally set to an empty string.
+         * - address: a stirng that holds the value for the address <input> field. Initally set to an empty string.
+         * - address2: a stirng that holds the value for the address2 <input> field. Initally set to an empty string.
+         * - city: a string that holds the value for the city <input> field. Initally set to an empty string.
+         * - county: a string that holds the value for the county <input> field. Initally set to an empty string.
+         * - state: a string that holds the value for the state <input> field. Initally set to an empty string.
+         * - country: a string that holds the value for the country <input> fields. Initally set to 'United States'.
+         * - postal: a string that holds the value for the postal <input> field. Initally set to an empty string.
          */
         this.state= {
             cityStateMap: new Map(),
@@ -93,7 +93,7 @@ class Address extends Component{
                 <div className="form-row">
                     <div className="form-group col-md-12">
                         <label htmlFor="inputCity">* Address</label>
-                        <input type="text" name='address' onChange={this.handleChange} className="form-control"  placeholder="1234 Main St"/>
+                        <input type="text" name='address' onChange={this.handleChange} className="form-control"  placeholder="1234 Main St" required/>
                     </div>
                     <div className="form-group col-md-12">
                         <label htmlFor="inputCity">Address 2</label>
@@ -101,7 +101,7 @@ class Address extends Component{
                     </div>
                     <div className="form-group col-md-4">
                         <label htmlFor="inputState">* State/Province</label>
-                        <input list="encodings2" type="text" name="state" onChange={this.handleChange} className="form-control" placeholder="City" autoComplete='new-password'/>
+                        <input list="encodings2" type="text" name="state" onChange={this.handleChange} className="form-control" placeholder="State/Province" autoComplete='new-password' required/>
                         <datalist id="encodings2">
                             {
                                 s.map( (item, i) =>{
@@ -112,7 +112,7 @@ class Address extends Component{
                     </div>
                     <div className="form-group col-md-4">
                         <label htmlFor="inputState">* City</label>
-                        <input list="encodings" type="text" name='city' onChange={this.handleChange} disabled={this.state.state !== "" ? false : true} className="form-control" placeholder="City" autoComplete='new-password'/>
+                        <input list="encodings" type="text" name='city' onChange={this.handleChange} disabled={this.state.state !== "" ? false : true} className="form-control" placeholder="City" autoComplete='new-password' required/>
                         <datalist id="encodings">
                             {
                                 c.map( (city, i) => {
@@ -127,12 +127,12 @@ class Address extends Component{
                     </div>
                     <div className="form-group col-md-2">
                         <label htmlFor="inputZip">* Zip</label>
-                        <input type="text" name="postal" onChange={this.handleChange} disabled={this.state.state !== "" ? false : true} className="form-control" id="inputZip"/>
+                        <input type="text" name="postal" onChange={this.handleChange} disabled={this.state.state !== "" ? false : true} className="form-control" id="inputZip" required/>
                     </div>
 
                     <div className="form-group col-md-4">
                         <label htmlFor="inputState">* Country</label>
-                        <input list="encodings" type="text" name='country' onChange={this.handleChange} value={this.state.country} disabled={this.state.state !== "" ? false : true} className="form-control" autoComplete='new-password'/>
+                        <input type="text" name='country' onChange={this.handleChange} value={this.state.country} disabled={this.state.state !== "" ? false : true} className="form-control" autoComplete='new-password'required/>
                     </div>
                 </div>
             </div>
@@ -140,4 +140,4 @@ class Address extends Component{
     }
 }
 
-export default Address
+export default Address 

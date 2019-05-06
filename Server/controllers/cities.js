@@ -19,17 +19,10 @@ exports.city_all = (req, res) => {
                     map.set(obj.state, [obj.city_name])
                 }
             })
-            /*
-            for (var [key, value] of map.entries()) {
-                console.log(key + ' = ' + value);
-              }
-            */
            res.status(200).send({
                success:'true',
                data: JSON.stringify([...map])
            })
-
-           console.log("here")
         }
     })
 }

@@ -26,12 +26,10 @@ where c.city_name = "South Orange";
 -- -----------------------------------------------------
 -- Return employee name and info
 -- -----------------------------------------------------
-SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address1, c.city_name, c.state, e.cell_number
+SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, c.city_id, c.city_name, c.state, e.cell_number
 FROM employee e
-JOIN location l
-	ON e.location_id = l.location_id
 JOIN address a
-	ON l.address_id = a.address_id
+	ON e.address_id = a.address_id
 JOIN city c
 	ON c.city_id = a.city_id;
 
@@ -121,6 +119,20 @@ ORDER BY c.category ASC,
 		 t.model_name ASC;
 
 -- -----------------------------------------------------
--- Selects an employees firt and last name when given an employee_id
+-- For all addresses, selects 
+-- -----------------------------------------------------
+SELECT a.address1,
+	c.city_name,
+    c.state,
+    a.postal_code,
+    a.address_id
+FROM address a
+JOIN city c
+	ON a.city_id = c.city_id;
+    
+SELECT c.city_name,  c.state
+FROM city c; 
+-- -----------------------------------------------------
+-- Selects an employees first and last name when given an employee_id
 -- -----------------------------------------------------
 SELECT first_name, last_name FROM employee WHERE employee_id = 1;

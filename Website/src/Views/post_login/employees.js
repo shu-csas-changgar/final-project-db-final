@@ -4,15 +4,21 @@ import CheckedTable from '../../Components/Tables/employeeTable'
 import Header from '../../Components/Datapage/header'
 import Control from '../../Components/AllPages/controller'
 import CreateModal from '../../Components/Modals/CreateModals/employeeCreate'
+import InfoModal from '../../Components/Modals/employee_info_modal'
+
+
 class Inventory extends Component{
     constructor(){
         super()
         this.state = { 
             tableData: [],
             fullData: [],
-            showCreateModal: false
+            selectedRow: null,
+            showCreateModal: false,
+            showInfoModal: false,
         }
         this.handler = this.handler.bind(this)
+        this.rowClick = this.rowClick.bind(this)
     }
 
     componentDidMount(){
@@ -41,9 +47,37 @@ class Inventory extends Component{
         })
     }
 
-    
-    toggleModal(event){
-        console.log(event.currentTarget)
+    createAddModal() {
+        return (
+            <CreateModal 
+                toggle = {() => this.setState({showCreateModal: !this.state.showCreateModal})}
+                showModal={this.state.showCreateModal}
+                body={this.state.modalBody}
+                header={this.state.modalHeader}
+            />
+        )
+    }
+
+    createInfoModal() {
+        
+        /**
+         * Map over the fullData array and get the object whos employee_id key is equal to the selected row state variable.
+         * Since no two employees can have the same employee_id this function will always return the proper employee
+         */
+        let dataToSend
+        this.state.fullData.forEach( obj => {
+            if(obj.employee_id === this.state.selectedRow) {
+                dataToSend = obj
+            }
+        })
+        return(
+            <InfoModal 
+                toggle = {() => this.setState({showInfoModal: !this.state.showInfoModal})}
+                showModal={this.state.showInfoModal}
+                bodyData={dataToSend}
+                header={"Focused View"}
+            />
+        )
     }
 
     handler(key) {
@@ -51,7 +85,16 @@ class Inventory extends Component{
         this.setState({
             [key]: [!this.state.key]
         })
-      }
+    }
+
+
+    rowClick(event){
+       const id = parseInt(event.currentTarget.id)
+        this.setState({
+            selectedRow: id,
+            showInfoModal: true
+        })
+    }
 
     render() {
         return(
@@ -78,17 +121,19 @@ class Inventory extends Component{
                                     headers = {["","First Name", "Last Name", "Email", "Address", "City", "State", "Cell Number"]}
                                     fullData ={this.state.fullData}
                                     body={this.state.tableData}
-                                    rowClick = {this.rowClick}
+                                    onClick = {this.rowClick}
                                 />
                             </div>
                         </div>
                         <div className={`container ${this.state.showCreateModal ? 'modal-open' :''}`}>
-                            <CreateModal 
-                                toggle = {() => this.setState({showCreateModal: !this.state.showCreateModal})}
-                                showModal={this.state.showCreateModal}
-                                body={this.state.modalBody}
-                                header={this.state.modalHeader}
-                            />
+                            {
+                                this.state.showCreateModal ? this.createAddModal() : null
+                            }
+                        </div>
+                        <div className={`container ${this.state.showInfoModal ? 'modal-open' :''}`}>
+                            {
+                                this.state.showInfoModal ? this.createInfoModal() : null
+                            }
                         </div>
                     </div>
                 </div>

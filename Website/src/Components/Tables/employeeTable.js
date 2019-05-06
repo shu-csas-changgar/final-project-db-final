@@ -8,6 +8,7 @@ class CheckedTable extends Component{
         this.state = {
             active: false
         }
+
     }
 
     render(){
@@ -30,7 +31,7 @@ class CheckedTable extends Component{
                                     id={obj.employee_id}
                                     key={i}
                                     obj={this.props.body[i]}
-                                    onClick={this.props.rowClick}
+                                    onClick={this.props.onClick}
                                 />
                             )
                         })

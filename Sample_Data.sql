@@ -67,7 +67,7 @@ INSERT INTO location(address_id, name, phone_number) VALUES(
     "8887776655");
 INSERT INTO location(address_id, name, phone_number) VALUES(4, "Umm hello there", "5465479632");
 INSERT INTO location(address_id, name, phone_number) VALUES(6, "Weed Man", "8885420174");
-INSERT INTO location(address_id, name, phone_number) VALUES(7, "Run Forest Run", "0325693475");
+-- INSERT INTO location(address_id, name, phone_number) VALUES(7, "Run Forest Run", "0325693475");
 
 -- -----------------------------------------------------
 -- Room
@@ -85,6 +85,7 @@ INSERT INTO room(room_number, floor, extension, location_id) VALUES ("13ZZ", 13,
 	(SELECT location_id FROM location WHERE address_id = 
 		(SELECT address_id FROM address WHERE address1 = "400 S Orange Ave" AND city_id = (SELECT city_id FROM city WHERE city_name = "South Orange" AND state = "New Jersey"))));
 
+ 
 -- -----------------------------------------------------
 -- Account
 -- -----------------------------------------------------
@@ -96,14 +97,15 @@ INSERT INTO account(username, password) VALUES("r@abc.com", "password");
 -- -----------------------------------------------------
 -- Employee
 -- -----------------------------------------------------
-INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Joshua", "Schappel", "j@abc.com", 2, "9083708410",
+INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Joshua", "Schappel", "j@abc.com", 1, "9083708410",
 	(SELECT account_id FROM account WHERE username = "j@abc.com"));
-INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Nick", "DeGirolamo", "n@abc.com", 2, "9084567485",
+INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Nick", "DeGirolamo", "n@abc.com", 4, "9084567485",
 	(SELECT account_id FROM account WHERE username = "n@abc.com"));
-INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Ryan", "Salem ", "rj@abc.com", 2, "586432432132", 4);
-INSERT INTO employee(first_name, last_name, email, location_id, cell_number, account_id) VALUES ("Sash", "Mahashabde", "s@abc.com", 2, "9083708410", 2);
-SELECT * FROM employee;
-Update employee SET location_id = 4 WHERE employee_id = 2;
+INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Ryan", "Salem ", "rj@abc.com", 6, "586432432132", 4);
+INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Sash", "Mahashabde", "s@abc.com", 5, "9083708410", 2);
+
+INSERT INTO employee(first_name, last_name, email, address_id, cell_number) VALUES ("TEST_FIRST", "TEST_LAST", "l@abc.com", 5, "9083708410");
+
 -- -----------------------------------------------------
 -- Vendor
 -- -----------------------------------------------------

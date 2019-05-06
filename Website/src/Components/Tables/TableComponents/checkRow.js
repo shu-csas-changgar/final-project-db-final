@@ -16,7 +16,7 @@ class CheckRow extends Component {
 
     render(){
         return(
-            <tr className={this.state.active? "table-active" : ""} key={this.props.i} id={this.props.id} onClick={this.props.rowClick}>
+            <tr className={this.state.active? "table-active" : ""} key={this.props.i} id={this.props.id} onClick={this.props.onClick}>
                 <td>
                     <input className="position-static" id={this.props.i} type="checkbox" onClick={this.handleCheckClick}/>
                 </td>
