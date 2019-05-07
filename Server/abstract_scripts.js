@@ -7,10 +7,19 @@ const db = require('./database')
  * - where: the condition that the update is used on. The where key's value [MUST] be an obj
  * @return An array of sql queries.
  */
-exports.updateQuery = (objArray) => {
+exports.createQueries = (objArray) => {
     let sqlQueries = []
-    objArray.map( obj =>{
-        let table = 'Update '
+    objArray.map( obj => {
+        if(obj.action === 'update') {
+            const sql = updateQuery(obj)
+            sqlQueries.unshift(sql)     
+        }  
+    })
+    return sqlQueries
+}
+
+function updateQuery(obj) {
+    let table = 'Update '
         let values = 'SET '
         let identifier = ` WHERE `
 
@@ -23,14 +32,12 @@ exports.updateQuery = (objArray) => {
                     identifier += `${key2} = ${db.escape(obj[key][key2])}`
                 })
             }
-            else {
+            else if(key !== 'action') {
                 values += `${key} = ${db.escape(obj[key])}, `
             }
         })
         var newValues = values.substring(0, values.length -2)
         const sql = table + newValues + identifier
-        sqlQueries.unshift(sql)     
-    })
-    return sqlQueries
+        return sql
 }
     

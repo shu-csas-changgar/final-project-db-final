@@ -90,10 +90,17 @@ class Inventory extends Component{
 
     rowClick(event){
        const id = parseInt(event.currentTarget.id)
+       if(event.target.type === 'checkbox') {
+        this.setState({
+            selectedRow: id,
+        })
+       } else {
         this.setState({
             selectedRow: id,
             showInfoModal: true
         })
+       }
+        
     }
 
     render() {

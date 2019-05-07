@@ -26,12 +26,14 @@ where c.city_name = "South Orange";
 -- -----------------------------------------------------
 -- Return employee name and info
 -- -----------------------------------------------------
-SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, c.city_id, c.city_name, c.state, e.cell_number
+SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, a.address2, a.county, a.postal_code, c.city_id, c.city_name, c.state, co.country_name, e.cell_number
 FROM employee e
 JOIN address a
 	ON e.address_id = a.address_id
 JOIN city c
-	ON c.city_id = a.city_id;
+	ON c.city_id = a.city_id
+JOIN country co
+	ON c.country_id = co.country_id;
 
 
 #returns every vendor name and address

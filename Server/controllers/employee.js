@@ -69,7 +69,8 @@ exports.employee_name = (req, res) => {
 
 exports.employee_all = (req, res) => {
     //Select all employee information
-    const sql = 'SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, c.city_id, c.city_name, c.state, e.cell_number FROM employee e JOIN address a ON e.address_id = a.address_id JOIN city c ON c.city_id = a.city_id'
+    const sql = 'SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, a.address2, a.county, a.postal_code, c.city_id, c.city_name, c.state, co.country_name, e.cell_number FROM employee e JOIN address a ON e.address_id = a.address_id JOIN city c ON c.city_id = a.city_id JOIN country co ON c.country_id = co.country_id'
+
     db.query(sql, (err, rows, fields)=> {
         if(err) console.log('errrorrrr')
         else if(rows.length === 0 ){
@@ -88,47 +89,39 @@ exports.employee_all = (req, res) => {
 }
 
 exports.employee_update = (req, res) => {
-    //console.log(req.body)
 
-    // Create the update query for the data
-/*
-    let table = 'Update '
-    let values = 'SET '
-    let identifier = ` WHERE `
+    const queries = abstractQueries.createQueries(req.body)
+    db.beginTransaction( err => {
+        if(err) { throw err }
 
-    req.body.map( obj =>{
-        Object.keys(obj).forEach( key => {
-            if(!key.includes('_id')){
-                if(key === 'table'){
-                    table += `${obj[key]} `
-                }else{
+        db.query(queries[0], (err, results, fields) => {
+            if(err) {
+                return db.rollback( () =>  {
+                    throw err
+                })
+            }
 
-                values += `${key} = ${db.escape(obj[key])}, `
+            for (let i = 1; i < queries.length; i++) {
+                db.query(queries[i], (err , results, fields) => {
+                    if(err) {
+                        return db.rollback( () => {
+                            throw err
+                        })
+                    }
+                })
+            }
+
+            db.commit( err => {
+                if(err) {
+                    return db.rollback( () => {
+                        throw err
+                    })
                 }
-            }
-            else {
-                identifier += `${key} = ${db.escape(obj[key])}`
-            }
+                console.log("success")
+                res.status(200).send({
+                    success: 'true'
+                })
+            })
         })
-    })
-    var newValues = values.substring(0, values.length -2)
-    const sql = table + newValues + identifier
-*/
-
-    const queries = abstractQueries.updateQuery(req.body)
-
-    db.query(queries[0], (err, results, fields) => {
-        if(err) {
-            console.log(`ERROR: ${err}`)
-            res.status(400).send({
-                success: 'false'
-            })
-        } 
-        else{
-            console.log(`Updated ${results.affectedRows} rows`)
-            res.status(200).send({
-                success: 'true'
-            })
-        }
     })
 }
