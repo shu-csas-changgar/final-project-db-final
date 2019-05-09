@@ -19,9 +19,17 @@ class Inventory extends Component{
         }
         this.handler = this.handler.bind(this)
         this.rowClick = this.rowClick.bind(this)
+        this.fetchData = this.fetchData.bind(this)
     }
 
     componentDidMount(){
+        this.fetchData()
+        
+    }
+
+
+    fetchData(){
+        console.log('hersadkflkjdsahe')
         fetch('/database/employee/all')
         .then( res =>{ return res.status === 200 ? res.json() : "Invalid"})
         .then( data => {  
@@ -46,7 +54,6 @@ class Inventory extends Component{
             }
         })
     }
-
     createAddModal() {
         return (
             <CreateModal 
@@ -76,6 +83,7 @@ class Inventory extends Component{
                 showModal={this.state.showInfoModal}
                 bodyData={dataToSend}
                 header={"Focused View"}
+                updateOccurred = {this.fetchData}
             />
         )
     }
@@ -129,6 +137,7 @@ class Inventory extends Component{
                                     fullData ={this.state.fullData}
                                     body={this.state.tableData}
                                     onClick = {this.rowClick}
+                                    
                                 />
                             </div>
                         </div>

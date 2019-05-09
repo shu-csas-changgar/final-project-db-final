@@ -38,6 +38,7 @@ class InfoModal extends Component {
         this.changeDisabled = this.changeDisabled.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        
     }
 
     /**
@@ -81,6 +82,7 @@ class InfoModal extends Component {
         })
     }
     
+    
     handleSubmit(event){
         event.preventDefault()
         
@@ -104,12 +106,26 @@ class InfoModal extends Component {
                 fetchArray.push(this.addressUpdate())
             }
 
-            this.sendAndFetch(fetchArray)
+            this.sendAndFetch(fetchArray).then(data => {
+                if(data.success === 'true'){
+                    console.log('Success')
+                    this.dismissModal()
+                   this.props.updateOccurred()
+                    
+                    
+
+                } else {
+                    console.log('error') 
+                    
+                }
+
+            })
+            
         }
     }
 
     sendAndFetch(objArray) {
-        fetch('/database/employee/update', {
+        return fetch('/database/employee/update', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -117,13 +133,6 @@ class InfoModal extends Component {
             body: JSON.stringify(objArray)
         })
         .then( res => res.json())
-        .then( data => {
-            if(data.success === 'true'){
-                console.log('Success')
-            } else {
-                console.log('error')
-            }
-        })
         .catch(err => {console.log(`There was an error send the data: ${err}`)})
     }
 

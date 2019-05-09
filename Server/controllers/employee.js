@@ -72,7 +72,7 @@ exports.employee_all = (req, res) => {
     const sql = 'SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, a.address2, a.county, a.postal_code, c.city_id, c.city_name, c.state, co.country_name, e.cell_number FROM employee e JOIN address a ON e.address_id = a.address_id JOIN city c ON c.city_id = a.city_id JOIN country co ON c.country_id = co.country_id'
 
     db.query(sql, (err, rows, fields)=> {
-        if(err) console.log('errrorrrr')
+        if(err) console.log(err)
         else if(rows.length === 0 ){
             console.log(rows)
             res.status(400).send({
