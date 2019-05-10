@@ -20,11 +20,17 @@ class Create extends Component {
     render() {
         return(
             <div className="row justify-content-center mt-3">
-                <div className="col d-flex justify-content-end">
+                <div className="col d-flex justify-content-end" style={{backgroundColor:"green", width:"30px"}}>
+                    <select onChange={null} name="selectedAddress" className="form-control">
+                        <option defaultValue value="">Active</option>
+                        <option defaultValue value="">Inactive</option>
+                    </select>
+                </div>    
+                <div className="flex-col d-flex justify-content-end mr-3">
                     <button type="Log In" style={{marginBottom:"10px"}} className="btn btn-primary">Delete
                         <span className="mr-1" aria-hidden="true">{this.trashIcon}</span>
                     </button>
-                </div>        
+                </div>    
                 <div className="flex-col d-flex justify-content-end mr-3">
                     <button type="Log In" style={{marginBottom:"10px"}} onClick={this.handleClick} value="showCreateModal" className="btn btn-primary">Create
                         <span className="mr-1" aria-hidden="true">{this.createIcon}</span>
