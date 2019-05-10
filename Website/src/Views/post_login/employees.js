@@ -1,27 +1,114 @@
 import React, { Component } from "react"
 import Navbar from '../../Components/Datapage/navbar'
-import Table from '../../Components/Tables/table'
+import CheckedTable from '../../Components/Tables/employeeTable'
 import Header from '../../Components/Datapage/header'
-import Control from '../../Components/AllPages/create'
+import Control from '../../Components/AllPages/controller'
+import CreateModal from '../../Components/Modals/CreateModals/employeeCreate'
+import InfoModal from '../../Components/Modals/employee_info_modal'
+
+
 class Inventory extends Component{
     constructor(){
         super()
         this.state = { 
-            tableData : []
+            tableData: [],
+            fullData: [],
+            selectedRow: null,
+            showCreateModal: false,
+            showInfoModal: false,
         }
+        this.handler = this.handler.bind(this)
+        this.rowClick = this.rowClick.bind(this)
+        this.fetchData = this.fetchData.bind(this)
     }
 
     componentDidMount(){
+        this.fetchData()
+        
+    }
+
+
+    fetchData(){
+        console.log('hersadkflkjdsahe')
         fetch('/database/employee/all')
         .then( res =>{ return res.status === 200 ? res.json() : "Invalid"})
         .then( data => {  
             if (data === 'Invalid') console.log('invalid')
-            else{console.log(data.info)
+            else{
+                const tableData = data.info.map( obj => {
+                    return({
+                        first_name: obj.first_name,
+                        last_name: obj.last_name,
+                        email: obj.email,
+                        address1: obj.address1,
+                        city_name: obj.city_name,
+                        state: obj.state,
+                        cell_number: obj.cell_number
+                    })
+                })
+
                 this.setState({
-                    tableData : data.info
+                    tableData : tableData,
+                    fullData: data.info
                 })
             }
         })
+    }
+    createAddModal() {
+        return (
+            <CreateModal 
+                toggle = {() => this.setState({showCreateModal: !this.state.showCreateModal})}
+                showModal={this.state.showCreateModal}
+                body={this.state.modalBody}
+                header={this.state.modalHeader}
+            />
+        )
+    }
+
+    createInfoModal() {
+        
+        /**
+         * Map over the fullData array and get the object whos employee_id key is equal to the selected row state variable.
+         * Since no two employees can have the same employee_id this function will always return the proper employee
+         */
+        let dataToSend
+        this.state.fullData.forEach( obj => {
+            if(obj.employee_id === this.state.selectedRow) {
+                dataToSend = obj
+            }
+        })
+        return(
+            <InfoModal 
+                toggle = {() => this.setState({showInfoModal: !this.state.showInfoModal})}
+                showModal={this.state.showInfoModal}
+                bodyData={dataToSend}
+                header={"Focused View"}
+                updateOccurred = {this.fetchData}
+            />
+        )
+    }
+
+    handler(key) {
+        console.log(key)
+        this.setState({
+            [key]: [!this.state.key]
+        })
+    }
+
+
+    rowClick(event){
+       const id = parseInt(event.currentTarget.id)
+       if(event.target.type === 'checkbox') {
+        this.setState({
+            selectedRow: id,
+        })
+       } else {
+        this.setState({
+            selectedRow: id,
+            showInfoModal: true
+        })
+       }
+        
     }
 
     render() {
@@ -37,15 +124,32 @@ class Inventory extends Component{
                             employees = {true}
                         />
                     </div>
-                        <Control />
-                    <div className ="flex-row mt-2"  style={{paddingBottom:"10px"}} >
+                        <Control
+                            action={this.handler}
+                            create={this.props.showCreateModal}
+                        />
+                    <div className ="flex-row mt-3"  style={{paddingBottom:"10px"}} >
                         <div className ='container' id='cont1'>
-                            <Table
-                                tableType='table m-2'
-                                headers = {["First Name", "Last Name", "Email", "Address", "City", "State", "Cell Number"]}
-                                body={this.state.tableData}
-                                rowClick = {null}
-                            />
+                            <div className="table-responsive">
+                                <CheckedTable
+                                    tableType='table table-hover'
+                                    headers = {["","First Name", "Last Name", "Email", "Address", "City", "State", "Cell Number"]}
+                                    fullData ={this.state.fullData}
+                                    body={this.state.tableData}
+                                    onClick = {this.rowClick}
+                                    
+                                />
+                            </div>
+                        </div>
+                        <div className={`container ${this.state.showCreateModal ? 'modal-open' :''}`}>
+                            {
+                                this.state.showCreateModal ? this.createAddModal() : null
+                            }
+                        </div>
+                        <div className={`container ${this.state.showInfoModal ? 'modal-open' :''}`}>
+                            {
+                                this.state.showInfoModal ? this.createInfoModal() : null
+                            }
                         </div>
                     </div>
                 </div>

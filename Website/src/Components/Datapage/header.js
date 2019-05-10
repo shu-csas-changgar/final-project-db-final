@@ -11,7 +11,7 @@ class header extends Component{
                     <p id="c-p" className="m-3">ABC Corp</p>
                 </div>
                 <div className="col-4">
-                    <a href="http://localhost:3000/" id="a-custom" className="expand float-right m-4">logout</a>
+                    <a href="http://localhost:3000/" id="a-custom" className="expand float-right m-4">Logout</a>
                 </div>
             </div>
         )

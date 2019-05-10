@@ -3,7 +3,7 @@ import Header from '../../Components/Datapage/header'
 import Table from '../../Components/Tables/table'
 import Navbar from '../../Components/Datapage/navbar'
 import DateFormatt from './date'
-import Popup from '../../Components/AllPages/popup'
+import Popup from '../../Components/Modals/popup'
 import '../../CSS/Datapage/home.css'
 import './home.css'
 

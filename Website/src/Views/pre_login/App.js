@@ -37,7 +37,6 @@ class App extends Component {
     this.setState({
       index: parseInt(id)
     })
-
   }
 
   render() {
