@@ -7,7 +7,7 @@ import CreateModal from '../../Components/Modals/CreateModals/employeeCreate'
 import InfoModal from '../../Components/Modals/employee_info_modal'
 
 
-class Inventory extends Component{
+class Employee extends Component{
     constructor(){
         super()
         this.state = { 
@@ -158,4 +158,4 @@ class Inventory extends Component{
     }
 }
 
-export default Inventory
+export default Employee
