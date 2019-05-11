@@ -45,9 +45,18 @@ select v.company_name, v.vendor_id, t.cost, t.purchase_date, t.end_date, t.end_d
 from vendor v, transaction t
 where v.company_name = "Vender 1";
 
+select * from equipment;
 
 #For all equipment, return the item name, serial number, location(if applies) ,
 # employee name(if applies),and lease end date. If there is a location, return the address and room number.
+SELECT e.equiptment_id, e.serial_number, t.model_name, e.employee_id
+FROM equipment e
+JOIN equipment_type t
+	on e.type_id = t.type_id
+join employee em
+	on em.employee_id = e.employee_id;
+
+
 
 select et.model_name, et.model_number, e.location_id, emp.first_name, emp.last_name, lo.address_id, r.room_number
 from equipment e

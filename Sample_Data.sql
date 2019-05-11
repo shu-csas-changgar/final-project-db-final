@@ -166,6 +166,7 @@ INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, emplo
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("122345345456", 2, 10, 2, 1);
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("122345345234", 2, 4, 2, 1);
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("1223345233", 2, 9, 2, 1);
+INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("eat ass", 2, 4, 2, 4);
 
 -- -----------------------------------------------------
 -- Events
