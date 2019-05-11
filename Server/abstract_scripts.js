@@ -12,32 +12,71 @@ exports.createQueries = (objArray) => {
     objArray.map( obj => {
         if(obj.action === 'update') {
             const sql = updateQuery(obj)
-            sqlQueries.unshift(sql)     
-        }  
+            console.log(obj.id)
+            const s = obj.id !== null ? true : false
+            const sqlObject = {
+                type: 'update',
+                dependent: s,
+                sql: sql
+            }
+            sqlQueries.unshift(sqlObject)     
+        }
+        else if (obj.action === 'insert') {
+            const sql = insertQuery(obj)
+            const sqlObject = {
+                type: 'insert',
+                dependent: false,
+                sql: sql
+            }
+            sqlQueries.unshift(sqlObject)
+        } 
     })
     return sqlQueries
 }
 
 function updateQuery(obj) {
-    let table = 'Update '
-        let values = 'SET '
-        let identifier = ` WHERE `
-
+    let table = 'UPDATE '
+    let values = 'SET '
+    let identifier = ` WHERE `
         Object.keys(obj).forEach( key => {
             if(key === 'table'){
                 table += `${obj[key]} `
             }
             else if(key === 'where') {
                 Object.keys(obj[key]).forEach( key2 => {
-                    identifier += `${key2} = ${db.escape(obj[key][key2])}`
+                        identifier += `${key2} = ${db.escape(obj[key][key2])}`
                 })
             }
-            else if(key !== 'action') {
+            else if (key === 'id') {
+                Object.keys(obj[key]).forEach( key2 => {
+                    values += `${key2} = ${obj[key][key2]}, `
+                })
+            }
+            else if(key !== 'action' && key !== 'id') {
                 values += `${key} = ${db.escape(obj[key])}, `
             }
         })
-        var newValues = values.substring(0, values.length -2)
-        const sql = table + newValues + identifier
-        return sql
+    var newValues = values.substring(0, values.length -2)
+    const sql = table + newValues + identifier
+    console.log(sql)
+    return sql
 }
-    
+
+function insertQuery(obj) {
+    let table = 'INSERT INTO '
+    let cols  = ' ('
+    let values = 'VALUES('
+    Object.keys(obj).forEach( key => {
+        if(key === 'table') {
+            table+= `${obj[key]}`
+        }
+        else if( key != 'action' && key != 'type') {
+            cols += `${key}, `
+            values += `${db.escape(obj[key])}, `
+        }
+    })
+    var newCols = cols.substring(0, cols.length -2) + ') '
+    var newValues = values.substring(0, values.length -2) + ')'
+    const sql = table + newCols + newValues
+    return sql
+}

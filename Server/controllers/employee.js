@@ -67,6 +67,25 @@ exports.employee_name = (req, res) => {
     }
 }
 
+
+exports.employee_address_check = (req, res) => {
+    const array = [req.body]
+    const query = abstractQueries.createQueries(array)
+    db.query(query[0], (err, rows, fields)=> {
+        if(err){
+            res.status(200).send({
+                success: 'false'
+            })
+        } else{
+            console.log(row.id)
+            res.status(200).send({
+                success: 'true',
+                info: rows
+            })
+        }
+    })
+}
+
 exports.employee_all = (req, res) => {
     //Select all employee information
     const sql = 'SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, a.address2, a.county, a.postal_code, c.city_id, c.city_name, c.state, co.country_name, e.cell_number FROM employee e JOIN address a ON e.address_id = a.address_id JOIN city c ON c.city_id = a.city_id JOIN country co ON c.country_id = co.country_id'
@@ -91,21 +110,28 @@ exports.employee_all = (req, res) => {
 exports.employee_update = (req, res) => {
 
     const queries = abstractQueries.createQueries(req.body)
+
+    console.log(queries)
     db.beginTransaction( err => {
         if(err) { throw err }
 
-        db.query(queries[0], (err, results, fields) => {
+        db.query(queries[0].sql, (err, results, fields) => {
             if(err) {
                 return db.rollback( () =>  {
-                    throw err
+                    res.status(400).send({
+                        success: 'false'
+                    })
                 })
             }
+            let x = results.insertId
 
             for (let i = 1; i < queries.length; i++) {
-                db.query(queries[i], (err , results, fields) => {
+                db.query(queries[i].sql, [x], (err , results, fields) => {
                     if(err) {
                         return db.rollback( () => {
-                            throw err
+                            res.status(400).send({
+                                success: 'false'
+                            })
                         })
                     }
                 })
@@ -114,7 +140,9 @@ exports.employee_update = (req, res) => {
             db.commit( err => {
                 if(err) {
                     return db.rollback( () => {
-                        throw err
+                        res.status(400).send({
+                            success: 'false'
+                        })
                     })
                 }
                 console.log("success")
@@ -125,3 +153,39 @@ exports.employee_update = (req, res) => {
         })
     })
 }
+/*
+if(obj.dependent === false && obj.type === 'insert') {
+    db.query(obj.sql, (err , results, fields) => {
+        if(err) {
+            return db.rollback( () => {
+                throw err
+            })
+        }
+        id = results.insertId
+        //console.log("id is " + results.insertId)
+    })
+}
+
+else if (obj.dependent === true) {
+    //console.log("here " + id)
+    db.query(obj.sql, [id], (err, results, fields) => {
+        if(err) {
+            return db.rollback( () => {
+                throw err
+            })
+        }
+    })
+}
+})
+db.commit( err => {
+if(err) {
+    return db.rollback( () => {
+        throw err
+    })
+}
+console.log("success")
+res.status(200).send({
+    success: 'true'
+})
+})
+*/

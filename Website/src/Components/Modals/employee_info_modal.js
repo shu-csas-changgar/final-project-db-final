@@ -38,6 +38,7 @@ class InfoModal extends Component {
         this.changeDisabled = this.changeDisabled.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.checkAddress = this.checkAddress.bind(this)
         
     }
 
@@ -98,31 +99,53 @@ class InfoModal extends Component {
             let fetchArray = []
             if (this.state.first_name !== null || this.state.last_name !== null || this.state.email !== null || this.state.cell_number !== null) {
                 console.log("employee updated")
-                fetchArray.push(this.employeeUpdate())
+                fetchArray.push(this.employeeUpdate('update'))
             }
 
             if (this.state.address1 !== null || this.state.address2 !== null || this.state.country !== null || this.state.postal_code !== null) {
-                console.log("addredd updated")
-                fetchArray.push(this.addressUpdate())
+                
+                const data = this.addressUpdate('select')
+                this.checkAddress(data).then( data => {
+                    if(data.success === 'true'){
+                        fetchArray.push(this.addressUpdate('select'))
+                    }
+                    else {
+                        this.setState({
+                            showErrorMessage: true
+                        })
+                    }
+                })
+                .catch (err => {console.log(`There was an error send the data: ${err}`)})
+                
+               
             }
-
+/*
             this.sendAndFetch(fetchArray).then(data => {
                 if(data.success === 'true'){
                     console.log('Success')
                     this.dismissModal()
-                   this.props.updateOccurred()
-                    
-                    
+                    this.props.updateOccurred()
 
                 } else {
                     console.log('error') 
-                    
                 }
-
             })
-            
+            */
         }
     }
+
+
+    checkAddress(obj){
+        return fetch('/database/employee/address/check', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then( res=> res.json())
+        .catch( err => {console.log(`There was an error send the data: ${err}`)})
+}
 
     sendAndFetch(objArray) {
         return fetch('/database/employee/update', {
@@ -140,13 +163,17 @@ class InfoModal extends Component {
      * Creates a new object that has all the values of the fields that were changed in the employee update
      * @returns an object that contains the data for the fetch
      */
-    employeeUpdate() {
+    employeeUpdate(action) {
         let employeeObj = {
             table: 'employee',
-            action: 'update',
-            where: {employee_id: this.props.bodyData.employee_id}
+            action: action,
+            where: {employee_id: this.props.bodyData.employee_id},
         }
-        
+
+        if (this.state.address1 !== null || this.state.address2 !== null || this.state.country !== null || this.state.postal_code !== null) {
+            employeeObj.id = {address_id: '?'}
+        }
+
         if (this.state.first_name !== null){
             employeeObj.first_name = this.state.first_name
         }
@@ -162,25 +189,25 @@ class InfoModal extends Component {
         return employeeObj
     }
 
-    addressUpdate() {
+    addressUpdate(action) {
+        const data = this.props.bodyData
+
         let addressObj = {
             table: 'address',
-            action: 'update',
-            where: {address_id: this.props.bodyData.address_id}
+            action: action,
+            type: 'child'
         }
 
-        if (this.state.address1 !== null){
-            addressObj.address1 = this.state.address1
-        }
-        if (this.state.address2 !== null){
-            addressObj.address2 = this.state.address2
-        }   
-        if (this.state.county !== null){
-            addressObj.county = this.state.county
-        }
-        if(this.state.postal_code !== null) {
-            addressObj.postal_code = this.state.postal_code
-        }
+        this.state.address1 !== null ? addressObj.address1 = this.state.address1 : addressObj.address1 = data.address1
+
+        this.state.address2 !== null ? addressObj.address2 = this.state.address2 : addressObj.address2 = data.address2
+        
+        this.state.county !== null ? addressObj.county = this.state.county : addressObj.county = data.county
+
+        this.state.postal_code !== null ? addressObj.postal_code = this.state.postal_code : addressObj.postal_code = data.postal_code
+
+        this.state.city_name !== null ? console.log("hellow world") : addressObj.city_id = data.city_id
+
         return addressObj
     }
 
