@@ -28,11 +28,146 @@ INSERT INTO city (city_name, state, country_id) VALUES ("New York", "New York",
 INSERT INTO city (city_name, state, country_id) VALUES ("Pittsburgh", "Pennsylvania",
 	(SELECT country_id FROM country WHERE country_name = "America"));
     
-INSERT INTO city (city_name, state, country_id) VALUES ("Phoenix", "Arazona",
+INSERT INTO city (city_name, state, country_id) VALUES ("Phoenix", "Arizona",
 	(SELECT country_id FROM country WHERE country_name = "America"));
 
 INSERT INTO city (city_name, state, country_id) VALUES ("Westfield", "Illinois",
 	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Montgomery", "Alabama",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+
+INSERT INTO city (city_name, state, country_id) VALUES ("Juneau", "Alaska",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Little Rock", "Arkansas",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Denver", "Colorado",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Hartford", "Connecticut",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Dover", "Delaware",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Tallahassee", "Florida",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Atlanta", "Georgia",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Honolulu", "Hawaii",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Boise", "Idaho",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Indianapolis", "Indiana",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Des Moines", "Iowa",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Topeka", "Kansas",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Frankfort", "Kentucky",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Baton Rouge", "Louisiana",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Augusta", "Maine",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Annapolis", "Maryland",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Boston", "Massachusetts",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Lansing", "Michigan",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("St. Paul", "Minnesota",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Jackson", "Mississippi",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Jefferson City", "Missouri",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Helena", "Montana",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Lincoln", "Nebraska",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Carson City", "Nevada",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Concord", "New Hampshire",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Santa Fe", "New Mexico",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Raleigh", "North Carolina",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Bismarck", "North Dakota",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Columbus", "Ohio",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Oklahoma City", "Oklahoma",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Salem", "Oregon",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Providence", "Rhode Island",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Columbia", "South Carolina",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Pierre", "South Dakota",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Nashville", "Tennessee",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Austin", "Texas",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Salt Lake City", "Utah",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Montpelier", "Vermont",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Richmond", "Virgina",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Olympia", "Washington",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Charleston", "West Virginia",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Madison", "Wisconsin",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+INSERT INTO city (city_name, state, country_id) VALUES ("Cheyenne", "Wyoming",
+	(SELECT country_id FROM country WHERE country_name = "America"));
+    
+    
+
     
 -- -----------------------------------------------------
 -- Address
@@ -43,12 +178,72 @@ INSERT INTO address(address1, county, postal_code, city_id) VALUES ("702 Shadowl
 	(SELECT city_id FROM city WHERE city_name = "Westfield" AND state = "Illinois"));
 INSERT INTO address(address1, county, postal_code, city_id) VALUES ("400 S Orange Ave", "Essex", "1154876",
 	(SELECT city_id FROM city WHERE city_name = "South Orange" AND state = "New Jersey"));
-INSERT INTO address(address1, county, postal_code, city_id) VALUES ("1000 Who Gives a Shit", "Cool", "545682",
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("1000 Who Gives a Shit", "Cool", "12345",
 	(SELECT city_id FROM city WHERE city_name = "Pittsburgh" AND state = "Pennsylvania"));
 INSERT INTO address(address1, county, postal_code, city_id) VALUES ("420 Weed Dr", "Stoner", "545682",
 	(SELECT city_id FROM city WHERE city_name = "New York" AND state = "New York"));
-INSERT INTO address(address1, county, postal_code, city_id) VALUES ("32 Thanos is Bae", "Bradford", "545682",
-	(SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arazona"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("32 Thanos is Bae", "Bradford", "384764",
+	(SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("32 Thanos is Dead", "County1", "382928",
+	(SELECT city_id FROM city WHERE city_name = "Montgomery" AND state = "Alabama"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("10 High Street", "County2", "394875",
+	(SELECT city_id FROM city WHERE city_name = "Juneau" AND state = "Alaska"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("15 This is Tedious", "County3", "93754",
+	(SELECT city_id FROM city WHERE city_name = "Little Rock" AND state = "Arkansas"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("15 Green Street", "County4", "983246",
+	(SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("15 Los Angeles Drive", "County5", "195467",
+	(SELECT city_id FROM city WHERE city_name = "Westfield" AND state = "California"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("67 Pizza Way", "County6", "574836",
+	(SELECT city_id FROM city WHERE city_name = "Denver" AND state = "Colorado"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("34 Coca Cola Street", "County7", "11123",
+	(SELECT city_id FROM city WHERE city_name = "Hartford" AND state = "Connecticut"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("1 No Idea Court", "County8", "333546",
+	(SELECT city_id FROM city WHERE city_name = "Dover" AND state = "Delaware"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("123 First Street", "County9", "234323",
+	(SELECT city_id FROM city WHERE city_name = "Tallahassee" AND state = "Florida"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("321 Second Street", "County10", "3321112",
+	(SELECT city_id FROM city WHERE city_name = "Atlanta" AND state = "Georgia"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("2 Hawaii Way", "County11", "584343",
+	(SELECT city_id FROM city WHERE city_name = "Honolulu" AND state = "Hawaii"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("1 Final Way", "County12", "5795743",
+	(SELECT city_id FROM city WHERE city_name = "Boise" AND state = "Idaho"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("2 Phone Court", "County13", "28576940",
+	(SELECT city_id FROM city WHERE city_name = "Indianapolis" AND state = "Indiana"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("3 Leave Street", "County14", "4739204",
+	(SELECT city_id FROM city WHERE city_name = "Des Moines" AND state = "Iowa"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("4 Tree Way", "County15", "6749305",
+	(SELECT city_id FROM city WHERE city_name = "Topeka" AND state = "Kansas"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("5 Dog Drive", "County16", "8594",
+	(SELECT city_id FROM city WHERE city_name = "Frankfort" AND state = "Kentucky"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("6 Cat Court", "County17", "009483",
+	(SELECT city_id FROM city WHERE city_name = "Baton Rouge" AND state = "Louisiana"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("7 Rat Street", "County18", "046932",
+	(SELECT city_id FROM city WHERE city_name = "Augusta" AND state = "Maine"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("8 Dollar Street", "County19", "574658",
+	(SELECT city_id FROM city WHERE city_name = "Annapolis" AND state = "Maryland"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("9 Cent Court", "County20", "111111",
+	(SELECT city_id FROM city WHERE city_name = "Boston" AND state = "Massachusetts"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("10 Blind Street", "County21", "222222",
+	(SELECT city_id FROM city WHERE city_name = "Lansing" AND state = "Michigan"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("11 Hard Street", "County22", "333333",
+	(SELECT city_id FROM city WHERE city_name = "St. Paul" AND state = "Minnesota"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("12 Soft Court", "County23", "444444",
+	(SELECT city_id FROM city WHERE city_name = "Jackson" AND state = "Mississippi"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("13 Black Way", "County24", "555555",
+	(SELECT city_id FROM city WHERE city_name = "Jefferson City" AND state = "Missouri"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("14 Red Street", "County25", "666666",
+	(SELECT city_id FROM city WHERE city_name = "Helena" AND state = "Montana"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("15 Blue Street", "County26", "777777",
+	(SELECT city_id FROM city WHERE city_name = "Lincoln" AND state = "Nebraska"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("16 Purple Court", "County27", "888888",
+	(SELECT city_id FROM city WHERE city_name = "Carson City" AND state = "Nevada"));
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("17 Last One Street", "County28", "999999",
+	(SELECT city_id FROM city WHERE city_name = "Concord" AND state = "New Hampshire"));
+    
+
+
+
 
 -- -----------------------------------------------------
 -- Location
@@ -67,8 +262,18 @@ INSERT INTO location(address_id, name, phone_number) VALUES(
     "8887776655");
 INSERT INTO location(address_id, name, phone_number) VALUES(4, "Umm hello there", "5465479632");
 INSERT INTO location(address_id, name, phone_number) VALUES(6, "Weed Man", "8885420174");
--- INSERT INTO location(address_id, name, phone_number) VALUES(7, "Run Forest Run", "0325693475");
-
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "4 Tree Way" AND city_id = (SELECT city_id FROM city WHERE city_name = "Topeka" AND state = "Kansas")),
+    "Building 2",
+    "2019284873");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "10 High Street" AND city_id = (SELECT city_id FROM city WHERE city_name = "Juneau" AND state = "Alaska")),
+    "Building 3",
+    "6996669999");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "702 Shadowlawn Drive" AND city_id = (SELECT city_id FROM city WHERE city_name = "Westfield" AND state = "Illinois")),
+    "A Cool Building",
+    "8887776655");
 -- -----------------------------------------------------
 -- Room
 -- -----------------------------------------------------
@@ -102,7 +307,7 @@ INSERT INTO employee(first_name, last_name, email, address_id, cell_number, acco
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Nick", "DeGirolamo", "n@abc.com", 4, "9084567485",
 	(SELECT account_id FROM account WHERE username = "n@abc.com"));
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Ryan", "Salem ", "rj@abc.com", 6, "586432432132", 4);
-INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Sach", "Mahashabde", "s@abc.com", 5, "9083708410", 2);
+INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Sash", "Mahashabde", "s@abc.com", 5, "9083708410", 2);
 
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number) VALUES ("TEST_FIRST", "TEST_LAST", "l@abc.com", 5, "9083708410");
 
@@ -166,7 +371,6 @@ INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, emplo
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("122345345456", 2, 10, 2, 1);
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("122345345234", 2, 4, 2, 1);
 INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("1223345233", 2, 9, 2, 1);
-INSERT INTO equipment(serial_number, transaction_id, type_id, location_id, employee_id) VALUES ("eat ass", 2, 4, 2, 4);
 
 -- -----------------------------------------------------
 -- Events
