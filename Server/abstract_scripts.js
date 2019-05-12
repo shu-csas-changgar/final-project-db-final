@@ -29,10 +29,73 @@ exports.createQueries = (objArray) => {
                 sql: sql
             }
             sqlQueries.unshift(sqlObject)
-        } 
+        }
+        else if (obj.action === 'select'){
+            const sql = selectQuery(obj)
+            const sqlObject = {
+                type: 'select',
+                dependent: false,
+                sql: sql
+            }
+            sqlQueries.unshift(sqlObject)
+        }
+        else if (obj.action === 'selectId'){
+            const sql = selectIdQuery(obj)
+            const sqlObject = {
+                type: 'select',
+                dependent: false,
+                sql: sql
+            }
+            sqlQueries.unshift(sqlObject)
+        }
     })
     return sqlQueries
 }
+
+function selectQuery(obj){
+    let select = 'SELECT '
+    let table = 'FROM '
+    let where = 'WHERE '
+
+    Object.keys(obj).forEach( key => {
+        if (key === 'table') {
+            table += `${obj[key]} `
+        }
+        else if (key !== 'action' && key !== 'id' && key !== 'type') {
+            select += `${key}, `
+            where += `${key} ${obj[key] === null? 'IS NULL ' : ' =' + db.escape(obj[key])} AND `
+        }
+    })
+
+    const newSelect = select.substring(0, select.length -2) + " "
+    const newWhere = where.substring(0, where.length - 4)
+    const sql = newSelect + table + newWhere
+    return sql
+}
+
+function selectIdQuery(obj){
+    let select = 'SELECT '
+    let table = 'FROM '
+    let where = 'WHERE '
+
+    Object.keys(obj).forEach( key => {
+        if (key === 'table') {
+            table += `${obj[key]} `
+        }
+        else if(key === 'id'){
+            select += `${obj[key]} `
+        }
+        else if (key !== 'action' && key !== 'id' && key !== 'type') {
+            where += `${key} ${obj[key] === null? 'IS NULL ' : ' =' + db.escape(obj[key])} AND `
+        }
+    })
+
+    const newWhere = where.substring(0, where.length - 4)
+    const sql = select + table + newWhere
+    return sql
+}
+
+
 
 function updateQuery(obj) {
     let table = 'UPDATE '

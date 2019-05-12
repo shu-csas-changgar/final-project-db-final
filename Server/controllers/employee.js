@@ -68,16 +68,24 @@ exports.employee_name = (req, res) => {
 }
 
 
+
 exports.employee_address_check = (req, res) => {
     const array = [req.body]
     const query = abstractQueries.createQueries(array)
+
     db.query(query[0], (err, rows, fields)=> {
         if(err){
+            console.log(err)
             res.status(200).send({
                 success: 'false'
             })
-        } else{
-            console.log(row.id)
+        } else if (rows.length === 0){
+            res.status(200).send({
+                success: 'false',
+                info: rows
+            })
+        }
+        else {
             res.status(200).send({
                 success: 'true',
                 info: rows

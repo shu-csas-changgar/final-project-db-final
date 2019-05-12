@@ -19,5 +19,6 @@ router.get('/employee/all', employee.employee_all)
 router.get('/inventory/all', inventory.inventory_all)
 router.get('/address/all', address.address_all)
 router.get('/cities/all', cities.city_all)
+router.post('/cities/check', cities.city_check)
 
 module.exports = router
