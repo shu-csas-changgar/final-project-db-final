@@ -139,6 +139,7 @@ class Employee extends Component{
                             create={this.props.showCreateModal}
                             delete={this.state.checkArray}
                             deleteTable='employee'
+                            updateOccurred = {this.fetchData}
                         />
                     <div className ="flex-row mt-3"  style={{paddingBottom:"10px"}} >
                         <div className ='container' id='cont1'>
