@@ -3,6 +3,8 @@ import Navbar from '../../Components/Datapage/navbar'
 import CheckedTable from '../../Components/Tables/employeeTable'
 import Header from '../../Components/Datapage/header'
 import Control from '../../Components/AllPages/controller'
+import CreateModal from '../../Components/Modals/CreateModals/employeeCreate'
+
 
 class Inventory extends Component{
 
@@ -35,8 +37,8 @@ class Inventory extends Component{
                     return({
                         model_name: obj.model_name,
                         serial_number: obj.serial_number,
-                        employee_id: obj.employee_id,
-                        
+                        first_name: obj.first_name,
+                        last_name: obj.last_name                        
 
                     })
                 })
@@ -47,6 +49,17 @@ class Inventory extends Component{
                 })
             }
         })
+    }
+
+    createAddModal(){
+        return(
+            <CreateModal
+            toggle={() => this.setState({showCreateModal: !this.state.showCreateModal})}
+            showModal = {this.state.showCreateModal}
+            body={this.state.modalBody}
+            header ={this.state.modalHeader}
+            />
+        )
     }
 
     handler(key){
@@ -95,12 +108,18 @@ class Inventory extends Component{
                             <div className="table-responsive">
                                 <CheckedTable
                                     tableType='table table-hover'
-                                    headers = {["","Model Name", "Serial Number", "Employee ID"]}
+                                    headers = {["","Model Name", "Serial Number", "First Name", "Last Name"]}
                                     fullData ={this.state.fullData}
                                     body={this.state.tableData}
                                     onClick = {this.rowClick}
                                 />
                             </div>                            
+                        </div>
+                        
+                        <div className={`container ${this.state.showCreateModal ? 'modal-open' :''}`}>
+                            {
+                                this.state.showCreateModal ? this.createAddModal() : null
+                            }
                         </div>
                     </div>
                 </div>   
