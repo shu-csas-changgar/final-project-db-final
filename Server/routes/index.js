@@ -13,6 +13,7 @@ router.post('/employee/credentials', employee.employee_credentials)
 router.post('/employee/equipment', employee.employee_equipment)
 router.post('/employee/name', employee.employee_name)
 router.post('/employee/update', employee.employee_update)
+router.post('/employee/address/check', employee.employee_address_check)
 router.get('/events/:id', events.upcomming_events)
 router.get('/employee/all', employee.employee_all)
 router.get('/inventory/all', inventory.inventory_all)
@@ -21,5 +22,6 @@ router.get('/address/all', address.address_all)
 router.get('/cities/all', cities.city_all)
 router.get('/leases/all', leases.leases_all)
 
+router.post('/cities/check', cities.city_check)
 
 module.exports = router

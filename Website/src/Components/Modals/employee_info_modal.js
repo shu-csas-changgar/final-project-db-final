@@ -38,6 +38,7 @@ class InfoModal extends Component {
         this.changeDisabled = this.changeDisabled.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.checkAddress = this.checkAddress.bind(this)
         
     }
 
@@ -74,8 +75,6 @@ class InfoModal extends Component {
     handleChange(event){
         let value =event.target.value
         if(value === "") value = null
-        console.log(value)
-
         const name = event.target.name
         this.setState({
             [name]: value
@@ -86,7 +85,7 @@ class InfoModal extends Component {
     handleSubmit(event){
         event.preventDefault()
         
-        // Check if the user entered data
+        // If no changes were made send a message to the user
         if(this.state.first_name === null && this.state.last_name === null && this.state.email === null && this.state.cell_number === null &&
              this.address1 === null && this.address2 === null && this.country === null && this.state.postal_code === null) {
             this.setState({
@@ -96,33 +95,111 @@ class InfoModal extends Component {
         // create the data to send to the server
         else{
             let fetchArray = []
-            if (this.state.first_name !== null || this.state.last_name !== null || this.state.email !== null || this.state.cell_number !== null) {
-                console.log("employee updated")
-                fetchArray.push(this.employeeUpdate())
+            let city = null
+            // Check if the city or state field was updated
+            if (this.state.city_name !== null || this.state.state !== null) {
+
+                const data = this.cityUpdate('selectId', false)
+                this.checkCity(data).then (data => {
+                    if(data.success === 'true') {
+                        console.log(data.info[0].city_id)
+                        city = data.info[0].city_id
+                    } else {
+                        fetchArray.push(this.cityUpdate('insert'))
+                    }
+                })
             }
-
-            if (this.state.address1 !== null || this.state.address2 !== null || this.state.country !== null || this.state.postal_code !== null) {
-                console.log("addredd updated")
-                fetchArray.push(this.addressUpdate())
-            }
-
-            this.sendAndFetch(fetchArray).then(data => {
-                if(data.success === 'true'){
-                    console.log('Success')
-                    this.dismissModal()
-                   this.props.updateOccurred()
-                    
-                    
-
-                } else {
-                    console.log('error') 
-                    
-                }
-
-            })
             
+            if (this.state.address1 !== null || this.state.address2 !== null || this.state.country !== null || this.state.postal_code !== null) {
+                
+                const data = this.addressUpdate('selectId')
+                this.checkAddress(data).then( data => {
+
+                    // Address already exists.
+                    // we will just update the employee address id to the existing one
+                    if(data.success === 'true'){
+                        console.log(data.info[0].address_id)
+                        fetchArray.push(this.employeeUpdate('update', false, data.info[0]))
+                        this.sendAndFetch(fetchArray).then(data => {
+                            if(data.success === 'true'){
+                                this.dismissModal()
+                                this.props.updateOccurred()
+                            } else {
+                                console.log('error') 
+                            }
+                        })
+                    }
+
+                    // Address doesnt exist
+                    else {
+                        // If employee fields were also filed in we will have to update the address and the employee
+                        if (this.state.first_name !== null || this.state.last_name !== null || this.state.email !== null || this.state.cell_number !== null){
+                            const query1 = this.employeeUpdate('update', true)
+                            fetchArray.push(query1)
+                            const query2 = this.addressUpdate('insert')
+                            fetchArray.push(query2)
+                            console.log("here")
+
+                            this.sendAndFetch(fetchArray).then(data => {
+                                if(data.success === 'true'){
+                                    console.log('Success')
+                                    this.dismissModal()
+                                    this.props.updateOccurred()
+                
+                                } else {
+                                    console.log('error') 
+                                }
+                            })
+                        }
+
+                        // Just address field was updated so we need to update the address and then the employees address id on the newly created address
+                        else {
+                            const query = this.addressUpdate('insert')
+
+
+                        }
+                       
+                    }
+                })
+                .catch (err => {console.log(`There was an error send the data: ${err}`)})
+                
+               
+            }
+            else if (this.state.first_name !== null || this.state.last_name !== null || this.state.email !== null || this.state.cell_number !== null) {
+                console.log("employee updated")
+                fetchArray.push(this.employeeUpdate('update'))
+            }
+            else {
+                this.setState({
+                    showErrorMessage: true
+                })
+            }  
         }
     }
+
+    checkCity(obj) {
+        return fetch('/database/cities/check', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then( res=> res.json())
+        .catch( err => {console.log(`There was an error send the data: ${err}`)})
+    }
+
+    checkAddress(obj){
+        return fetch('/database/employee/address/check', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then( res=> res.json())
+        .catch( err => {console.log(`There was an error send the data: ${err}`)})
+}
 
     sendAndFetch(objArray) {
         return fetch('/database/employee/update', {
@@ -140,13 +217,23 @@ class InfoModal extends Component {
      * Creates a new object that has all the values of the fields that were changed in the employee update
      * @returns an object that contains the data for the fetch
      */
-    employeeUpdate() {
+    employeeUpdate(action, dependent, ...other) {
         let employeeObj = {
             table: 'employee',
-            action: 'update',
-            where: {employee_id: this.props.bodyData.employee_id}
+            action: action,
+            where: {employee_id: this.props.bodyData.employee_id},
         }
-        
+
+        other.map( obj => {
+            if(obj.hasOwnProperty('address_id')) {
+                employeeObj.id = {address_id: other[0].address_id}
+            }  
+        })
+
+        if (dependent) {
+            employeeObj.id = {address_id: '?'}
+        }
+
         if (this.state.first_name !== null){
             employeeObj.first_name = this.state.first_name
         }
@@ -162,26 +249,49 @@ class InfoModal extends Component {
         return employeeObj
     }
 
-    addressUpdate() {
+    addressUpdate(action) {
+        const data = this.props.bodyData
+
         let addressObj = {
             table: 'address',
-            action: 'update',
-            where: {address_id: this.props.bodyData.address_id}
+            action: action,
+            type: 'child'
         }
 
-        if (this.state.address1 !== null){
-            addressObj.address1 = this.state.address1
-        }
-        if (this.state.address2 !== null){
-            addressObj.address2 = this.state.address2
-        }   
-        if (this.state.county !== null){
-            addressObj.county = this.state.county
-        }
-        if(this.state.postal_code !== null) {
-            addressObj.postal_code = this.state.postal_code
-        }
+        if(action === 'selectId') {
+            addressObj.id = 'address_id'
+        } 
+        
+        this.state.address1 !== null ? addressObj.address1 = this.state.address1 : addressObj.address1 = data.address1
+
+        this.state.address2 !== null ? addressObj.address2 = this.state.address2 : addressObj.address2 = data.address2
+        
+        this.state.county !== null ? addressObj.county = this.state.county : addressObj.county = data.county
+
+        this.state.postal_code !== null ? addressObj.postal_code = this.state.postal_code : addressObj.postal_code = data.postal_code
+
+        this.state.city_name !== null ? console.log("hellow world") : addressObj.city_id = data.city_id
+
         return addressObj
+    }
+
+    cityUpdate(action, dependent) {
+        const data = this.props.bodyData
+        let cityObj = {
+            table: 'city',
+            action: action,
+            type: 'child'
+        }
+
+        if(action === 'selectId') {
+            cityObj.id = 'city_id'
+        } 
+
+        this.state.city_name !== null ? cityObj.city_name = this.state.city_name : cityObj.city_name = data.city_name
+
+        this.state.state !== null ? cityObj.state = this.state.state : cityObj.state = data.state
+
+        return cityObj
     }
 
 
