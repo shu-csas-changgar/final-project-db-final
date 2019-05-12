@@ -271,9 +271,46 @@ INSERT INTO location(address_id, name, phone_number) VALUES(
     "Building 3",
     "6996669999");
 INSERT INTO location(address_id, name, phone_number) VALUES(
-	(SELECT address_id FROM address WHERE address1 = "702 Shadowlawn Drive" AND city_id = (SELECT city_id FROM city WHERE city_name = "Westfield" AND state = "Illinois")),
-    "A Cool Building",
-    "8887776655");
+	(SELECT address_id FROM address WHERE address1 = "2 Hawaii Way" AND city_id = (SELECT city_id FROM city WHERE city_name = "Honolulu" AND state = "Hawaii")),
+    "Building 4",
+    "3453563445");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "15 This is Tedious" AND city_id = (SELECT city_id FROM city WHERE city_name = "Little Rock" AND state = "Arkansas")),
+    "Building 5",
+    "2018205444");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "32 Thanos is Bae" AND city_id = (SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona")),
+    "Building 6",
+    "9734445555");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "32 Thanos is Dead" AND city_id = (SELECT city_id FROM city WHERE city_name = "Montgomery" AND state = "Alabama")),
+    "Building 7",
+    "7324567890");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "1 Final Way" AND city_id = (SELECT city_id FROM city WHERE city_name = "Boise" AND state = "Idaho")),
+    "Building 8",
+    "3456545678");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "2 Phone Court" AND city_id = (SELECT city_id FROM city WHERE city_name = "Indianapolis" AND state = "Indiana")),
+    "Building 9",
+    "1235463544");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "3 Leave Street" AND city_id = (SELECT city_id FROM city WHERE city_name = "Des Moines" AND state = "Iowa")),
+    "Building 10",
+    "0987654758");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "5 Dog Drive" AND city_id = (SELECT city_id FROM city WHERE city_name = "Frankfort" AND state = "Kentucky")),
+    "Building 11",
+    "3928954733");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "6 Cat Court" AND city_id = (SELECT city_id FROM city WHERE city_name = "Baton Rouge" AND state = "Louisiana")),
+    "Building 12",
+    "0936475648");
+INSERT INTO location(address_id, name, phone_number) VALUES(
+	(SELECT address_id FROM address WHERE address1 = "7 Rat Street" AND city_id = (SELECT city_id FROM city WHERE city_name = "Augusta" AND state = "Maine")),
+    "Building 13",
+    "3445743222");
+
 -- -----------------------------------------------------
 -- Room
 -- -----------------------------------------------------
@@ -289,16 +326,74 @@ INSERT INTO room(room_number, floor, extension, location_id) VALUES ("20A", 20, 
 INSERT INTO room(room_number, floor, extension, location_id) VALUES ("13ZZ", 13, "898",
 	(SELECT location_id FROM location WHERE address_id = 
 		(SELECT address_id FROM address WHERE address1 = "400 S Orange Ave" AND city_id = (SELECT city_id FROM city WHERE city_name = "South Orange" AND state = "New Jersey"))));
+        INSERT INTO room(room_number, floor, extension, location_id) VALUES ("1B", 11, "111",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "1 Final Way" AND city_id = (SELECT city_id FROM city WHERE city_name = "Boise" AND state = "Idaho"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("2B", 22, "222",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "2 Phone Court" AND city_id = (SELECT city_id FROM city WHERE city_name = "Indianapolis" AND state = "Indiana"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("3B", 33, "333",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "3 Leave Street" AND city_id = (SELECT city_id FROM city WHERE city_name = "Des Moines" AND state = "Iowa"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("4B", 44, "444",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "5 Dog Drive" AND city_id = (SELECT city_id FROM city WHERE city_name = "Frankfort" AND state = "Kentucky"))));
+        
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("5B", 55, "555",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "6 Cat Court" AND city_id = (SELECT city_id FROM city WHERE city_name = "Baton Rouge" AND state = "Louisiana"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("6B", 66, "666",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "7 Rat Street" AND city_id = (SELECT city_id FROM city WHERE city_name = "Augusta" AND state = "Maine"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("7B", 77, "777",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "67 Pizza Way" AND city_id = (SELECT city_id FROM city WHERE city_name = "Denver" AND state = "Colorado"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("8B", 88, "888",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "34 Coca Cola Street" AND city_id = (SELECT city_id FROM city WHERE city_name = "Hartford" AND state = "Connecticut"))));
+        INSERT INTO room(room_number, floor, extension, location_id) VALUES ("9B", 99, "999",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "1 No Idea Court" AND city_id = (SELECT city_id FROM city WHERE city_name = "Dover" AND state = "Delaware"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("10B", 1010, "101010",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "321 Second Street" AND city_id = (SELECT city_id FROM city WHERE city_name = "Tallahassee" AND state = "Florida"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("11B", 1111, "111111",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "8 Dollar Street" AND city_id = (SELECT city_id FROM city WHERE city_name = "Annapolis" AND state = "Maryland"))));
+INSERT INTO room(room_number, floor, extension, location_id) VALUES ("12B", 1212, "121212",
+	(SELECT location_id FROM location WHERE address_id = 
+		(SELECT address_id FROM address WHERE address1 = "9 Cent Court" AND city_id = (SELECT city_id FROM city WHERE city_name = "Boston" AND state = "Massachusetts"))));
 
  
 -- -----------------------------------------------------
 -- Account
 -- -----------------------------------------------------
+INSERT INTO account(username, password) VALUES("a@abc.com", "password");
+INSERT INTO account(username, password) VALUES("b@abc.com", "password");
+INSERT INTO account(username, password) VALUES("c@abc.com", "password");
+INSERT INTO account(username, password) VALUES("d@abc.com", "password");
+INSERT INTO account(username, password) VALUES("e@abc.com", "password");
+INSERT INTO account(username, password) VALUES("f@abc.com", "password");
+INSERT INTO account(username, password) VALUES("g@abc.com", "password");
+INSERT INTO account(username, password) VALUES("h@abc.com", "password");
+INSERT INTO account(username, password) VALUES("i@abc.com", "password");
 INSERT INTO account(username, password) VALUES("j@abc.com", "password");
-INSERT INTO account(username, password) VALUES("s@abc.com", "password");
+INSERT INTO account(username, password) VALUES("k@abc.com", "password");
+INSERT INTO account(username, password) VALUES("l@abc.com", "password");
+INSERT INTO account(username, password) VALUES("m@abc.com", "password");
 INSERT INTO account(username, password) VALUES("n@abc.com", "password");
+INSERT INTO account(username, password) VALUES("o@abc.com", "password");
+INSERT INTO account(username, password) VALUES("p@abc.com", "password");
+INSERT INTO account(username, password) VALUES("q@abc.com", "password");
 INSERT INTO account(username, password) VALUES("r@abc.com", "password");
-
+INSERT INTO account(username, password) VALUES("s@abc.com", "password");
+INSERT INTO account(username, password) VALUES("t@abc.com", "password");
+INSERT INTO account(username, password) VALUES("u@abc.com", "password");
+INSERT INTO account(username, password) VALUES("v@abc.com", "password");
+INSERT INTO account(username, password) VALUES("w@abc.com", "password");
+INSERT INTO account(username, password) VALUES("x@abc.com", "password");
+INSERT INTO account(username, password) VALUES("y@abc.com", "password");
+INSERT INTO account(username, password) VALUES("z@abc.com", "password");
 -- -----------------------------------------------------
 -- Employee
 -- -----------------------------------------------------
@@ -306,7 +401,7 @@ INSERT INTO employee(first_name, last_name, email, address_id, cell_number, acco
 	(SELECT account_id FROM account WHERE username = "j@abc.com"));
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Nick", "DeGirolamo", "n@abc.com", 4, "9084567485",
 	(SELECT account_id FROM account WHERE username = "n@abc.com"));
-INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Ryan", "Salem ", "rj@abc.com", 6, "586432432132", 4);
+INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Ryan", "Salem ", "r@abc.com", 6, "586432432132", 4);
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Sash", "Mahashabde", "s@abc.com", 5, "9083708410", 2);
 
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number) VALUES ("TEST_FIRST", "TEST_LAST", "l@abc.com", 5, "9083708410");
