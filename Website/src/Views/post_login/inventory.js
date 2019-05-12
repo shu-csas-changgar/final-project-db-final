@@ -4,7 +4,7 @@ import CheckedTable from '../../Components/Tables/employeeTable'
 
 import Header from '../../Components/Datapage/header'
 import Control from '../../Components/AllPages/controller'
-import CreateModal from '../../Components/Modals/CreateModals/employeeCreate'
+import InventoryCreate from '../../Components/Modals/CreateModals/inventoryCreate'
 
 
 class Inventory extends Component{
@@ -83,9 +83,9 @@ class Inventory extends Component{
     }
 
      
-    createAddModal(){
+    inventoryCreate(){
         return(
-            <CreateModal
+            <InventoryCreate
             toggle={() => this.setState({showCreateModal: !this.state.showCreateModal})}
             showModal = {this.state.showCreateModal}
             body={this.state.modalBody}
@@ -118,6 +118,7 @@ class Inventory extends Component{
     }
 
     render(){
+        console.log(this.state.showCreateModal)
         return(
             <div>
                 <div >
@@ -182,7 +183,7 @@ class Inventory extends Component{
                         
                         <div className={`container ${this.state.showCreateModal ? 'modal-open' :''}`}>
                             {
-                                this.state.showCreateModal ? this.createAddModal() : null
+                                this.state.showCreateModal ? this.inventoryCreate() : null
                             }
                         </div>
                    
