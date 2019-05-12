@@ -24,7 +24,8 @@ exports.inventory_all = (req, res) => {
 }
 
 exports.inventory_company = (req, res) =>{
-    const sql = 'select * from equipment where equipment_id is null'
+    const sql = 'select eq.serial_number, eq.type_id , e.model_name from equipment join equipment eq   on eq.employee_id is null join equipment_type e  where e.type_id = equipment.type_id'
+        
 
     db.query(sql, (err, rows, fields)=>{
         if(err) console.log(err)
