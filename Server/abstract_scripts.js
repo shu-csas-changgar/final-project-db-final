@@ -47,6 +47,15 @@ exports.createQueries = (objArray) => {
             }
             sqlQueries.unshift(sqlObject)
         }
+        else if (obj.action === 'delete'){
+            const sql = remove(obj)
+            const sqlObject = {
+                type: 'select',
+                dependent: false,
+                sql: sql
+            }
+            sqlQueries.unshift(sqlObject)
+        }
     })
     return sqlQueries
 }
@@ -125,8 +134,26 @@ function updateQuery(obj) {
                 values += `${key} = ${db.escape(obj[key])}, `
             }
         })
-    var newValues = values.substring(0, values.length -2)
+    let newValues = values.substring(0, values.length -2)
     const sql = table + newValues + identifier
+    return sql
+}
+
+function remove(obj) {
+    let table = 'DELETE FROM  '
+    let values = `WHERE `
+    Object.keys(obj).forEach( key => {
+        if(key === 'table'){
+            table += `${obj[key]} `
+        }
+        else if (key === 'dataArray') {
+            obj[key].map( item => {
+                values += `employee_id = ${db.escape(item)} AND `
+            })
+        }
+    })
+    let newValues = values.substring(0, values.length -4)
+    const sql = table + newValues
     return sql
 }
 
@@ -150,8 +177,8 @@ function insertQuery(obj) {
             values += `${db.escape(obj[key])}, `
         }
     })
-    var newCols = cols.substring(0, cols.length -2) + ') '
-    var newValues = values.substring(0, values.length -2) + ')'
+    let newCols = cols.substring(0, cols.length -2) + ') '
+    let newValues = values.substring(0, values.length -2) + ')'
     const sql = table + newCols + newValues
     return sql
 }

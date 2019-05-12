@@ -26,6 +26,72 @@ exports.employee_credentials = (req, res) => {
     }
 }
 
+exports.employee_delete = ( req, res ) => {
+    const array = [req.body]
+    const query = abstractQueries.createQueries(array)
+    sql1 = 'SET FOREIGN_KEY_CHECKS=0'
+    sql2 = 'SET FOREIGN_KEY_CHECKS=1'
+
+    db.beginTransaction( err => {
+        if(err) { throw err }
+
+        db.query(sql1, (err, results, fields) => {
+            if(err) {
+                console.log(err)
+
+                return db.rollback( () =>  {
+                    res.status(400).send({
+                        success: 'false',
+                        error: err
+                    })
+                })
+            }
+            db.query(query[0].sql, (err, results, fields) => { 
+                if(err) {
+                    console.log(err)
+    
+                    return db.rollback( () =>  {
+                        res.status(400).send({
+                            success: 'false',
+                            error: err
+                        })
+                    })
+                }
+            })
+            db.query(sql2, (err, results, fields) => { 
+                if(err) {
+                    console.log(err)
+    
+                    return db.rollback( () =>  {
+                        res.status(400).send({
+                            success: 'false',
+                            error: err
+                        })
+                    })
+                }
+            })
+
+
+
+        })
+        db.commit( err => {
+            if(err) {
+                console.log("here at the other error ------------------")
+                return db.rollback( () => {
+                    res.status(400).send({
+                        success: 'false',
+                        error: err
+                    })
+                })
+            }
+            console.log("success")
+            res.status(200).send({
+                success: 'true'
+            })
+        })
+    })
+}
+
 
 exports.employee_equipment = (req, res) => {
     if(req.body.id === null) res.status(400).send({
@@ -67,6 +133,33 @@ exports.employee_name = (req, res) => {
     }
 }
 
+exports.employee_check = (req, res) => {
+    const array = [req.body]
+    const query = abstractQueries.createQueries(array)
+
+
+    db.query(query[0], (err, rows, fields)=> {
+        if(err){
+            console.log(err)
+            res.status(200).send({
+                success: 'false'
+            })
+        } else if (rows.length === 0){
+            res.status(200).send({
+                success: 'false',
+                info: rows
+            })
+        }
+        else {
+            console.log(rows)
+            res.status(200).send({
+                success: 'true',
+                info: rows
+            })
+        }
+    })
+}
+
 
 
 exports.employee_address_check = (req, res) => {
@@ -96,6 +189,27 @@ exports.employee_address_check = (req, res) => {
     })
 }
 
+exports.employee_name_check = (req, res) => {
+    sql = 'SELECT email FROM employee WHERE employee_email = ?'
+
+    db.query(sql,[req.body], (err, rows, fields)=> {
+        if(err) console.log(err)
+        else if(rows.length === 0 ){
+            console.log(rows)
+            res.status(400).send({
+                success: 'false'
+
+            })
+        } else{
+            res.status(200).send({
+                success: 'true',
+                info: rows
+            })
+        }
+    })
+
+}
+
 exports.employee_all = (req, res) => {
     //Select all employee information
     const sql = 'SELECT e.employee_id, e.first_name, e.last_name, e.email, a.address_id, a.address1, a.address2, a.county, a.postal_code, c.city_id, c.city_name, c.state, co.country_name, e.cell_number FROM employee e JOIN address a ON e.address_id = a.address_id JOIN city c ON c.city_id = a.city_id JOIN country co ON c.country_id = co.country_id'
@@ -118,8 +232,8 @@ exports.employee_all = (req, res) => {
 }
 
 exports.employee_update = (req, res) => {
-
-    const queries = abstractQueries.createQueries(req.body)
+    const array = [req.body]
+    const queries = abstractQueries.createQueries(array)
     db.beginTransaction( err => {
         if(err) { throw err }
 

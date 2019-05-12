@@ -281,7 +281,7 @@ class InfoModal extends Component {
         })
         .then( res=> res.json())
         .catch( err => {console.log(`There was an error send the data: ${err}`)})
-}
+    }
 
     /**
      * When given an array of City, Address, and Employee objects, this function will add the objects to the database.

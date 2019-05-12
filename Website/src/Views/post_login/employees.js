@@ -16,6 +16,7 @@ class Employee extends Component{
             selectedRow: null,
             showCreateModal: false,
             showInfoModal: false,
+            checkArray: []
         }
         this.handler = this.handler.bind(this)
         this.rowClick = this.rowClick.bind(this)
@@ -24,9 +25,7 @@ class Employee extends Component{
 
     componentDidMount(){
         this.fetchData()
-        
     }
-
 
     fetchData(){
         fetch('/database/employee/all')
@@ -60,6 +59,7 @@ class Employee extends Component{
                 showModal={this.state.showCreateModal}
                 body={this.state.modalBody}
                 header={this.state.modalHeader}
+                updateOccurred = {this.fetchData}
             />
         )
     }
@@ -96,9 +96,21 @@ class Employee extends Component{
 
     rowClick(event){
        const id = parseInt(event.currentTarget.id)
+       console.log(id)
        if(event.target.type === 'checkbox') {
+        const options = this.state.checkArray
+        let index
+        if (event.target.checked) {
+            // add the numerical value of the checkbox to options array
+            options.push(id)
+          } else {
+            // or remove the value from the unchecked checkbox from the array
+            index = options.indexOf(id)
+            options.splice(index, 1)
+          }
         this.setState({
             selectedRow: id,
+            checkArray: options
         })
        } else {
         this.setState({
@@ -110,6 +122,8 @@ class Employee extends Component{
     }
 
     render() {
+        console.log(this.state.checkArray)
+
         return(
             <div>
                 <div >
@@ -125,6 +139,8 @@ class Employee extends Component{
                         <Control
                             action={this.handler}
                             create={this.props.showCreateModal}
+                            delete={this.state.checkArray}
+                            deleteTable='employee'
                         />
                     <div className ="flex-row mt-3"  style={{paddingBottom:"10px"}} >
                         <div className ='container' id='cont1'>
@@ -134,8 +150,7 @@ class Employee extends Component{
                                     headers = {["","First Name", "Last Name", "Email", "Address", "City", "State", "Cell Number"]}
                                     fullData ={this.state.fullData}
                                     body={this.state.tableData}
-                                    onClick = {this.rowClick}
-                                    
+                                    onClick = {this.rowClick}                                    
                                 />
                             </div>
                         </div>

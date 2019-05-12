@@ -54,6 +54,7 @@ class Address extends Component{
     handleChange(event){
         const value =event.target.value
         const name = event.target.name
+        this.props.action(name, value)
         this.setState({
             [name]: value
         })
@@ -82,6 +83,7 @@ class Address extends Component{
     }
 
     render(){
+        console.log(this.props)
         // Constant to hold the states array
         const s = this.renderStates(this.state.cityStateMap)
         // Constant to hold the cities array
@@ -93,7 +95,7 @@ class Address extends Component{
                 <div className="form-row">
                     <div className="form-group col-md-12">
                         <label htmlFor="inputCity">* Address</label>
-                        <input type="text" name='address' onChange={this.handleChange} className="form-control"  placeholder="1234 Main St" required/>
+                        <input type="text" name='address1' onChange={this.handleChange} className="form-control"  placeholder="1234 Main St" required/>
                     </div>
                     <div className="form-group col-md-12">
                         <label htmlFor="inputCity">Address 2</label>
@@ -127,7 +129,7 @@ class Address extends Component{
                     </div>
                     <div className="form-group col-md-2">
                         <label htmlFor="inputZip">* Zip</label>
-                        <input type="text" name="postal" onChange={this.handleChange} disabled={this.state.state !== "" ? false : true} className="form-control" id="inputZip" required/>
+                        <input type="text" name="postal_code" onChange={this.handleChange} disabled={this.state.state !== "" ? false : true} className="form-control" id="inputZip" required/>
                     </div>
 
                     <div className="form-group col-md-4">
