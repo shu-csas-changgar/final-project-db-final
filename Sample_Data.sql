@@ -102,7 +102,7 @@ INSERT INTO employee(first_name, last_name, email, address_id, cell_number, acco
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Nick", "DeGirolamo", "n@abc.com", 4, "9084567485",
 	(SELECT account_id FROM account WHERE username = "n@abc.com"));
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Ryan", "Salem ", "rj@abc.com", 6, "586432432132", 4);
-INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Sash", "Mahashabde", "s@abc.com", 5, "9083708410", 2);
+INSERT INTO employee(first_name, last_name, email, address_id, cell_number, account_id) VALUES ("Sach", "Mahashabde", "s@abc.com", 5, "9083708410", 2);
 
 INSERT INTO employee(first_name, last_name, email, address_id, cell_number) VALUES ("TEST_FIRST", "TEST_LAST", "l@abc.com", 5, "9083708410");
 

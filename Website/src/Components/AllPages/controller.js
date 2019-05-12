@@ -10,6 +10,7 @@ class Create extends Component {
         this.handleClick = this.handleClick.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
         this.createDelete = this.createDelete.bind(this)
+        
         this.createIcon = <FontAwesomeIcon icon={faPlus} transform="right-5"/>
         this.trashIcon = <FontAwesomeIcon icon={faTrashAlt} transform="right-5"/>
     }
@@ -29,6 +30,7 @@ class Create extends Component {
             this.sendAndFetch(obj).then( data => {
                 if(data.success === 'true') {
                     console.log('success')
+                    this.props.updateOccurred()
                 } else {
                     console.log('NOOOOOOOOOOOOOOOOOOO')
                 }
