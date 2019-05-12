@@ -5,6 +5,7 @@ class navbar extends Component {
 
     render() {
         const link = "#"
+        console.log(this.props.history)
         return(
           <Router>
             <div>

@@ -24,8 +24,7 @@ exports.inventory_all = (req, res) => {
 }
 
 exports.inventory_company = (req, res) =>{
-    const sql = 'select eq.serial_number, eq.type_id , e.model_name from equipment join equipment eq   on eq.employee_id is null join equipment_type e  where e.type_id = equipment.type_id'
-        
+    const sql = 'SELECT t.model_name, e.serial_number, c.category, e.equiptment_id FROM equipment e JOIN equipment_type t ON t.type_id = e.type_id JOIN category c ON t.category_id = c.category_id WHERE e.employee_id  IS NULL ORDER BY c.category_id ASC'
 
     db.query(sql, (err, rows, fields)=>{
         if(err) console.log(err)
