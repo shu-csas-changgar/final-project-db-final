@@ -134,7 +134,13 @@ class Inventory extends Component{
                             action={this.handler}
                             create={this.props.showCreateModal}
                         />
-                        
+                    <hr/>
+                    <div className='flex-row mt-3' style={{paddingBottom: "10px"}}>
+                        <div className = 'd-flex align-content-center'> 
+                            <h2> <strong> Employee Inventory</strong> </h2>
+
+                            </div>
+                    </div>
 
                     <div className ="flex-row mt-3"  style={{paddingBottom:"10px"}}>
                         <div className ='container' id='cont1'>
@@ -152,14 +158,8 @@ class Inventory extends Component{
                     <hr />
                     <div className='flex-row mt-3' style={{paddingBottom: '10px'}}>
                         <div className='d-flex justify-content-center'>
-                        <h3> Company Inventory </h3>
+                        <h2> <strong>Company Inventory</strong> </h2>
                         </div>
-                        
-
-
- 
-
-
                     </div>
                     <div className='flex-row mt-3' style={{paddingBottom: '10px'}}>
                         <div className ='container' id='cont2'>
@@ -171,14 +171,12 @@ class Inventory extends Component{
                                     body={this.state.table2Data}
                                     onClick = {this.rowClick}
                                 />
-                            
-                            
                             </div>
                         
                         
                         
                         
-                        </div>
+                         </div>
                     
                     </div>
                         
@@ -187,8 +185,11 @@ class Inventory extends Component{
                                 this.state.showCreateModal ? this.createAddModal() : null
                             }
                         </div>
+                   
+                        </div>   
                     </div>
-                </div>   
+                    
+               
             
         )
                 
