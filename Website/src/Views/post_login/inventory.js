@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Navbar from '../../Components/Datapage/navbar'
 import CheckedTable from '../../Components/Tables/employeeTable'
+
 import Header from '../../Components/Datapage/header'
 import Control from '../../Components/AllPages/controller'
 import CreateModal from '../../Components/Modals/CreateModals/employeeCreate'
@@ -11,7 +12,10 @@ class Inventory extends Component{
     constructor(){
         super()
         this.state ={
-            tableData:[], fullData: [], 
+            table1Data:[], 
+            table2Data:[],
+            fullData: [],
+            empData: [], 
             selectedRow: null, 
             showCreateModal: false,
             showInfoModal: false
@@ -26,14 +30,24 @@ class Inventory extends Component{
         this.fetchData()
     }
 
+    
+
     fetchData(){
-        console.log('eat my ass')
-        fetch('/database/inventory/all')
-        .then( res => {return res.status === 200 ? res.json() : "Invalid"})
-        .then( data => {
-            if(data === 'Invalid') console.log('butts')
+
+        Promise.all([
+            fetch('/database/inventory/all'),
+            fetch('/database/inventory/company')
+        ])
+       
+       
+        .then( (res) => Promise.all(res.map(res => (res.status === 200 ? res.json() : "Invalid"))))
+        .then(([r1, r2]) => {
+
+            let table1Data = []
+            let table2Data = []
+            if(r1 === 'Invalid') console.log('butts')
             else{
-                const tableData = data.info.map( obj => {
+                table1Data = r1.info.map( obj => {
                     return({
                         model_name: obj.model_name,
                         serial_number: obj.serial_number,
@@ -43,14 +57,32 @@ class Inventory extends Component{
                     })
                 })
 
-                this.setState({
-                    tableData: tableData,
-                    fullData: data.info
+               
+            }
+            if (r2 === 'invalid') console.log('invalid')
+            else{
+                table2Data = r2.info.map( obj =>{
+                    return({
+                        model_name: obj.model_name,
+                        serial_number: obj.serial_number,
+
+                    })
                 })
             }
+
+            this.setState({
+
+                table1Data: table1Data,
+                table2Data: table2Data,
+                empData: r1.info,
+                fullData: r2.info
+
+
+            })
         })
     }
 
+     
     createAddModal(){
         return(
             <CreateModal
@@ -102,6 +134,7 @@ class Inventory extends Component{
                             action={this.handler}
                             create={this.props.showCreateModal}
                         />
+                        
 
                     <div className ="flex-row mt-3"  style={{paddingBottom:"10px"}}>
                         <div className ='container' id='cont1'>
@@ -109,12 +142,45 @@ class Inventory extends Component{
                                 <CheckedTable
                                     tableType='table table-hover'
                                     headers = {["","Model Name", "Serial Number", "First Name", "Last Name"]}
-                                    fullData ={this.state.fullData}
-                                    body={this.state.tableData}
+                                    fullData ={this.state.empData}
+                                    body={this.state.table1Data}
                                     onClick = {this.rowClick}
                                 />
                             </div>                            
                         </div>
+                    </div>
+                    <hr />
+                    <div className='flex-row mt-3' style={{paddingBottom: '10px'}}>
+                        <div className='d-flex justify-content-center'>
+                        <h3> Company Inventory </h3>
+                        </div>
+                        
+
+
+ 
+
+
+                    </div>
+                    <div className='flex-row mt-3' style={{paddingBottom: '10px'}}>
+                        <div className ='container' id='cont2'>
+                            <div className= "table-responsive">
+                                <CheckedTable
+                                    tableType='table table-hover'
+                                    headers ={["",'Model Name', 'Model Number']}
+                                    fullData ={this.state.fullData}
+                                    body={this.state.table2Data}
+                                    onClick = {this.rowClick}
+                                />
+                            
+                            
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                    
+                    </div>
                         
                         <div className={`container ${this.state.showCreateModal ? 'modal-open' :''}`}>
                             {
@@ -123,7 +189,7 @@ class Inventory extends Component{
                         </div>
                     </div>
                 </div>   
-            </div>
+            
         )
                 
 
