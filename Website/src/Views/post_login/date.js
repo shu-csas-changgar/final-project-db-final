@@ -5,7 +5,7 @@ class DateFormatt {
         const months =['Jan.','Feb.','Mar.','May.','Jun.','Jul.','Aug.','Sept.','Oct.','Nov.','Dec.',]
         return weekdays[aDate.getDay()] + ', ' + months[aDate.getMonth()] + " " + aDate.getDay()
     }
-
+   
     static startToEnd = (startTime, endTime) => {
         const reformatt = time =>{
             let mins = ('0'+time.getMinutes()).slice(-2)

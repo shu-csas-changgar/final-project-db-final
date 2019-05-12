@@ -45,17 +45,24 @@ select v.company_name, v.vendor_id, t.cost, t.purchase_date, t.end_date, t.end_d
 from vendor v, transaction t
 where v.company_name = "Vender 1";
 
-select * from equipment;
+select * from equipment where employee_id is null;
 
 #For all equipment, return the item name, serial number, location(if applies) ,
 # employee name(if applies),and lease end date. If there is a location, return the address and room number.
-SELECT e.equiptment_id, e.serial_number, t.model_name, e.employee_id
+SELECT e.equiptment_id, e.serial_number, t.model_name, e.employee_id, em.first_name, em.last_name
 FROM equipment e
 JOIN equipment_type t
 	on e.type_id = t.type_id
 join employee em
 	on em.employee_id = e.employee_id;
+	
 
+SELECT e.equiptment_id, e.serial_number, t.model_name, e.employee_id
+FROM equipment e
+JOIN equipment_type t
+	on e.type_id = t.type_id
+where e.employee_id = null;
+	
 
 
 select et.model_name, et.model_number, e.location_id, emp.first_name, emp.last_name, lo.address_id, r.room_number
@@ -106,6 +113,16 @@ limit 7;
 
 #
 
+select e.transaction_id, t.vendor_id, t.cost, t.purchase_date, t.begin_date, t.end_date, v.company_name, eq.model_number
+from transaction t
+join equipment e
+	on t.transaction_id = e.transaction_id
+join vendor v
+	on t.vendor_id = v.vendor_id
+join equipment_type eq
+	on e.type_id = eq.type_id;
+
+	
 
 
 -- -----------------------------------------------------
