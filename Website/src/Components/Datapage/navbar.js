@@ -13,10 +13,10 @@ class navbar extends Component {
                         <a className={`nav-link ${this.props.home? "active" : null}`} onClick={()=>{this.props.history.push("/database")}} href={link}>Home</a>
                     </li>
                     <li className="nav-item">
-                        <a className={`nav-link ${this.props.inventory? "active" : null}`} onClick={()=>{this.props.history.push("/database/inventory")}} href={link}>Inventory</a>
+                        <a className={`nav-link ${this.props.inventory? "active" : null}`} onClick={()=>{this.props.history.push("database/inventory")}} href={link}>Inventory</a>
                     </li>
                     <li className="nav-item">
-                        <a className={`nav-link ${this.props.reservations? "active" : null}`} onClick={()=>{this.props.history.push("/database/reservations")}}  href={link}>Reservations</a>
+                        <a className={`nav-link ${this.props.reservations? "active" : null}`} onClick={()=>{this.props.history.push("database/reservations")}}  href={link}>Addresses</a>
                     </li>
                     <li className="nav-item">
                         <a className={`nav-link ${this.props.employees? "active" : null}`} onClick={()=>{this.props.history.push("database/employees")}} href={link}>Employees</a>
