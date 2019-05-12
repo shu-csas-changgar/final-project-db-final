@@ -70,6 +70,7 @@ exports.employee_name = (req, res) => {
 
 
 exports.employee_address_check = (req, res) => {
+
     const array = [req.body]
     const query = abstractQueries.createQueries(array)
 
@@ -86,6 +87,7 @@ exports.employee_address_check = (req, res) => {
             })
         }
         else {
+            console.log(rows)
             res.status(200).send({
                 success: 'true',
                 info: rows
@@ -118,8 +120,6 @@ exports.employee_all = (req, res) => {
 exports.employee_update = (req, res) => {
 
     const queries = abstractQueries.createQueries(req.body)
-
-    console.log(queries)
     db.beginTransaction( err => {
         if(err) { throw err }
 
@@ -127,7 +127,8 @@ exports.employee_update = (req, res) => {
             if(err) {
                 return db.rollback( () =>  {
                     res.status(400).send({
-                        success: 'false'
+                        success: 'false',
+                        error: err
                     })
                 })
             }
@@ -138,10 +139,12 @@ exports.employee_update = (req, res) => {
                     if(err) {
                         return db.rollback( () => {
                             res.status(400).send({
-                                success: 'false'
+                                success: 'false',
+                                error: err
                             })
                         })
                     }
+                    x = results.insertId
                 })
             }
 
@@ -149,7 +152,8 @@ exports.employee_update = (req, res) => {
                 if(err) {
                     return db.rollback( () => {
                         res.status(400).send({
-                            success: 'false'
+                            success: 'false',
+                            error: err
                         })
                     })
                 }
@@ -161,39 +165,61 @@ exports.employee_update = (req, res) => {
         })
     })
 }
-/*
-if(obj.dependent === false && obj.type === 'insert') {
-    db.query(obj.sql, (err , results, fields) => {
-        if(err) {
-            return db.rollback( () => {
-                throw err
-            })
-        }
-        id = results.insertId
-        //console.log("id is " + results.insertId)
-    })
-}
 
-else if (obj.dependent === true) {
-    //console.log("here " + id)
-    db.query(obj.sql, [id], (err, results, fields) => {
-        if(err) {
-            return db.rollback( () => {
-                throw err
+exports.allUpdate = (req, res) => {
+
+    const queries = abstractQueries.createQueries(req.body)
+
+    db.beginTransaction( err => {
+        if(err) { throw err }
+
+        db.query(queries[0].sql, (err, results, fields) => {
+            if(err) {
+                return db.rollback( () =>  {
+                    res.status(400).send({
+                        success: 'false',
+                        error: err
+                    })
+                })
+            }
+            let x = results.insertId
+
+            db.query(queries[1].sql, [x], (err , results, fields) => {
+                if(err) {
+                    return db.rollback( () => {
+                        res.status(400).send({
+                            success: 'false',
+                            error: err
+                        })
+                    })
+                }
+                x = results.insertId
+                db.query(queries[2].sql, [x], (err , results, fields) => {
+                    if(err) {
+                        return db.rollback( () => {
+                            res.status(400).send({
+                                success: 'false',
+                                error: err
+                            })
+                        })
+                    }                
+                })
             })
-        }
+
+            db.commit( err => {
+                if(err) {
+                    return db.rollback( () => {
+                        res.status(400).send({
+                            success: 'false',
+                            error: err
+                        })
+                    })
+                }
+                console.log("success")
+                res.status(200).send({
+                    success: 'true'
+                })
+            })
+        })
     })
 }
-})
-db.commit( err => {
-if(err) {
-    return db.rollback( () => {
-        throw err
-    })
-}
-console.log("success")
-res.status(200).send({
-    success: 'true'
-})
-})
-*/

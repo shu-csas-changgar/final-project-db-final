@@ -29,7 +29,6 @@ class Employee extends Component{
 
 
     fetchData(){
-        console.log('hersadkflkjdsahe')
         fetch('/database/employee/all')
         .then( res =>{ return res.status === 200 ? res.json() : "Invalid"})
         .then( data => {  
@@ -89,7 +88,6 @@ class Employee extends Component{
     }
 
     handler(key) {
-        console.log(key)
         this.setState({
             [key]: [!this.state.key]
         })

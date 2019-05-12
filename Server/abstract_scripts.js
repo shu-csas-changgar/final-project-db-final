@@ -12,7 +12,6 @@ exports.createQueries = (objArray) => {
     objArray.map( obj => {
         if(obj.action === 'update') {
             const sql = updateQuery(obj)
-            console.log(obj.id)
             const s = obj.id !== null ? true : false
             const sqlObject = {
                 type: 'update',
@@ -82,7 +81,14 @@ function selectIdQuery(obj){
         if (key === 'table') {
             table += `${obj[key]} `
         }
+        
         else if(key === 'id'){
+            Object.keys(obj[key]).forEach( key2 => {
+                where += `${key2} ${obj[key][key2] === null? 'IS NULL ' : ' =' + db.escape(obj[key][key2])} AND `
+            })
+        }
+
+        else if(key === 'selectId'){
             select += `${obj[key]} `
         }
         else if (key !== 'action' && key !== 'id' && key !== 'type') {
@@ -121,7 +127,6 @@ function updateQuery(obj) {
         })
     var newValues = values.substring(0, values.length -2)
     const sql = table + newValues + identifier
-    console.log(sql)
     return sql
 }
 
@@ -133,7 +138,14 @@ function insertQuery(obj) {
         if(key === 'table') {
             table+= `${obj[key]}`
         }
-        else if( key != 'action' && key != 'type') {
+        else if (key === 'id') {
+            Object.keys(obj[key]).forEach( key2 => {
+                cols += `${key2}, `
+                values += `${obj[key][key2]}, `
+            })
+        }
+        
+        else if( key != 'action' && key != 'type' && key !== 'id') {
             cols += `${key}, `
             values += `${db.escape(obj[key])}, `
         }

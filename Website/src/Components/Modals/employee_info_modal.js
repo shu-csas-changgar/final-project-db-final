@@ -64,6 +64,10 @@ class InfoModal extends Component {
         this.props.toggle()
     }
 
+    /**
+     * When called this function sets all the input fields for the modal to be editable
+     * @param {Javascript event} event the event passed with the function call 
+     */
     changeDisabled(event){
         event.preventDefault()
         this.setState({
@@ -72,6 +76,10 @@ class InfoModal extends Component {
         })
     }
 
+    /**
+     * handles all changes in the input fields. These changes are used to update the react state variables
+     * @param {Javascipt event} event the event passed with the function call 
+     */
     handleChange(event){
         let value =event.target.value
         if(value === "") value = null
@@ -82,6 +90,11 @@ class InfoModal extends Component {
     }
     
     
+    /**
+     * Handles the submission of the modal. Will construct the approperate queries for the server based on the
+     * modal fields that were filled in
+     * @param {Javascript event} event 
+     */
     handleSubmit(event){
         event.preventDefault()
         
@@ -94,38 +107,84 @@ class InfoModal extends Component {
         }
         // create the data to send to the server
         else{
+
             let fetchArray = []
-            let city = null
+
             // Check if the city or state field was updated
             if (this.state.city_name !== null || this.state.state !== null) {
 
-                const data = this.cityUpdate('selectId', false)
-                this.checkCity(data).then (data => {
+                const citydata = this.cityUpdate('selectId', false)
+                // Check if the city already exists
+                this.checkCity(citydata).then (data => {
+
+                    // It exists
                     if(data.success === 'true') {
-                        console.log(data.info[0].city_id)
-                        city = data.info[0].city_id
-                    } else {
+                   
+                        //Check address
+                        this.checkAddress(this.addressUpdate("selectId", false, data.info[0])).then (data2 => {
+                            // if the address exists
+                            if(data2.success === 'true'){
+                                fetchArray.push(this.employeeUpdate('update', false, data2.info[0]))
+                                this.sendAndFetch(fetchArray).then(data => {
+                                    if(data2.success === 'true'){
+                                        this.dismissModal()
+                                        this.props.updateOccurred()
+                                    } else {
+                                        console.log(data2.error)
+                                    }
+                                })
+                            }
+
+                            // Address doesnt exist
+                            else {
+                                fetchArray.push(this.employeeUpdate('update', true))
+                                fetchArray.push(this.addressUpdate('insert', false, data.info[0]))
+                                this.sendAndFetch(fetchArray).then(data => {
+                                    if(data.success === 'true'){
+                                        this.dismissModal()
+                                        this.props.updateOccurred()
+                                    } else {
+                                        console.log(data.error)
+                                    }
+                                })
+                            } 
+                        })
+                    }
+
+                    // City doesnt exist
+                    else {
+                        fetchArray.push(this.employeeUpdate('update', true))
+                        fetchArray.push(this.addressUpdate('insert', true))
                         fetchArray.push(this.cityUpdate('insert'))
+                        
+                        this.sendAndFetch2(fetchArray).then(data => {
+                            if(data.success === 'true'){
+                                this.dismissModal()
+                                this.props.updateOccurred()
+                            } else {
+                                console.log(data.error)
+                            }
+                        })
                     }
                 })
+                .catch( (err => {console.log(err)}))
             }
             
-            if (this.state.address1 !== null || this.state.address2 !== null || this.state.country !== null || this.state.postal_code !== null) {
+            else if (this.state.address1 !== null || this.state.address2 !== null || this.state.country !== null || this.state.postal_code !== null) {
                 
-                const data = this.addressUpdate('selectId')
+                const data = this.addressUpdate('selectId', false)
                 this.checkAddress(data).then( data => {
 
                     // Address already exists.
                     // we will just update the employee address id to the existing one
                     if(data.success === 'true'){
-                        console.log(data.info[0].address_id)
                         fetchArray.push(this.employeeUpdate('update', false, data.info[0]))
                         this.sendAndFetch(fetchArray).then(data => {
                             if(data.success === 'true'){
                                 this.dismissModal()
                                 this.props.updateOccurred()
                             } else {
-                                console.log('error') 
+                                console.log(data.error)
                             }
                         })
                     }
@@ -136,13 +195,11 @@ class InfoModal extends Component {
                         if (this.state.first_name !== null || this.state.last_name !== null || this.state.email !== null || this.state.cell_number !== null){
                             const query1 = this.employeeUpdate('update', true)
                             fetchArray.push(query1)
-                            const query2 = this.addressUpdate('insert')
+                            const query2 = this.addressUpdate('insert', false)
                             fetchArray.push(query2)
-                            console.log("here")
 
                             this.sendAndFetch(fetchArray).then(data => {
                                 if(data.success === 'true'){
-                                    console.log('Success')
                                     this.dismissModal()
                                     this.props.updateOccurred()
                 
@@ -154,20 +211,37 @@ class InfoModal extends Component {
 
                         // Just address field was updated so we need to update the address and then the employees address id on the newly created address
                         else {
-                            const query = this.addressUpdate('insert')
+                            const query2 = this.employeeUpdate('update', true)
+                            fetchArray.push(query2)
+                            const query1 = this.addressUpdate('insert', false)
+                            fetchArray.push(query1)
+                         
 
-
+                            this.sendAndFetch(fetchArray).then(data => {
+                                if(data.success === 'true'){
+                                    this.dismissModal()
+                                    this.props.updateOccurred()
+                
+                                } else {
+                                    console.log(data.error) 
+                                }
+                            })
                         }
-                       
                     }
                 })
-                .catch (err => {console.log(`There was an error send the data: ${err}`)})
-                
-               
+                .catch (err => {console.log(`There was an error send the data: ${err}`)})  
             }
             else if (this.state.first_name !== null || this.state.last_name !== null || this.state.email !== null || this.state.cell_number !== null) {
-                console.log("employee updated")
                 fetchArray.push(this.employeeUpdate('update'))
+                this.sendAndFetch(fetchArray).then(data => {
+                    if(data.success === 'true'){
+                        this.dismissModal()
+                        this.props.updateOccurred()
+    
+                    } else {
+                        console.log(data.error) 
+                    }
+                })
             }
             else {
                 this.setState({
@@ -177,6 +251,10 @@ class InfoModal extends Component {
         }
     }
 
+    /**
+     * Sends a fetch request to the database to check whether the city the user inputed exists
+     * @param {City Object} obj 
+     */
     checkCity(obj) {
         return fetch('/database/cities/check', {
             method: "POST",
@@ -189,6 +267,10 @@ class InfoModal extends Component {
         .catch( err => {console.log(`There was an error send the data: ${err}`)})
     }
 
+    /**
+     * Sends a fetch request to the database to check whether the address the user inputed exists
+     * @param {Address Object} obj 
+     */
     checkAddress(obj){
         return fetch('/database/employee/address/check', {
             method: "POST",
@@ -201,6 +283,11 @@ class InfoModal extends Component {
         .catch( err => {console.log(`There was an error send the data: ${err}`)})
 }
 
+    /**
+     * When given an array of City, Address, and Employee objects, this function will add the objects to the database.
+     * It will throw an error if part of the query could not be completed
+     * @param {Array of City, Address, and Employee objects} objArray 
+     */
     sendAndFetch(objArray) {
         return fetch('/database/employee/update', {
             method: "POST",
@@ -214,8 +301,25 @@ class InfoModal extends Component {
     }
 
     /**
+     * When given an array of City, Address, and Employee objects, this function will add the objects to the database.
+     * It will throw an error if part of the query could not be completed
+     * @param {Array of City, Address, and Employee objects} objArray 
+     */
+    sendAndFetch2(objArray) {
+        return fetch('/database/employee/all', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objArray)
+        })
+        .then( res => res.json())
+        .catch(err => {console.log(`There was an error send the data: ${err}`)})
+    }
+
+    /**
      * Creates a new object that has all the values of the fields that were changed in the employee update
-     * @returns an object that contains the data for the fetch
+     * @returns an Employee object that contains the data for the fetch
      */
     employeeUpdate(action, dependent, ...other) {
         let employeeObj = {
@@ -249,7 +353,11 @@ class InfoModal extends Component {
         return employeeObj
     }
 
-    addressUpdate(action) {
+    /**
+     * Creates a new object that has all the values of the fields that were changed in the address update
+     * @returns an Address object that contains the data for the fetch
+     */
+    addressUpdate(action, dependent, ...other) {
         const data = this.props.bodyData
 
         let addressObj = {
@@ -258,8 +366,18 @@ class InfoModal extends Component {
             type: 'child'
         }
 
+        other.map( obj => {
+            if(obj.hasOwnProperty('city_id')) {
+                addressObj.id = {city_id: other[0].city_id}
+            }  
+        })
+
+        if (dependent) {
+            addressObj.id = {city_id: '?'}
+        }
+
         if(action === 'selectId') {
-            addressObj.id = 'address_id'
+            addressObj.selectId = 'address_id'
         } 
         
         this.state.address1 !== null ? addressObj.address1 = this.state.address1 : addressObj.address1 = data.address1
@@ -275,16 +393,21 @@ class InfoModal extends Component {
         return addressObj
     }
 
+    /**
+     * Creates a new object that has all the values of the fields that were changed in the city update
+     * @returns a City object that contains the data for the fetch
+     */
     cityUpdate(action, dependent) {
         const data = this.props.bodyData
         let cityObj = {
             table: 'city',
             action: action,
-            type: 'child'
+            type: 'child',
+            country_id: 2
         }
 
         if(action === 'selectId') {
-            cityObj.id = 'city_id'
+            cityObj.selectId = 'city_id'
         } 
 
         this.state.city_name !== null ? cityObj.city_name = this.state.city_name : cityObj.city_name = data.city_name
@@ -294,8 +417,9 @@ class InfoModal extends Component {
         return cityObj
     }
 
-
-
+    /**
+     * Error message to be rendered at bottom of modal if something is wrong
+     */
     renderErrorMessage(){
         return(
             <formError />
