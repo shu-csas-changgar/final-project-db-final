@@ -319,7 +319,6 @@ class CreateEmployee extends Component {
             </div>
         )
     }
-
 }
 
 export default CreateEmployee

@@ -27,7 +27,7 @@ class Create extends Component {
             let obj = this.createDelete(this.props.delete)
             console.log(obj)
 
-            this.sendAndFetch(obj).then( data => {
+            this.props.sendAndFetch(obj).then( data => {
                 if(data.success === 'true') {
                     console.log('success')
                     this.props.updateOccurred()
@@ -39,9 +39,11 @@ class Create extends Component {
     }
 
     createDelete(dataArray) {
+        console.log(this.props.deleteTable)
         let deleteObj = {
             table: this.props.deleteTable,
-            action: 'delete',            
+            action: 'delete',
+            deleteId: this.props.deleteId,           
             dataArray
         }
         return deleteObj

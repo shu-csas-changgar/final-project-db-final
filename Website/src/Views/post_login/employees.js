@@ -64,6 +64,23 @@ class Employee extends Component{
         )
     }
 
+    /**
+     * When given an array of City, Address, and Employee objects, this function will add the objects to the database.
+     * It will throw an error if part of the query could not be completed
+     * @param {An array of items to delete} objArray 
+     */
+    sendAndFetch(objArray) {
+        return fetch('/database/employee/delete', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objArray)
+        })
+        .then( res => res.json())
+        .catch(err => {console.log(`There was an error send the data: ${err}`)})
+    }
+
     createInfoModal() {
         
         /**
@@ -140,6 +157,8 @@ class Employee extends Component{
                             delete={this.state.checkArray}
                             deleteTable='employee'
                             updateOccurred = {this.fetchData}
+                            sendAndFetch = {this.sendAndFetch}
+                            deleteId = 'employee_id'
                         />
                     <div className ="flex-row mt-3"  style={{paddingBottom:"10px"}} >
                         <div className ='container' id='cont1'>

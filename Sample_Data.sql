@@ -182,7 +182,7 @@ INSERT INTO address(address1, county, postal_code, city_id) VALUES ("1000 Who Gi
 	(SELECT city_id FROM city WHERE city_name = "Pittsburgh" AND state = "Pennsylvania"));
 INSERT INTO address(address1, county, postal_code, city_id) VALUES ("420 Weed Dr", "Stoner", "545682",
 	(SELECT city_id FROM city WHERE city_name = "New York" AND state = "New York"));
-INSERT INTO address(address1, county, postal_code, city_id) VALUES ("32 Thanos is Bae", "Bradford", "384764",
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("34 Thanos is Bae", "Bradford", "384764",
 	(SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona"));
 INSERT INTO address(address1, county, postal_code, city_id) VALUES ("32 Thanos is Dead", "County1", "382928",
 	(SELECT city_id FROM city WHERE city_name = "Montgomery" AND state = "Alabama"));
@@ -279,7 +279,7 @@ INSERT INTO location(address_id, name, phone_number) VALUES(
     "Building 5",
     "2018205444");
 INSERT INTO location(address_id, name, phone_number) VALUES(
-	(SELECT address_id FROM address WHERE address1 = "32 Thanos is Bae" AND city_id = (SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona")),
+	(SELECT address_id FROM address WHERE address1 = "34 Thanos is Bae" AND city_id = (SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona")),
     "Building 6",
     "9734445555");
 INSERT INTO location(address_id, name, phone_number) VALUES(
@@ -566,3 +566,8 @@ insert into reservations(reservation_id, location_id, start_time, end_time, empl
 insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (3, 2, '2019-09-06 16-30-00', '2019-09-06 17-30-00', 2);
 insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (4, 3, '2019-09-06 16-30-00', '2019-09-06 17-30-00', 3);
 insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (5, 4, '2019-05-12 16-30-00', '2019-05-12 17-30-00', 4);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (4, 2, '2019-06-12 16-30-00', '2019-06-12 17-30-00', 6);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (3, 3, '2019-07-12 16-30-00', '2019-07-12 17-30-00', 7);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (2, 2, '2019-08-12 16-30-00', '2019-08-12 17-30-00', 8);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (1, 1, '2019-09-12 16-30-00', '2019-09-12 17-30-00', 9);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (3, 2, '2019-10-12 16-30-00', '2019-10-12 17-30-00', 10);

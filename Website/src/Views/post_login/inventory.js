@@ -28,9 +28,7 @@ class Inventory extends Component{
 
     componentDidMount(){
         this.fetchData()
-    }
-
-    
+    }    
 
     fetchData(){
 
@@ -38,8 +36,6 @@ class Inventory extends Component{
             fetch('/database/inventory/all'),
             fetch('/database/inventory/company')
         ])
-       
-       
         .then( (res) => Promise.all(res.map(res => (res.status === 200 ? res.json() : "Invalid"))))
         .then(([r1, r2]) => {
 
@@ -56,8 +52,6 @@ class Inventory extends Component{
 
                     })
                 })
-
-               
             }
             if (r2 === 'invalid') console.log('invalid')
             else{
