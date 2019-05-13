@@ -236,8 +236,14 @@ exports.employee_all = (req, res) => {
 }
 
 exports.employee_update = (req, res) => {
-    const array = [req.body]
-    const queries = abstractQueries.createQueries(array)
+    console.log('*********************')
+
+    //console.log(req.body)
+    const queries = abstractQueries.createQueries(req.body)
+    console.log(queries)
+    //const array = [req.body]
+    //const queries = abstractQueries.createQueries(array)
+
     db.beginTransaction( err => {
         if(err) { throw err }
 
@@ -285,8 +291,10 @@ exports.employee_update = (req, res) => {
 }
 
 exports.allUpdate = (req, res) => {
-
+    console.log("-----------------------------------")
+    console.log(req.data)
     const queries = abstractQueries.createQueries(req.body)
+    console.log(queries)
 
     db.beginTransaction( err => {
         if(err) { throw err }

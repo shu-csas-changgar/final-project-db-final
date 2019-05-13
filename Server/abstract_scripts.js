@@ -136,6 +136,7 @@ function updateQuery(obj) {
         })
     let newValues = values.substring(0, values.length -2)
     const sql = table + newValues + identifier
+
     return sql
 }
 

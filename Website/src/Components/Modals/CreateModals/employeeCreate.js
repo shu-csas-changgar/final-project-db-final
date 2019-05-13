@@ -72,8 +72,9 @@ class CreateEmployee extends Component {
                     else{
                         console.log('employee does not exist')
                         let obj2 = this.employeeCreate('insert', this.state.selectedAddress)
+                        let x = [obj2]
                         console.log(obj2)
-                        this.sendAndFetch(obj2).then( data => {
+                        this.sendAndFetch(x).then( data => {
                             if(data.success === 'true'){
                                 this.dismissModal()
                                 this.props.updateOccurred()
