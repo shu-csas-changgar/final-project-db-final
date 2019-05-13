@@ -15,6 +15,7 @@ import Reservations from './Views/post_login/reservations'
 import Leases from './Views/post_login/leases'
 import Employees from './Views/post_login/employees'
 import NotFound from './Views/errors/notFound'
+import AddPage from './Views/post_login/addPage'
 
 //Redux imports
 import { createStore } from 'redux'
@@ -66,6 +67,11 @@ const routing =(
                     store = {store}
                     component={Leases}
                 />
+                <ProtectedRoute
+                    exact path = "/database/addpage"
+                    store ={store}
+                    component={AddPage}
+                 />
                 <Route component={NotFound} />
             </Switch>
         </div>
