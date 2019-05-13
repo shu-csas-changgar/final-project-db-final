@@ -43,32 +43,32 @@ const routing =(
                     component={Home}
                 />
                 <ProtectedRoute
-                    exact path = "/database/employees"
+                    exact path = "/employees"
                     store = {store}
                     component={Employees}
                 />
                 <ProtectedRoute
-                    exact path = "/database/inventory"
+                    exact path = "/inventory"
                     store = {store}
                     component={Inventory}
                 />
                 <ProtectedRoute
-                    exact path = "/database/reservations"
+                    exact path = "/reservations"
                     store = {store}
                     component={Reservations}
                 />
                 <ProtectedRoute
-                    exact path = "/database/events"
+                    exact path = "/events"
                     store = {store}
                     component={Events}
                 />
                 <ProtectedRoute
-                    exact path = "/database/leases"
+                    exact path = "/leases"
                     store = {store}
                     component={Leases}
                 />
                 <ProtectedRoute
-                    exact path = "/database/addpage"
+                    exact path = "/addpage"
                     store ={store}
                     component={AddPage}
                  />

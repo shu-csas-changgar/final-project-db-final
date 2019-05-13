@@ -44,6 +44,75 @@ exports.inventory_company = (req, res) =>{
     })
 }
 
+exports.inventory_delete = ( req, res ) => {
+    const array = [req.body]
+    const query = abstractQueries.createQueries(array)
+
+    console.log(query)
+
+    
+    sql1 = 'SET FOREIGN_KEY_CHECKS=0'
+    sql2 = 'SET FOREIGN_KEY_CHECKS=1'
+
+    db.beginTransaction( err => {
+        if(err) { throw err }
+
+        db.query(sql1, (err, results, fields) => {
+            if(err) {
+                console.log(err)
+
+                return db.rollback( () =>  {
+                    res.status(400).send({
+                        success: 'false',
+                        error: err
+                    })
+                })
+            }
+            db.query(query[0].sql, (err, results, fields) => { 
+                if(err) {
+                    console.log(err)
+    
+                    return db.rollback( () =>  {
+                        res.status(400).send({
+                            success: 'false',
+                            error: err
+                        })
+                    })
+                }
+            })
+            db.query(sql2, (err, results, fields) => { 
+                if(err) {
+                    console.log(err)
+    
+                    return db.rollback( () =>  {
+                        res.status(400).send({
+                            success: 'false',
+                            error: err
+                        })
+                    })
+                }
+            })
+
+
+
+        })
+        db.commit( err => {
+            if(err) {
+                console.log("here at the other error ------------------")
+                return db.rollback( () => {
+                    res.status(400).send({
+                        success: 'false',
+                        error: err
+                    })
+                })
+            }
+            console.log("success")
+            res.status(200).send({
+                success: 'true'
+            })
+        })
+    })
+}
 
 
 

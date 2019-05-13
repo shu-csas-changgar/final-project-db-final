@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Navbar from '../../Components/Datapage/navbar'
-import CheckedTable from '../../Components/Tables/employeeTable'
+import CheckedTable from '../../Components/Tables/equipment_table'
 
 import Header from '../../Components/Datapage/header'
 import Control from '../../Components/AllPages/controller'
@@ -15,7 +15,8 @@ class Inventory extends Component{
             table1Data:[], 
             table2Data:[],
             fullData: [],
-            empData: [], 
+            empData: [],
+            checkArray: [],
             selectedRow: null, 
             showCreateModal: false,
             showInfoModal: false
@@ -43,6 +44,7 @@ class Inventory extends Component{
             let table2Data = []
             if(r1 === 'Invalid') console.log('butts')
             else{
+                console.log(r1.info)
                 table1Data = r1.info.map( obj => {
                     return({
                         model_name: obj.model_name,
@@ -76,6 +78,41 @@ class Inventory extends Component{
         })
     }
 
+    sendAndFetch(objArray) {
+        return fetch('/database/inventory/delete', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objArray)
+        })
+        .then( res => res.json())
+        .catch(err => {console.log(`There was an error send the data: ${err}`)})
+    }
+
+    rowClick(event){
+        const id = parseInt(event.currentTarget.id)
+        if(event.target.type === 'checkbox') {
+         const options = this.state.checkArray
+         let index
+         if (event.target.checked) {
+             // add the numerical value of the checkbox to options array
+             options.push(id)
+             console.log(options)
+           } else {
+             // or remove the value from the unchecked checkbox from the array
+             index = options.indexOf(id)
+             options.splice(index, 1)
+             console.log(options)
+           }
+
+         this.setState({
+             selectedRow: id,
+             checkArray: options
+         })
+        } 
+     }
+
      
     inventoryCreate(){
         return(
@@ -89,30 +126,12 @@ class Inventory extends Component{
     }
 
     handler(key){
-        console.log(key)
         this.setState({
             [key]: [!this.state.key]
         })
     }
 
-    rowClick(event){
-        const id = parseInt(event.currentTarget.id)
-        if(event.target.type === 'checkbox'){
-            this.setState({
-                selectedRow: id,
-                showInfoModal: true
-            })
-        }
-        else{
-            this.setState({
-                selectedRow: id,
-                showInfoModal: true
-            })
-        }
-    }
-
     render(){
-        console.log(this.state.showCreateModal)
         return(
             <div>
                 <div >
@@ -128,15 +147,18 @@ class Inventory extends Component{
                         <Control
                             action={this.handler}
                             create={this.props.showCreateModal}
+                            delete={this.state.checkArray}
+                            deleteTable = 'equipment'
+                            sendAndFetch = {this.sendAndFetch}
+                            deleteId = 'equiptment_id'
+                            updateOccurred ={this.fetchData}
                         />
                     <hr/>
-                    <div className='flex-row mt-3' style={{paddingBottom: "10px"}}>
-                        <div className = 'd-flex align-content-center'> 
-                            <h2> <strong> Employee Inventory</strong> </h2>
-
-                            </div>
+                    <div className='flex-row mt-3' style={{paddingBottom: '10px'}}>
+                        <div className='d-flex justify-content-center'>
+                        <h2> <strong>Employee Inventory</strong> </h2>
+                        </div>
                     </div>
-
                     <div className ="flex-row mt-3"  style={{paddingBottom:"10px"}}>
                         <div className ='container' id='cont1'>
                             <div className="table-responsive">

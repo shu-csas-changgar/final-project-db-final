@@ -151,11 +151,11 @@ function removeE(obj) {
         }
         else if (key === 'dataArray') {
             obj[key].map( item => {
-                values += `${iiii} = ${db.escape(item)} AND `
+                values += `${iiii} = ${db.escape(item)} OR `
             })
         }
     })
-    let newValues = values.substring(0, values.length -4)
+    let newValues = values.substring(0, values.length -3)
     const sql = table + newValues
     return sql
 }

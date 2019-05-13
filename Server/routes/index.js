@@ -19,7 +19,7 @@ router.post('/employee/check', employee.employee_check)
 router.post('/employee/name/check', employee.employee_name_check)
 router.post('/employee/delete', employee.employee_delete)
 router.post('/lease/delete', leases.lease_delete)
-
+router.post('/inventory/delete', inventory.inventory_delete)
 router.post('/vendor/create', leases.leases_create_vendor)
 router.get('/events/:id', events.upcomming_events)
 router.get('/employee/all', employee.employee_all)

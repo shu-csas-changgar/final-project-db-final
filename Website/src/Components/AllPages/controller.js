@@ -21,11 +21,9 @@ class Create extends Component {
     }
 
     handleDelete(event){
-        console.log(this.props.delete)
 
         if(this.props.delete.length > 0) {
             let obj = this.createDelete(this.props.delete)
-            console.log(obj)
 
             this.props.sendAndFetch(obj).then( data => {
                 if(data.success === 'true') {
@@ -68,14 +66,8 @@ class Create extends Component {
 
     render() {
         return(
-            <div className="row justify-content-center mt-3">
-                <div className="col d-flex justify-content-end" style={{backgroundColor:"green", width:"30px"}}>
-                    <select onChange={null} name="selectedAddress" className="form-control">
-                        <option defaultValue value="">Active</option>
-                        <option defaultValue value="">Inactive</option>
-                    </select>
-                </div>    
-                <div className="flex-col d-flex justify-content-end mr-3">
+            <div className="row justify-content-center mt-3">  
+                <div className="col d-flex justify-content-end">
                     <button type="Log In" style={{marginBottom:"10px"}} onClick={this.handleDelete} className="btn btn-primary">Delete
                         <span className="mr-1" aria-hidden="true">{this.trashIcon}</span>
                     </button>

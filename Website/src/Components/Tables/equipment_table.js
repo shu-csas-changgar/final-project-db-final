@@ -29,7 +29,7 @@ class CheckedTable extends Component{
                             //console.log(obj.transaction_id)
                             return(
                                 <CheckRow 
-                                    id={obj.transaction_id}
+                                    id={obj.equiptment_id}
                                     key={i}
                                     obj={this.props.body[i]}
                                     onClick={this.props.onClick}
