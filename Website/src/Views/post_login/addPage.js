@@ -162,11 +162,7 @@ class AddPage extends Component{
             action: action,
             type: 'child',
             cost: this.state.cost,
-            purchase_date: this.state.purchase_date,
-            start_date: this.state.start_date,
-            end_date: this.state.end_date,
-            vendor_id:this.state.selectedLease
-
+            vendor_id:this.state.selectedLease2
         }
         return leaseObj
     }
@@ -174,7 +170,7 @@ class AddPage extends Component{
     submitLease(event) {
         event.preventDefault()
 
-        if(this.state.cost !== null && this.state.purchase_date !== null && this.state.start_date !== null && this.state.end_date !== null && this.state.selectedLease2 !== null){
+        if(this.state.cost !== null && this.state.selectedLease2 !== null){
             const obj = this.leaseUpdate('insert', false)
 
             console.log(obj)

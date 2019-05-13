@@ -34,7 +34,6 @@ exports.city_all = (req, res) => {
  * If it does then the object sent back is false otherwise the object sent back is true.
  */
 exports.city_check = (req, res) => {
-    console.log(req.body)
     const array = [req.body]
     const query = abstractQueries.createQueries(array)
     console.log(query)
