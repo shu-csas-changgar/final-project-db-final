@@ -23,6 +23,101 @@ exports.leases_all = (req, res) =>{
     })   
 }
 
+exports.leases_create_vendor = (req, res)=> {
+    const array = [req.body]
+    const query = abstractQueries.createQueries(array)
+    console.log(query)
+
+    db.beginTransaction( err => {
+        if(err) { throw err }
+
+        db.query(query[0].sql, (err, results, fields) => {
+            if(err) {
+                return db.rollback( () =>  {
+                    res.status(400).send({
+                        success: 'false',
+                        error: err
+                    })
+                })
+            }
+            db.commit( err => {
+                if(err) {
+                    return db.rollback( () => {
+                        res.status(400).send({
+                            success: 'false',
+                            error: err
+                        })
+                    })
+                }
+                console.log("success")
+                res.status(200).send({
+                    success: 'true'
+                })
+            })
+        })
+    })
+}
+
+exports.leases_form = (req, res)=>{
+
+    const sql =' SELECT vendor_id, company_name FROM vendor ORDER BY company_name ASC'
+
+    console.log("WE are here")
+    db.query(sql, (err, rows, fields)=>{
+
+        if(err) console.log(err)
+        else if(rows.length === 0){
+            res.status(200).send({
+                success: 'false'
+            })
+
+        }
+        
+        else{
+            console.log(rows)
+            res.status(200).send({
+
+                success: 'true',
+                info:rows
+            })
+        }
+    })
+}
+
+exports.leases_update =(req, res)=>{
+    const array = [req.body]
+    const query = abstractQueries.createQueries(array)
+    console.log(query)
+
+    db.beginTransaction( err => {
+        if(err) { throw err }
+
+        db.query(query[0].sql, (err, results, fields) => {
+            if(err) {
+                return db.rollback( () =>  {
+                    res.status(400).send({
+                        success: 'false',
+                        error: err
+                    })
+                })
+            }
+            db.commit( err => {
+                if(err) {
+                    return db.rollback( () => {
+                        res.status(400).send({
+                            success: 'false',
+                            error: err
+                        })
+                    })
+                }
+                console.log("success")
+                res.status(200).send({
+                    success: 'true'
+                })
+            })
+        })
+    })
+}
 
 exports.lease_delete = (req, res) => {
     const array = [req.body]
