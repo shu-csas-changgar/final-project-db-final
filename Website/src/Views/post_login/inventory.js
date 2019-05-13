@@ -4,7 +4,7 @@ import CheckedTable from '../../Components/Tables/employeeTable'
 
 import Header from '../../Components/Datapage/header'
 import Control from '../../Components/AllPages/controller'
-import CreateModal from '../../Components/Modals/CreateModals/employeeCreate'
+import InventoryCreate from '../../Components/Modals/CreateModals/inventoryCreate'
 
 
 class Inventory extends Component{
@@ -28,9 +28,7 @@ class Inventory extends Component{
 
     componentDidMount(){
         this.fetchData()
-    }
-
-    
+    }    
 
     fetchData(){
 
@@ -38,8 +36,6 @@ class Inventory extends Component{
             fetch('/database/inventory/all'),
             fetch('/database/inventory/company')
         ])
-       
-       
         .then( (res) => Promise.all(res.map(res => (res.status === 200 ? res.json() : "Invalid"))))
         .then(([r1, r2]) => {
 
@@ -56,8 +52,6 @@ class Inventory extends Component{
 
                     })
                 })
-
-               
             }
             if (r2 === 'invalid') console.log('invalid')
             else{
@@ -83,9 +77,9 @@ class Inventory extends Component{
     }
 
      
-    createAddModal(){
+    inventoryCreate(){
         return(
-            <CreateModal
+            <InventoryCreate
             toggle={() => this.setState({showCreateModal: !this.state.showCreateModal})}
             showModal = {this.state.showCreateModal}
             body={this.state.modalBody}
@@ -118,6 +112,7 @@ class Inventory extends Component{
     }
 
     render(){
+        console.log(this.state.showCreateModal)
         return(
             <div>
                 <div >
@@ -182,7 +177,7 @@ class Inventory extends Component{
                         
                         <div className={`container ${this.state.showCreateModal ? 'modal-open' :''}`}>
                             {
-                                this.state.showCreateModal ? this.createAddModal() : null
+                                this.state.showCreateModal ? this.inventoryCreate() : null
                             }
                         </div>
                    

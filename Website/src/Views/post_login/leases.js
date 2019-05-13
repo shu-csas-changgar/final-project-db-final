@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Navbar from '../../Components/Datapage/navbar'
-import CheckedTable from '../../Components/Tables/employeeTable'
+import CheckedTable from '../../Components/Tables/leaseTable'
 import Header from '../../Components/Datapage/header'
 import Control from '../../Components/AllPages/controller'
 import CreateModal from '../../Components/Modals/CreateModals/employeeCreate'
@@ -15,7 +15,8 @@ class Leases extends Component{
             fullData: [],
             selectedRow:null,
             showCreateModal:false,
-            showInfoModal:false
+            showInfoModal:false,
+            checkArray: []
         }
 
         this.handler = this.handler.bind(this)
@@ -47,19 +48,29 @@ class Leases extends Component{
     }
     rowClick(event){
         const id = parseInt(event.currentTarget.id)
-        if(event.target.type === 'checkbox'){
-            this.setState({
-                selectedRow: id,
-                showInfoModal: true
-            })
+        if(event.target.type === 'checkbox') {
+         const options = this.state.checkArray
+         let index
+         if (event.target.checked) {
+             // add the numerical value of the checkbox to options array
+             options.push(id)
+           } else {
+             // or remove the value from the unchecked checkbox from the array
+             index = options.indexOf(id)
+             options.splice(index, 1)
+           }
+         this.setState({
+             selectedRow: id,
+             checkArray: options
+         })
+        } else {
+         this.setState({
+             selectedRow: id,
+             showInfoModal: true
+         })
         }
-        else{
-            this.setState({
-                selectedRow: id,
-                showInfoModal: true
-            })
-        }
-    }
+         
+     }
     /**
      * Formatts the start and end time into one line
      * @param {MySQL DataTime} start_time the time that an event starts
@@ -79,6 +90,26 @@ class Leases extends Component{
         var date = new Date(start_time)
         return(DateFormatt.dayOfWeekAndMonth(date))
     }
+
+    /**
+     * When given an array of City, Address, and Employee objects, this function will add the objects to the database.
+     * It will throw an error if part of the query could not be completed
+     * @param {An array of items to delete} objArray 
+     */
+    sendAndFetch(objArray) {
+        return fetch('/database/lease/delete', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objArray)
+        })
+        .then( res => res.json())
+        .catch(err => {console.log(`There was an error send the data: ${err}`)})
+    }
+
+
+    
     fetchData(){
 
         console.log('fethcy')
@@ -107,6 +138,7 @@ class Leases extends Component{
         })
     }
     render(){
+        console.log(this.state.fullData)
         return(
             <div>
                 <div >
@@ -122,6 +154,11 @@ class Leases extends Component{
                         <Control
                             action={this.handler}
                             create={this.props.showCreateModal}
+                            delete={this.state.checkArray}
+                            deleteTable = 'transaction'
+                            sendAndFetch = {this.sendAndFetch}
+                            deleteId = 'transaction_id'
+                            updateOccurred ={this.fetchData}
                         />
 
                     <div className ="flex-row mt-3"  style={{paddingBottom:"10px"}}>

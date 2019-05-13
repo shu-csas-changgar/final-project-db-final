@@ -26,7 +26,7 @@ class navbar extends Component {
                         <a className={`nav-link ${this.props.leases? "active" : null}`} onClick={()=>{this.props.history.push("database/leases")}} href={link}>Leases</a>
                     </li>
                     <li className="nav-item">
-                        <a className={`nav-link ${this.props.events? "active" : null}`} onClick={()=>{this.props.history.push("database/events")}} href={link}>Events</a>
+                        <a className={`nav-link ${this.props.addpage? "active" : null}`} onClick={()=>{this.props.history.push("database/addpage")}} href={link}>add page</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" onClick={()=>{this.props.history.push("/database/reports")}} href={link}>Reports</a>

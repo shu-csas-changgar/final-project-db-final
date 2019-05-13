@@ -29,6 +29,8 @@ exports.employee_credentials = (req, res) => {
 exports.employee_delete = ( req, res ) => {
     const array = [req.body]
     const query = abstractQueries.createQueries(array)
+    console.log(query)
+
     sql1 = 'SET FOREIGN_KEY_CHECKS=0'
     sql2 = 'SET FOREIGN_KEY_CHECKS=1'
 
@@ -136,6 +138,7 @@ exports.employee_name = (req, res) => {
 exports.employee_check = (req, res) => {
     const array = [req.body]
     const query = abstractQueries.createQueries(array)
+    console.log(query)
 
 
     db.query(query[0], (err, rows, fields)=> {
@@ -166,6 +169,7 @@ exports.employee_address_check = (req, res) => {
 
     const array = [req.body]
     const query = abstractQueries.createQueries(array)
+    console.log(query)
 
     db.query(query[0], (err, rows, fields)=> {
         if(err){
