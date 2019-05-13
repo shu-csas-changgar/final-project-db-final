@@ -566,3 +566,8 @@ insert into reservations(reservation_id, location_id, start_time, end_time, empl
 insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (3, 2, '2019-09-06 16-30-00', '2019-09-06 17-30-00', 2);
 insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (4, 3, '2019-09-06 16-30-00', '2019-09-06 17-30-00', 3);
 insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (5, 4, '2019-05-12 16-30-00', '2019-05-12 17-30-00', 4);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (4, 2, '2019-06-12 16-30-00', '2019-06-12 17-30-00', 6);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (3, 3, '2019-07-12 16-30-00', '2019-07-12 17-30-00', 7);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (2, 2, '2019-08-12 16-30-00', '2019-08-12 17-30-00', 8);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (1, 1, '2019-09-12 16-30-00', '2019-09-12 17-30-00', 9);
+insert into reservations(reservation_id, location_id, start_time, end_time, employee_id) values (3, 2, '2019-10-12 16-30-00', '2019-10-12 17-30-00', 10);

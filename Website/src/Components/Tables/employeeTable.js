@@ -11,10 +11,7 @@ class CheckedTable extends Component{
 
     }
 
-    
-
     render(){
-        console.log(this.props)
         return(
             <table className={this.props.tableType}>
                 <thead>

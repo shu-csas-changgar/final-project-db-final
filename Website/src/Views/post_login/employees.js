@@ -96,7 +96,6 @@ class Employee extends Component{
 
     rowClick(event){
        const id = parseInt(event.currentTarget.id)
-       console.log(id)
        if(event.target.type === 'checkbox') {
         const options = this.state.checkArray
         let index
@@ -122,7 +121,6 @@ class Employee extends Component{
     }
 
     render() {
-        console.log(this.state.checkArray)
 
         return(
             <div>

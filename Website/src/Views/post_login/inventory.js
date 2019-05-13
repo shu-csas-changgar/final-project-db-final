@@ -65,7 +65,7 @@ class Inventory extends Component{
                     return({
                         model_name: obj.model_name,
                         serial_number: obj.serial_number,
-
+                        category: obj.category
                     })
                 })
             }
@@ -166,7 +166,7 @@ class Inventory extends Component{
                             <div className= "table-responsive">
                                 <CheckedTable
                                     tableType='table table-hover'
-                                    headers ={["",'Model Name', 'Model Number']}
+                                    headers ={["", "Modal",'Serial Number', 'Category']}
                                     fullData ={this.state.fullData}
                                     body={this.state.table2Data}
                                     onClick = {this.rowClick}
