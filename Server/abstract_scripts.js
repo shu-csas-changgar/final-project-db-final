@@ -48,7 +48,7 @@ exports.createQueries = (objArray) => {
             sqlQueries.unshift(sqlObject)
         }
         else if (obj.action === 'delete'){
-            const sql = remove(obj)
+            const sql = removeE(obj)
             const sqlObject = {
                 type: 'select',
                 dependent: false,
@@ -139,16 +139,18 @@ function updateQuery(obj) {
     return sql
 }
 
-function remove(obj) {
+function removeE(obj) {
     let table = 'DELETE FROM  '
     let values = `WHERE `
+
+    let iiii = obj.deleteId
     Object.keys(obj).forEach( key => {
         if(key === 'table'){
             table += `${obj[key]} `
         }
         else if (key === 'dataArray') {
             obj[key].map( item => {
-                values += `employee_id = ${db.escape(item)} AND `
+                values += `${iiii} = ${db.escape(item)} AND `
             })
         }
     })
