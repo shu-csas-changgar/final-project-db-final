@@ -182,7 +182,7 @@ INSERT INTO address(address1, county, postal_code, city_id) VALUES ("1000 Who Gi
 	(SELECT city_id FROM city WHERE city_name = "Pittsburgh" AND state = "Pennsylvania"));
 INSERT INTO address(address1, county, postal_code, city_id) VALUES ("420 Weed Dr", "Stoner", "545682",
 	(SELECT city_id FROM city WHERE city_name = "New York" AND state = "New York"));
-INSERT INTO address(address1, county, postal_code, city_id) VALUES ("32 Thanos is Bae", "Bradford", "384764",
+INSERT INTO address(address1, county, postal_code, city_id) VALUES ("34 Thanos is Bae", "Bradford", "384764",
 	(SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona"));
 INSERT INTO address(address1, county, postal_code, city_id) VALUES ("32 Thanos is Dead", "County1", "382928",
 	(SELECT city_id FROM city WHERE city_name = "Montgomery" AND state = "Alabama"));
@@ -279,7 +279,7 @@ INSERT INTO location(address_id, name, phone_number) VALUES(
     "Building 5",
     "2018205444");
 INSERT INTO location(address_id, name, phone_number) VALUES(
-	(SELECT address_id FROM address WHERE address1 = "32 Thanos is Bae" AND city_id = (SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona")),
+	(SELECT address_id FROM address WHERE address1 = "34 Thanos is Bae" AND city_id = (SELECT city_id FROM city WHERE city_name = "Phoenix" AND state = "Arizona")),
     "Building 6",
     "9734445555");
 INSERT INTO location(address_id, name, phone_number) VALUES(
