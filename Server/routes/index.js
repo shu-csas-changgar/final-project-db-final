@@ -19,6 +19,8 @@ router.post('/employee/check', employee.employee_check)
 router.post('/employee/name/check', employee.employee_name_check)
 router.post('/employee/delete', employee.employee_delete)
 router.post('/lease/delete', leases.lease_delete)
+
+router.post('/vendor/create', leases.leases_create_vendor)
 router.get('/events/:id', events.upcomming_events)
 router.get('/employee/all', employee.employee_all)
 router.get('/inventory/all', inventory.inventory_all)
@@ -26,7 +28,8 @@ router.get('/inventory/company', inventory.inventory_company)
 router.get('/address/all', address.address_all)
 router.get('/cities/all', cities.city_all)
 router.get('/leases/all', leases.leases_all)
-
+router.get('/leases/form', leases.leases_form)
 router.post('/cities/check', cities.city_check)
+router.post('/leases/update',leases.leases_update)
 
 module.exports = router
