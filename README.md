@@ -1,3 +1,5 @@
+# Notice: This repo is no longer active! The project development will continue on Joshua Schappel's github account. To follow the project please visit: https://github.com/jschappel/ABC-Corp
+
 ![](https://github.com/shu-csas-changgar/final-project-db-final/blob/master/THE-GOAT.png)
 
 
