@@ -137,7 +137,7 @@ class home extends Component {
 
     render() {
         const link = '#'
-
+        console.log(this.state.equipmentTableData)
         /**
          * Check if tables to be rendered onto the screen have data. If they do then create the table component
          * If they dont then create a message to be rendered where the table would have been rendered
